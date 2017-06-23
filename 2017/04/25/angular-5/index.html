@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>angularjs(五) | 要么庸俗要么孤独</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="angularjs,前端框架，angular指令">
+    <meta name="description" content="本文主要介绍了AngularJS中的指令的概念，以及常用的指令">
+<meta name="keywords" content="angularjs,前端框架，angular指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs(五)">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/angular-5/index.html">
+<meta property="og:site_name" content="要么庸俗要么孤独">
+<meta property="og:description" content="本文主要介绍了AngularJS中的指令的概念，以及常用的指令">
+<meta property="og:updated_time" content="2017-05-14T14:15:19.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularjs(五)">
+<meta name="twitter:description" content="本文主要介绍了AngularJS中的指令的概念，以及常用的指令">
+    
+        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wyx</h5>
+          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Modify01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">angularjs(五)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">angularjs(五)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-25T05:17:02.000Z" itemprop="datePublished" class="page-time">
+  2017-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指令-directive"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">指令(directive)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-样式相关的指令"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.样式相关的指令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-ng-class"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1.1  ng-class</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-ng-style"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">1.2 ng-style</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-ng-show，ng-hide"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">1.3  ng-show，ng-hide</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-表单控件功能相关指令"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">2.表单控件功能相关指令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-事件绑定相关指令"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">3.事件绑定相关指令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特殊的ng-src和ng-href"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">特殊的ng-src和ng-href</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-自定义指令示例"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">4.自定义指令示例</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-angular-5"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">angularjs(五)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-25 13:17:02" datetime="2017-04-25T05:17:02.000Z"  itemprop="datePublished">2017-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>过滤器</code></center></p>
+<hr>
+<h2 id="指令-directive"><a href="#指令-directive" class="headerlink" title="指令(directive)"></a>指令(directive)</h2><p>&#160; &#160; &#160; &#160;通过使用模板，我们可以把model和controller中的数据组装起来呈现给浏览器，还可以通过数据绑定，实时更新视图，让我们的页面变成动态的。</p>
+<p>模板中可以使用的东西包括以下四种：</p>
+<ol>
+<li><code>指令</code>(directive)：ng提供的或者自定义的标签和属性，用来增强HTML表现力；</li>
+<li><code>标记</code>(markup)：即双大括号，可将数据单向绑定到HTML中；</li>
+<li><code>过滤器</code>(filter)：用来格式化输出数据；</li>
+<li><code>表单控制</code>：用来增强表单的验证功能。</li>
+</ol>
+<p>&#160; &#160; &#160; &#160;其中，指令无疑是使用量最大的，ng内置了很多指令用来控制模板，如ng-repeat，ng-class，也有很多指令来帮你完成业务逻辑，如ng-controller,ng-model。</p>
+<p>指令的几种使用方式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">l 作为标签：<span class="tag">&lt;<span class="name">my-dir</span>&gt;</span><span class="tag">&lt;/<span class="name">my-dir</span>&gt;</span></div><div class="line">l 作为属性：<span class="tag">&lt;<span class="name">span</span> <span class="attr">my-dir</span>=<span class="string">"exp"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">l 作为注释：<span class="comment">&lt;!-- directive: my-dir exp --&gt;</span></div><div class="line">l 作为类名：<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"my-dir: exp;"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其实常用的就是作为标签和属性。</p>
+<h2 id="1-样式相关的指令"><a href="#1-样式相关的指令" class="headerlink" title="1.样式相关的指令"></a>1.样式相关的指令</h2><p>&#160; &#160; &#160; &#160;既然模板就是普通的HTML，那我首要关心的就是样式的控制，元素的定位、字体、背景色等等如何可以灵活控制。下面来看看常用的样式控制指令。</p>
+<h3 id="1-1-ng-class"><a href="#1-1-ng-class" class="headerlink" title="1.1  ng-class"></a>1.1  ng-class</h3><p>&#160; &#160; &#160; &#160;ng-class用来给元素绑定类名，其表达式的返回值可以是以下三种：</p>
+<ol>
+<li><code>类名字符串，可以用空格分割多个类名，如’redtext boldtext’；_</code></li>
+<li><code>类名数组，数组中的每一项都会层叠起来生效；_</code></li>
+<li><code>一个名值对应的map，其键值为类名，值为boolean类型，当值为true时，该类会被加在元素上。_</code></li>
+</ol>
+<p>&#160; &#160; &#160; &#160;下面来看一个使用map的例子：<br><em>ng-class测试</em><br>红色 加粗 删除线 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">map:&#123;<span class="attr">redtext</span>:&#123;&#123;red&#125;&#125;, <span class="attr">boldtext</span>:&#123;&#123;bold&#125;&#125;, <span class="attr">striketext</span>:&#123;&#123;strike&#125;&#125;&#125;</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;如果你想拼接一个类名出来，可以使用插值表达式，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">”&#123;&#123;style&#125;&#125;text”</span>&gt;</span>字体样式测试<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后在controller中指定style的值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　$scope.style = ‘red’;</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;注意我用了<code>class</code>而不是ng-class，这是不可以对换的，官方的文档也未做说明，姑且认为这是ng的语法规则吧。<br>&#160; &#160; &#160; &#160;与ng-class相近的，ng还提供了ng-class-odd、ng-class-even两个指令，用来配合ng-repeat分别在奇数列和偶数列使用对应的类。这个用来在表格中实现隔行换色再方便不过了。</p>
+<h3 id="1-2-ng-style"><a href="#1-2-ng-style" class="headerlink" title="1.2 ng-style"></a>1.2 ng-style</h3><p>&#160; &#160; &#160; &#160;ng-style用来绑定元素的css样式，其表达式的返回值为一个js对象，键为css样式名，值为该样式对应的合法取值。用法比较简单：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-style</span>=<span class="string">"&#123;color:'red'&#125;"</span>&gt;</span>ng-style测试<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;div ng-style="style"&gt;ng-style测试&lt;/div&gt;</div><div class="line">$scope.style = &#123;color:'red'&#125;;</div></pre></td></tr></table></figure>
+<h3 id="1-3-ng-show，ng-hide"><a href="#1-3-ng-show，ng-hide" class="headerlink" title="1.3  ng-show，ng-hide"></a>1.3  ng-show，ng-hide</h3><p>&#160; &#160; &#160; &#160;对于比较常用的元素显隐控制，ng也做了封装，ng-show和ng-hide的值为boolean类型的表达式，当值为true时，对应的show或hide生效。框架会用display:block和display:none来控制元素的显隐。</p>
+<h2 id="2-表单控件功能相关指令"><a href="#2-表单控件功能相关指令" class="headerlink" title="2.表单控件功能相关指令"></a>2.表单控件功能相关指令</h2><ul>
+<li>对于常用的表单控件功能，ng也做了封装，方便灵活控制。</li>
+<li>ng-checked控制radio和checkbox的选中状态</li>
+<li>ng-selected控制下拉框的选中状态</li>
+<li>ng-disabled控制失效状态</li>
+<li>ng-multiple控制多选</li>
+<li>ng-readonly控制只读状态</li>
+<li>以上指令的取值均为boolean类型，当值为true时相关状态生效，道理比较简单就不多做解释。注意： 上面的这些只是单向绑定，即只是从数据到模板，不能反作用于数据。要双向绑定，还是要使用 ng-model 。</li>
+</ul>
+<h2 id="3-事件绑定相关指令"><a href="#3-事件绑定相关指令" class="headerlink" title="3.事件绑定相关指令"></a>3.事件绑定相关指令</h2><p>&#160; &#160; &#160; &#160;事件绑定是javascrpt中比较重要的一部分内容，ng对此也做了详细的封装，正如我们之前使用过的ng-click一样，事件的指令如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">-    ng-click</div><div class="line">　-　ng-change</div><div class="line">　-　ng-dblclick</div><div class="line">　-　ng-mousedown</div><div class="line">　-　ng-mouseenter</div><div class="line">　-　ng-mouseleave</div><div class="line">　-　ng-mousemove</div><div class="line">　-　ng-mouseover</div><div class="line">　-　ng-mouseup</div><div class="line">　-　ng-submit</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;事件绑定指令的取值为函数，并且需要加上括号，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-change</span>=<span class="string">”change($event)”</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后在<code>controller</code>中定义如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$scope.change = <span class="function"><span class="keyword">function</span>(<span class="params">$event</span>)</span>&#123;</div><div class="line">         alert($event.target);</div><div class="line">         <span class="comment">//……………………</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　<br>&#160; &#160; &#160; &#160;在模板中可以用变量<code>$event</code>将事件对象传递到<code>controller</code>中。<br>对于ng的这种设计，一些人有所质疑，视图与事件绑定混在一起到底好不好？我们不是要讲究视图与逻辑分离吗？如此一来，把事件的绑定又变回了内联的，岂不是历史的倒退。我也一样对此表示不解，因为不写onclick已经很多年。。。但既然已经存在了，我们不妨往合理的方向上想一想，或许ng的设计者压根就不想让模板成为单纯的视图层，本来就是想增强HTML，让它有一点业务能力。这么想的话似乎也能想通，好吧，先欺骗一下自己吧~</p>
+<h3 id="特殊的ng-src和ng-href"><a href="#特殊的ng-src和ng-href" class="headerlink" title="特殊的ng-src和ng-href"></a>特殊的ng-src和ng-href</h3><p>在说明这两个指令的特殊之前，需要先了解一下ng的启动及执行过程，如下图：</p>
+<p>1) 浏览器加载静态HTML文件并解析为DOM；<br>2) 浏览器加载angular.js文件；<br>3) angular监听DOMContentLoaded 事件，监听到时开始启动；<br>4) angular寻找ng-app指令，确定作用范围；<br>5) 找到app中定义的Module使用$injector服务进行依赖注入；<br>6) 根据$injector服务创建$compile服务用于编译；<br>7) $compile服务编译DOM中的指令、过滤器等；<br>8) 使用ng-init指令，将作用域中的变量进行替换；<br>9) 最后生成了我们在最终视图。<br>&#160; &#160; &#160; &#160;可以看到，ng框架是在DOMcontent加载完毕后才开始发挥作用。假如我们模板中有一张图片如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://m.cnblogs.com/142260/”&#123;&#123;imgUrl&#125;&#125;” /&gt;</span></span></div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;那么在页面开始加载到ng编译完成之前，页面上会一直显示一张错误的图片，因为路径{&nbsp;{imgUrl}&nbsp;}还未被替换。</p>
+<p>&#160; &#160; &#160; &#160;为了避免这种情况，我们使用ng-src指令，这样在路径被正确得到之前就不会显示找不到图片。同理，h标签的href属性也需要换成ng-href，这样页面上就不会先出现一个地址错误的链接。</p>
+<p>&#160; &#160; &#160; &#160;顺着这个思路再多想一点，我们在模板中使用{&nbsp;{}}显示数据时，在ng编译完成之前页面上岂不是会显示出大括号及里面的表达式？确实是这样。为了避免这个，ng中有一个与{&nbsp;{}}等同的指令:ng-bind，同样用于单向绑定，在页面刚加载的时候就不会显示出对用户无用的数据了。尽管这样你可能不但没舒心反而更纠结了，{&nbsp;{}}那么好用易理解，还不能用了不成？好消息是我们依然可以使用。因为我编写的是单页面应用，页面只会在加载index.html的时</p>
+<p>&#160; &#160; &#160; &#160;候出这个问题，只需在index.html中的模板中换成ng-bind就行。其他的模板是我们动态加载的，就可以放心使用{&nbsp;{}}了。</p>
+<h3 id="4-自定义指令示例"><a href="#4-自定义指令示例" class="headerlink" title="4.自定义指令示例"></a>4.自定义指令示例</h3><p>&#160; &#160; &#160; &#160;下面我们来解析下指令的例子。</p>
+<ol>
+<li>首先，我们定义一个名为userInfo的指令：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">demoApp.directive(<span class="string">'userInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">restrict</span> : <span class="string">'E'</span>,</div><div class="line">        <span class="attr">templateUrl</span> : <span class="string">'userInfoTemplate.html'</span>,</div><div class="line">        <span class="attr">replace</span> : <span class="literal">true</span>,</div><div class="line">        <span class="attr">transclude</span> : <span class="literal">true</span>,</div><div class="line">        <span class="attr">scope</span> : &#123;</div><div class="line">            <span class="attr">mytitle</span> : <span class="string">'=etitle'</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">link</span> : <span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attrs</span>)</span>&#123;</div><div class="line">            scope.showText = <span class="literal">false</span>;</div><div class="line">            scope.toggleText = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                scope.showText = ! scope.showText;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>Restrict</code>为’E’：用作标签；</li>
+<li><code>replace</code>为true：用模板替换当前标签；</li>
+<li><code>transclude</code>为true：将当前元素的内容转移到模板中；</li>
+<li><code>scope</code> 为 {mytitle : ‘=etitle’}：定义一个名为mytitle的MODEL，其值指向当前元素的etitle属性；templateUrl为’userInfoTemplate.html’：模板内容为ng-template定义ID为userInfoTemplate.html的内容；</li>
+<li><code>link</code>：指定所包含的行为。link属性值为一个函数,这个函数有五个参数:scope,iEle,iAttrs,ctrl,linker</li>
+</ul>
+<ol>
+<li>userInfoTemplate.html模板为：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ng-template"</span> <span class="attr">id</span>=<span class="string">"userInfoTemplate.html"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mybox"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mytitle"</span> <span class="attr">style</span>=<span class="string">"cursor: pointer;"</span> <span class="attr">ng-click</span>=<span class="string">"toggleText()"</span>&gt;</span></div><div class="line">            &#123; &#123;mytitle&#125; &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-transclude</span> <span class="attr">ng-show</span>=<span class="string">"showText"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>将当前元素的内容添加到有ng-transclude属性的这个DIV下，默认是隐藏的。</p>
+<ol>
+<li>Controller信息：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"test7Controller"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">    $scope.title = <span class="string">'个人简介'</span>;</div><div class="line">    $scope.text = <span class="string">'大家好，我正在研究AngularJs，欢迎大家与我交流。'</span>;</div><div class="line">    $scope.updateInfo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    $scope.title = <span class="string">'个人信息'</span>;</div><div class="line">    $scope.text = <span class="string">'大家好，今天天气真好！'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>指令使用方式（View信息）为：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">user-info</span> <span class="attr">etitle</span>=<span class="string">"title"</span>&gt;</span>&#123; &#123;text&#125; &#125;<span class="tag">&lt;/<span class="name">user-info</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Etitle指向Controller中的$scope.title。注意命名方式：指令名为<code>userInfo</code>，对应的标签为<code>user-info</code>。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>指令是angular里面核心的功能，日常的学习和开发中也是使用不同指令去完成各种不同的需求，尤其<code>自定义指令</code>尤使用的频率极高，应该好好的掌握！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-05-14T14:15:19.600Z" itemprop="dateUpdated">2017-05-14 22:15:19</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/25/angular-5/" target="_blank" rel="external">http://yoursite.com/2017/04/25/angular-5/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.png" alt="wyx">
+            wyx
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架，angular指令/">前端框架，angular指令</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular-5/&title=《angularjs(五)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular-5/&title=《angularjs(五)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular-5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularjs(五)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular-5/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular-5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/25/angular-4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">angularjs(四)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/25/angular_8/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">angular(八)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wyx &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular-5/&title=《angularjs(五)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular-5/&title=《angularjs(五)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular-5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularjs(五)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular-5/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular-5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByUlEQVR42u3aSWrDQBAFUN//0gpkFXAk/6oeJMPrlVE8vM6iqOn1is/xe5Inf8/787Mnkw8uLu4w97g877izH6sSz/56ZsDFxd3PvQ5e18Q8qCX0DzZcXNyHcWdd4/o1Li7ud3Gvy5VqSYOLi/t8blL89AqY5GJLajVcXNwB7kjQmfV6YX8XFxe3yD2Kp9cMnfbruLi4W7j5ADUfrCbJUD56ac57cXFxJ3HzJYneCDb5dyRjGFxc3NXcXlrTS4mq7ZV/roeLi7uF22uC5K3M6ppFNSDi4uKu4ObrEdWlq943fEincHFxt3B7JVC1WBqZkhQ+gIuLO5WbvDVZpxhf6pp2M1xc3AFutQmSJyLVlkc0VsHFxd3Ira5M9doiIw0RXFzce7nVcDaysFUd6+Li4u7hVuukcq9luI0SDVRwcXGncvMUpBqYquVQdCVcXNyN3Grzolca9QYtuLi4d3Hzkww/emGxOUrBxcVdwK0GlHwxK1/Pyse0uLi4O7lJ8BoZjuZlT5QM4eLibuTOaogUhiLj6QsuLu4DuAm0WiAlw11cXNzv4uZt02pyg4uL+wTuijWs6rWjd+Li4m7h9hqmSUgauQYuLu5N3B/I92zDiaZTkgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

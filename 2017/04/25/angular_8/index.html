@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>angular(八) | 要么庸俗要么孤独</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="angularjs,前端框架,angular路由">
+    <meta name="description" content="本文主要介绍了angular中依赖注入DI">
+<meta name="keywords" content="angularjs,前端框架,angular路由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular(八)">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/angular_8/index.html">
+<meta property="og:site_name" content="要么庸俗要么孤独">
+<meta property="og:description" content="本文主要介绍了angular中依赖注入DI">
+<meta property="og:updated_time" content="2017-05-14T14:15:36.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular(八)">
+<meta name="twitter:description" content="本文主要介绍了angular中依赖注入DI">
+    
+        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wyx</h5>
+          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Modify01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">angular(八)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">angular(八)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-25T05:17:02.000Z" itemprop="datePublished" class="page-time">
+  2017-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">路由</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由介绍"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">路由介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ngRoute内容"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">ngRoute内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ng的路由机制"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">ng的路由机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步：引入文件和依赖"><span class="post-toc-number">1.1.3.1.</span> <span class="post-toc-text">第一步：引入文件和依赖</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步：定义路由表"><span class="post-toc-number">1.1.3.2.</span> <span class="post-toc-text">第二步：定义路由表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三步：在主视图模板中指定加载子视图的位置"><span class="post-toc-number">1.1.3.3.</span> <span class="post-toc-text">第三步：在主视图模板中指定加载子视图的位置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由示例"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">路由示例</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-angular_8"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">angular(八)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-25 13:17:02" datetime="2017-04-25T05:17:02.000Z"  itemprop="datePublished">2017-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>路由DI</code></center></p>
+<hr>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="路由介绍"><a href="#路由介绍" class="headerlink" title="路由介绍"></a>路由介绍</h3><p>&#160; &#160; &#160; &#160;在谈路由机制前有必要先提一下现在比较流行的单页面应用，就是所谓的single page APP。为了实现无刷新的视图切换，我们通常会用ajax请求从后台取数据，然后套上HTML模板渲染在页面上，然而ajax的一个致命缺点就是导致浏览器后退按钮失效，尽管我们可以在页面上放一个大大的返回按钮，让用户点击返回来导航，但总是无法避免用户习惯性的点后退。解决此问题的一个方法是使用hash，监听hashchange事件来进行视图切换，另一个方法是用HTML5的history API，通过pushState()记录操作历史，监听popstate事件来进行视图切换，也有人把这叫pjax技术。基本流程如下：</p>
+<p>&#160; &#160; &#160; &#160;如此一来，便形成了通过地址栏进行导航的深度链接（deeplinking ），也就是我们所需要的路由机制。通过路由机制，一个单页应用的各个视图就可以很好的组织起来了。</p>
+<h3 id="ngRoute内容"><a href="#ngRoute内容" class="headerlink" title="ngRoute内容"></a>ngRoute内容</h3><p>&#160; &#160; &#160; &#160;ng的路由机制是靠ngRoute提供的，通过hash和history两种方式实现了路由，可以检测浏览器是否支持history来灵活调用相应的方式。ng的路由(ngRoute)是一个单独的模块，包含以下内容：</p>
+<ul>
+<li><p>服务$routeProvider用来定义一个路由表，即地址栏与视图模板的映射</p>
+</li>
+<li><p>服务$routeParams保存了地址栏中的参数，例如</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">id</span> : <span class="number">1</span>, <span class="attr">name</span> : <span class="string">'tom'</span>&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>服务$route完成路由匹配，并且提供路由相关的属性访问及事件，如访问当前路由对应的controller</p>
+</li>
+<li><p>指令ngView用来在主视图中指定加载子视图的区域<br>　以上内容再加上$location服务，我们就可以实现一个单页面应用了。下面来看一下具体如何使用这些内容。</p>
+</li>
+</ul>
+<h3 id="ng的路由机制"><a href="#ng的路由机制" class="headerlink" title="ng的路由机制"></a>ng的路由机制</h3><h4 id="第一步：引入文件和依赖"><a href="#第一步：引入文件和依赖" class="headerlink" title="第一步：引入文件和依赖"></a>第一步：引入文件和依赖</h4><p>&#160; &#160; &#160; &#160;ngRoute模块包含在一个单独的文件中，所以第一步需要在页面上引入这个文件，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://code.angularjs.org/1.2.8/angular.min.js"</span> rel=<span class="string">"nofollow"</span>/&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://code.angularjs.org/1.2.8/angular-route.min.js"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>/&gt;</span><span class="undefined"></span></span></div></pre></td></tr></table></figure>
+<p>　<br>&#160; &#160; &#160; &#160;光引入还不够，我们还需在模块声明中注入对ngRoute的依赖，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [<span class="string">'ngRoute'</span>]);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;完成了这些，我们就可以在模板或是controller中使用上面的服务和指令了。下面我们需要定义一个路由表。</p>
+<h4 id="第二步：定义路由表"><a href="#第二步：定义路由表" class="headerlink" title="第二步：定义路由表"></a>第二步：定义路由表</h4><p>&#160; &#160; &#160; &#160;$routeProvider提供了定义路由表的服务，它有两个核心方法，when(path,route)和otherwise(params)，先看一下核心中的核心when(path,route)方法。<br>&#160; &#160; &#160; &#160;when(path,route)方法接收两个参数，path是一个string类型，表示该条路由规则所匹配的路径，它将与地址栏的内容($location.path)值进行匹配。如果需要匹配参数，可以在path中使用冒号加名称的方式，如：path为/show/:name，如果地址栏是/show/tom，那么参数name和所对应的值tom便会被保存在$routeParams中，像这样：{name : tom}。我们也可以用<code>*</code>进行模糊匹配，如：/show*/:name将匹配/showInfo/tom。</p>
+<p>&#160; &#160; &#160; &#160;route参数是一个object，用来指定当path匹配后所需的一系列配置项，包括以下内容：</p>
+<ul>
+<li>controller //function或string类型。在当前模板上执行的controller函数，生成新的scope；</li>
+<li>controllerAs //string类型，为controller指定别名；</li>
+<li>template //string或function类型，视图z所用的模板，这部分内容将被ngView引用；</li>
+<li>templateUrl //string或function类型，当视图模板为单独的html文件或是使用了<br><code>&lt;script type=&quot;text/ng-template&quot;&gt;</code><br>定义模板时使用；</li>
+<li>resolve //指定当前controller所依赖的其他模块；</li>
+<li>redirectTo //重定向的地址。</li>
+</ul>
+<p>最简单情况，我们定义一个html文件为模板，并初始化一个指定的controller：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailRouteConfig</span>(<span class="params">$routeProvider</span>)</span>&#123;</div><div class="line">    $routeProvider.when(<span class="string">'/show'</span>, &#123;</div><div class="line">        <span class="attr">controller</span>: ShowController,</div><div class="line">        <span class="attr">templateUrl</span>: <span class="string">'show.html'</span></div><div class="line">    &#125;).</div><div class="line">    when(<span class="string">'/put/:name'</span>,&#123;</div><div class="line">       <span class="attr">controller</span>: PutController,</div><div class="line">       <span class="attr">templateUrl</span>: <span class="string">'put.html'</span></div><div class="line">    &#125;)</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;otherwise(params)方法对应路径匹配不到时的情况，这时候我们可以配置一个redirectTo参数，让它重定向到404页面或者是首页。</p>
+<h4 id="第三步：在主视图模板中指定加载子视图的位置"><a href="#第三步：在主视图模板中指定加载子视图的位置" class="headerlink" title="第三步：在主视图模板中指定加载子视图的位置"></a>第三步：在主视图模板中指定加载子视图的位置</h4><p>&#160; &#160; &#160; &#160;我们的单页面程序都是局部刷新的，那这个“局部”是哪里呢，这就轮到ngView出马了，只需在模板中简单的使用此指令，在哪里用，哪里就是“局部”。例如：<br><code>&lt;div ng-view&gt;&lt;/div&gt;</code>　　或：<code>&lt;ng-view&gt;&lt;/ng-view&gt;</code>　</p>
+<p>&#160; &#160; &#160; &#160;我们的子视图将会在此处被引入进来。完成这三步后，你的程序的路由就配置好了。</p>
+<h3 id="路由示例"><a href="#路由示例" class="headerlink" title="路由示例"></a>路由示例</h3><p>&#160; &#160; &#160; &#160;下面我们将用一个例子（例09）来说明路由的使用方式及步骤：</p>
+<p>1.为demoApp添加一个路由，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">demoApp.config([<span class="string">'$routeProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>) </span>&#123;  </div><div class="line">$routeProvider.when(<span class="string">'/list'</span>, &#123;  </div><div class="line"><span class="attr">templateUrl</span>: <span class="string">'route/list.html'</span>,  </div><div class="line">  <span class="attr">controller</span>: <span class="string">'routeListController'</span></div><div class="line">&#125;).when(<span class="string">'/list/:id'</span>, &#123;  </div><div class="line">  <span class="attr">templateUrl</span>: <span class="string">'route/detail.html'</span>,</div><div class="line">   <span class="attr">controller</span>: <span class="string">'routeDetailController'</span></div><div class="line">  &#125;).otherwise(&#123;  </div><div class="line">        <span class="attr">redirectTo</span>: <span class="string">'/list'</span>  </div><div class="line">     &#125;);  </div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>/list 对应为：route/list.html页面，显示用户列表；/list/:id对应于route/detail.html页面，显示用户详细信息。</p>
+<p>2.为list.html和detail.html分别声明Controller：routeListController和routeDetailController。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">'routeListController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;  </div><div class="line">$scope.users = [&#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己带盐！"</span>&#125;,</div><div class="line">&#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;,</div><div class="line">&#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！我是谁！"</span>&#125;];</div><div class="line"> </div><div class="line">&#125;);  </div><div class="line">demoApp.controller(<span class="string">'routeDetailController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope, $routeParams, userService</span>) </span>&#123;  </div><div class="line">    $scope.userDetail = userService.getUser($routeParams.id);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>routeDetailController中如上面提到的一样，注入了userService服务，在这里直接拿来用。</p>
+<p>3.创建list.html和detail.html页面，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Route : List.html（用户列表页面）<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"user in users"</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://m.cnblogs.com/142260/3817063.html?full=1#/list/&#123;&#123; user.userId &#125;&#125;"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Route : detail.html（用户详细信息页面）<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color: red;"</span>&gt;</span>&#123;&#123;userDetail.userName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>用户ID：&#123;&#123;userDetail.userId&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>用户名：&#123;&#123;userDetail.userName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">用户简介：<span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;userDetail.userInfo&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://m.cnblogs.com/142260/3817063.html?full=1#/list"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span>返回<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>路由局部刷新位置：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>AngularJS路由（Route） 示例<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-05-14T14:15:36.220Z" itemprop="dateUpdated">2017-05-14 22:15:36</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/25/angular_8/" target="_blank" rel="external">http://yoursite.com/2017/04/25/angular_8/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.png" alt="wyx">
+            wyx
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular路由/">angular路由</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular_8/&title=《angular(八)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular_8/&title=《angular(八)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular_8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angular(八)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular_8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular_8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/25/angular-5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">angularjs(五)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/25/angular_6/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">angular(六)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wyx &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular_8/&title=《angular(八)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular_8/&title=《angular(八)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular_8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angular(八)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular_8/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular_8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aS2rDQBAFQN//0gpklWAiv+7WjBSoWRnZyGUvHv3R6xWf4/u8X/l5/Xg7ySdfKw4uLu6Ye5yev7g5/fxKbsDFxd3PPQ+vwu1OQy2hf7Dh4uI+jDspgM7viYuL+3+5STDlLQ0uLu7zuUnzk3PzAmhhr4aLizvgTkLnqtcL57u4uLhF7lE8ycokp5S/HRcXdwv3fKgRtSLF5UrSXH34Llxc3MXc/BbVFWx1wBoNWXBxcW/i9nIjj7BeefSrIsPFxV3MzceX5bqp9ZhF8nfg4uKu5k4KkfnqNC+VmrmLi4t7EbfXxsz3OYVtMC4u7k3c/GfkZdAFoYmLi7uFmw9JP4wyxyOPQouFi4u7mDtZpubxNHl8ExcX915udb3aK256xRAuLu5Obr4EvXbk0YtCXFzcPdxJCZKMO5MWqBCOuLi4G7m9kMp/Xh5bUZDh4uJu4U6anCorv09hE4uLi3sptxdbveFIcs/8XVxc3NXcautSHY/mbU9UDOHi4m7kTsIrWZNMRq64uLhP5uav89FJtbnCxcV9Jnf0cFVc3ODi4j6B2wuXpGTpBd8FYxFcXNwBd0/HUcXh4uLexP0CBKznHiwc55wAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

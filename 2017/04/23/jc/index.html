@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>js对象的原型与继承方式 | 要么庸俗要么孤独</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="对象原型,js对象继承方式,javascript">
+    <meta name="description" content="本文主要介绍了js对象原型的概念，和几种常见的继承方式">
+<meta name="keywords" content="对象原型,js对象继承方式,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js对象的原型与继承方式">
+<meta property="og:url" content="http://yoursite.com/2017/04/23/jc/index.html">
+<meta property="og:site_name" content="要么庸俗要么孤独">
+<meta property="og:description" content="本文主要介绍了js对象原型的概念，和几种常见的继承方式">
+<meta property="og:updated_time" content="2017-05-14T14:13:57.279Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js对象的原型与继承方式">
+<meta name="twitter:description" content="本文主要介绍了js对象原型的概念，和几种常见的继承方式">
+    
+        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wyx</h5>
+          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Modify01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js对象的原型与继承方式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js对象的原型与继承方式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-23T13:04:04.000Z" itemprop="datePublished" class="page-time">
+  2017-04-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/javascript/">javascript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#js对象的原型："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">js对象的原型：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#混入式继承"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">混入式继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ES5提供的方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">ES5提供的方法</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-jc"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js对象的原型与继承方式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-23 21:04:04" datetime="2017-04-23T13:04:04.000Z"  itemprop="datePublished">2017-04-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/javascript/">javascript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="js对象的原型："><a href="#js对象的原型：" class="headerlink" title="js对象的原型："></a>js对象的原型：</h2><ol>
+<li><p>原型：就是指函数的prototype属性所引用的 对象</p>
+</li>
+<li><p>原型的作用：实现数据的共享</p>
+</li>
+<li><p>本质：原型 就是 对象；当创建函数时，就已经创建原型–js解析器创建的默认原型，会给默认原型添加一个constructor属性，该属性指回函数。</p>
+</li>
+<li><p>如果手动替换掉了默认的原型，那么constructor属性会丢失。此时，若该属性具有一定的开发意义，就将其手动添加上，并且给其正确的指向。</p>
+</li>
+<li><p>继承的概念<br> 就是指对象有权去访问另一个对象上的属性和方法。</p>
+</li>
+<li><p>继承的实现<br> 继承的基本实现：让一个对象 能 直接访问到另一个对象上的成员</p>
+</li>
+<li><p>继承实现方式</p>
+<ul>
+<li><p>原型式：a: 在默认原型上 去添加 想要访问的属性和要调用的方法；<br>b: 将默认的原型替换掉。然后原型变成一个新的对象，之后创建的对象，就继承自新的原型。</p>
+</li>
+<li><p>混入式：从jQuery的extend方法里总结的一种继承实现</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="混入式继承"><a href="#混入式继承" class="headerlink" title="混入式继承"></a>混入式继承</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 在ES6，Object.assign()</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params"> target </span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> args = <span class="built_in">arguments</span>,</div><div class="line">            i = <span class="number">1</span>,</div><div class="line">            l = args.length,</div><div class="line">            obj;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> k;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ( target == <span class="literal">undefined</span> ) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> ( ; i &lt; l; i++ ) &#123;</div><div class="line">        obj = args[ i ];</div><div class="line">        <span class="keyword">for</span> ( k <span class="keyword">in</span> obj ) &#123;</div><div class="line">            <span class="keyword">if</span> ( obj.hasOwnProperty( k ) ) &#123;</div><div class="line">                target[ k ] = obj [ k ];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>应用场景：</p>
+<p>&#160; &#160; &#160; &#160;在实际开发时，如果需要将参数以对象形式出入，并且在实际处理时需要将该对象的属性 在添加给其他对象来存储，那么在此时此景，就可以使用混入式继承来实现。</p>
+<p>注意：<strong>虽然混入式继承不能实现代码的复用，但是在特定的情况下可以提高开发效率</strong></p>
+<h2 id="ES5提供的方法"><a href="#ES5提供的方法" class="headerlink" title="ES5提供的方法"></a>ES5提供的方法</h2><p>扩展：Object.defineProperty(); Object.defineProperties()</p>
+<p>Object.create( parent, [options] );</p>
+<p>功能：创建一个对象，并继承自parent参数。<br>可以通过第二个参数，给新对象初始化一些属性和方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> parent = &#123;</div><div class="line">    <span class="attr">say</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log( <span class="string">'hello, girl. I am '</span> + <span class="keyword">this</span>.name + <span class="string">'. i am '</span> + <span class="keyword">this</span>.age + <span class="string">' years old. make friend, OK?'</span> );</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> child = <span class="built_in">Object</span>.create( parent, &#123;</div><div class="line">    <span class="string">'name'</span>: &#123;</div><div class="line">        <span class="attr">value</span>: <span class="string">'jingjing'</span>,</div><div class="line">        <span class="attr">writable</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">'age'</span>: &#123;</div><div class="line">        <span class="attr">value</span>: <span class="number">22</span>,</div><div class="line">        <span class="attr">writable</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125; );</div><div class="line"></div><div class="line">child.say();</div></pre></td></tr></table></figure>
+<p>优点：非常方便的创建了一个对象，并继承了其他对象；</p>
+<p>缺点：类型比较弱。</p>
+<p>兼容处理：</p>
+<ol>
+<li><p>创建新对象</p>
+</li>
+<li><p>新对象的原型 是 方法的parent参数</p>
+</li>
+<li><p>在兼容处理时，该方法从哪里来的 最终就添加到哪里去</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &lt;!-- 如果浏览器不支持该方法 --&gt;</span></div><div class="line"><span class="keyword">if</span> ( !<span class="built_in">Object</span>.create )&#123;</div><div class="line">    <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params"> parent </span>) </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        &#125;</div><div class="line">        parent.constructor = F;</div><div class="line">        F.prototype = parent;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-05-14T14:13:57.279Z" itemprop="dateUpdated">2017-05-14 22:13:57</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/23/jc/" target="_blank" rel="external">http://yoursite.com/2017/04/23/jc/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.png" alt="wyx">
+            wyx
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js对象继承方式/">js对象继承方式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/对象原型/">对象原型</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/23/jc/&title=《js对象的原型与继承方式》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/23/jc/&title=《js对象的原型与继承方式》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/23/jc/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js对象的原型与继承方式》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/23/jc/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/23/jc/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/25/vue入门简介/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vue(入门及简介)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/22/dv/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">正则表达式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wyx &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/23/jc/&title=《js对象的原型与继承方式》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/23/jc/&title=《js对象的原型与继承方式》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/23/jc/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js对象的原型与继承方式》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/23/jc/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/23/jc/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABz0lEQVR42u3awbKCMAwFUP//p3lbN+C9DeXpzOnKAaUHF5kkzesVr+NtXd9NvvN+5bVj4eLijrnH5Tp79PVmZ7+9fv61ARcX93luvuUEl/8dp9dxcXG/krsYgIJAhouL+4vcM0p+ty2EcHFx/5ebpCB50ZKHvI21Gi4u7oCbdyn3fd7S38XFxV3iHuW69xCl3h0XF/cR7uQopU2SkiInKoFwcXEf4U7yh+RKO9IRvSQuLu42bhs+JqVL8hpFRoaLi7uNOzlQSRooefqSt1ZxcXF3c9t3Wnul28Y4cHFxH+S2ISYfzpg0WeosCRcX9yZuW5ysJUCT4BXNjODi4t7KTR59Xcy0iVES2k5DHi4u7uPcduSiTYmSoY0ikOHi4m7jrgWs9lilbbIslj24uLi3cvMft4Fp0lT9UIzh4uJu5uYPWhvRmBzKFuc/uLi4G7hrxU/dl51nL7i4uJu5R7nyENaGuSSc4eLiPsOdtE6uN1hLhu6assDFxZ1z2zGINWgbqqI5EVxc3M3ctshpC6T50Q4uLu43c9tSJw9VUbsWFxf367ltwMprr2hwExcXdzM3L35abjt48SFq4eLiPsJtDz7nI5h5A2XU38XFxV3h/gHhp+IxJpMy9wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

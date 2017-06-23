@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>angularjs(四) | 要么庸俗要么孤独</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="angularjs,前端框架,angular过滤器">
+    <meta name="description" content="本文主要介绍了AngularJS中的内置过滤器的功能，以及如何自定义自己的过滤器">
+<meta name="keywords" content="angularjs,前端框架,angular过滤器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs(四)">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/angular-4/index.html">
+<meta property="og:site_name" content="要么庸俗要么孤独">
+<meta property="og:description" content="本文主要介绍了AngularJS中的内置过滤器的功能，以及如何自定义自己的过滤器">
+<meta property="og:updated_time" content="2017-05-14T14:15:22.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularjs(四)">
+<meta name="twitter:description" content="本文主要介绍了AngularJS中的内置过滤器的功能，以及如何自定义自己的过滤器">
+    
+        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wyx</h5>
+          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Modify01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">angularjs(四)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">angularjs(四)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-25T05:17:02.000Z" itemprop="datePublished" class="page-time">
+  2017-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-过滤器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.过滤器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#过滤器使用方式"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">过滤器使用方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#filter的两种使用方法："><span class="post-toc-number">1.1.1.1.</span> <span class="post-toc-text">filter的两种使用方法：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-在模板中使用filter"><span class="post-toc-number">1.1.1.1.1.</span> <span class="post-toc-text">1. 在模板中使用filter</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-在controller和service中使用filter"><span class="post-toc-number">1.1.1.1.2.</span> <span class="post-toc-text">2. 在controller和service中使用filter</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-ng的内置过滤器"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">3. ng的内置过滤器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-currency-货币处理"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1. currency (货币处理)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-date-日期格式化"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2. date (日期格式化)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-filter-匹配子串"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">3. filter(匹配子串)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-json-格式化json对象"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">4. json(格式化json对象)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-limitTo-限制数组长度或字符串长度"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">5. limitTo(限制数组长度或字符串长度)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-lowercase-小写"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">6. lowercase(小写)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-uppercase-大写"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">7. uppercase(大写)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-number-格式化数字"><span class="post-toc-number">1.2.8.</span> <span class="post-toc-text">8. number(格式化数字)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-orderBy-排序"><span class="post-toc-number">1.2.9.</span> <span class="post-toc-text">9. orderBy(排序)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-自定义过滤器及示例"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.自定义过滤器及示例</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-angular-4"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">angularjs(四)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-25 13:17:02" datetime="2017-04-25T05:17:02.000Z"  itemprop="datePublished">2017-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>过滤器</code></center></p>
+<hr>
+<h2 id="1-过滤器"><a href="#1-过滤器" class="headerlink" title="1.过滤器"></a>1.过滤器</h2><p>&#160; &#160; &#160; &#160;过滤器<code>（filter）</code>正如其名，作用就是接收一个输入，通过某个规则进行处理，然后返回处理后的结果。主要用在数据的格式化上，例如获取一个数组中的子集，对数组中的元素进行排序等。过滤器通常是伴随标记来使用的，将你model中的数据格式化为需要的格式。表单的控制功能主要涉及到数据验证以及表单控件的增强。ng内置了一些过滤器，它们是：</p>
+<p>currency(货币)、date(日期)、filter(子串匹配)、json(格式化json对象)、limitTo(限制个数)、lowercase(小写)、uppercase(大写)、number(数字)、orderBy(排序)。</p>
+<h3 id="过滤器使用方式"><a href="#过滤器使用方式" class="headerlink" title="过滤器使用方式"></a>过滤器使用方式</h3><p>&#160; &#160; &#160; &#160;总共九种。除此之外还可以自定义过滤器，这个就强大了，可以满足任何要求的数据处理。Filter还是很简单的，需要明白的是内置的<code>filter</code>如何使用，以及自己如何定义一个<code>filter</code>。</p>
+<h4 id="filter的两种使用方法："><a href="#filter的两种使用方法：" class="headerlink" title="filter的两种使用方法："></a>filter的两种使用方法：</h4><h5 id="1-在模板中使用filter"><a href="#1-在模板中使用filter" class="headerlink" title="1. 在模板中使用filter"></a>1. 在模板中使用filter</h5><p>我们可以直接在双括号中使用<code>filter</code>，跟在表达式后面用 | 分割，语法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; expression | filter &#125;&#125;</div></pre></td></tr></table></figure>
+<p>也可以多个<code>filter</code>连用，上一个filter的输出将作为下一个filter的输入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; expression | filter1 | filter2 | ... &#125;&#125;</div></pre></td></tr></table></figure>
+<p>filter可以接收参数，参数用 : 进行分割，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; expression | filter:argument1:argument2:... &#125;&#125;</div></pre></td></tr></table></figure>
+<p>除了对双括号中的数据进行格式化，我们还可以在指令中使用filter，例如先对数组array进行过滤处理，然后再循环输出：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-repeat</span>=<span class="string">"a in array | filter "</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="2-在controller和service中使用filter"><a href="#2-在controller和service中使用filter" class="headerlink" title="2. 在controller和service中使用filter"></a>2. 在controller和service中使用filter</h5><p>&#160; &#160; &#160; &#160;我们的js代码中也可以使用过滤器，方式就是我们熟悉的依赖注入，例如我要在controller中使用currency过滤器，只需将它注入到该controller中即可，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'testC'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,currencyFilter</span>)</span>&#123;</div><div class="line">    $scope.num = currencyFilter(<span class="number">123534</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　</p>
+<p>在模板中使用就可以直接输出$123,534.00了！在服务中使用filter也是同样的道理。</p>
+<p>&#160; &#160; &#160; &#160;如果你要在controller中使用多个filter，并不需要一个一个注入吗，ng提供了一个$filter服务可以来调用所需的filter，你只需注入一个$filter就够了，使用方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'testC'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,$filter</span>)</span>&#123;</div><div class="line">    $scope.num = $filter(<span class="string">'currency'</span>)(<span class="number">123534</span>);　　</div><div class="line">    $scope.date = $filter(<span class="string">'date'</span>)(<span class="keyword">new</span> <span class="built_in">Date</span>());  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以达到同样的效果。好处是你可以方便使用不同的filter了。</p>
+<h2 id="3-ng的内置过滤器"><a href="#3-ng的内置过滤器" class="headerlink" title="3. ng的内置过滤器"></a>3. ng的内置过滤器</h2><p>&#160; &#160; &#160; &#160;ng内置了九种过滤器，使用方法都非常简单，看文档即懂。不过为了以后不去翻它的文档，我在这里还是做一个详细的记录。<br>&#160; &#160; &#160; &#160;currency(货币)、date(日期)、filter(子串匹配)、json(格式化json对象)、limitTo(限制个数)、lowercase(小写)、uppercase(大写)、number(数字)、orderBy(排序)</p>
+<h3 id="1-currency-货币处理"><a href="#1-currency-货币处理" class="headerlink" title="1. currency (货币处理)"></a>1. currency (货币处理)</h3><p>&#160; &#160; &#160; &#160;使用currency可以将数字格式化为货币，默认是美元符号，你可以自己传入所需的符号，例如我传入人民币：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;num | currency : <span class="string">'￥'</span>&#125;&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-date-日期格式化"><a href="#2-date-日期格式化" class="headerlink" title="2. date (日期格式化)"></a>2. date (日期格式化)</h3><p>&#160; &#160; &#160; &#160;原生的js对日期的格式化能力有限，ng提供的date过滤器基本可以满足一般的格式化要求。用法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;date | date : <span class="string">'yyyy-MM-dd hh:mm:ss EEEE'</span>&#125;&#125;</div></pre></td></tr></table></figure>
+<p>　<br>&#160; &#160; &#160; &#160;参数用来指定所要的格式，y M d h m s E 分别表示 年 月 日 时 分 秒 星期，你可以自由组合它们。也可以使用不同的个数来限制格式化的位数。另外参数也可以使用特定的描述性字符串，例如“shortTime”将会把时间格式为12:05 pm这样的。ng提供了八种描述性的字符串，个人觉得这些有点多余，我完全可以根据自己的意愿组合出想要的格式，不愿意去记这么多单词~</p>
+<h3 id="3-filter-匹配子串"><a href="#3-filter-匹配子串" class="headerlink" title="3. filter(匹配子串)"></a>3. filter(匹配子串)</h3><p>&#160; &#160; &#160; &#160;这个名叫filter的filter。用来处理一个数组，然后可以过滤出含有某个子串的元素，作为一个子数组来返回。可以是字符串数组，也可以是对象数组。如果是对象数组，可以匹配属性的值。它接收一个参数，用来定义子串的匹配规则。下面举个例子说明一下参数的用法，我用现在特别火的几个孩子定义了一个数组：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$scope.childrenArray = [</div><div class="line">        &#123;<span class="attr">name</span>:<span class="string">'kimi'</span>,<span class="attr">age</span>:<span class="number">3</span>&#125;,</div><div class="line">        &#123;<span class="attr">name</span>:<span class="string">'cindy'</span>,<span class="attr">age</span>:<span class="number">4</span>&#125;,</div><div class="line">        &#123;<span class="attr">name</span>:<span class="string">'anglar'</span>,<span class="attr">age</span>:<span class="number">4</span>&#125;,</div><div class="line">        &#123;<span class="attr">name</span>:<span class="string">'shitou'</span>,<span class="attr">age</span>:<span class="number">6</span>&#125;,</div><div class="line">        &#123;<span class="attr">name</span>:<span class="string">'tiantian'</span>,<span class="attr">age</span>:<span class="number">5</span>&#125;</div><div class="line">];</div><div class="line"></div><div class="line">    $scope.func = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="keyword">return</span> e.age&gt;<span class="number">4</span>;&#125;&#123;&#123; childrenArray | filter : <span class="string">'a'</span> &#125;&#125; <span class="comment">//匹配属性值中含有a的</span></div><div class="line">    &#123;&#123; childrenArray | filter : <span class="number">4</span> &#125;&#125;  <span class="comment">//匹配属性值中含有4的</span></div><div class="line">    &#123;&#123; childrenArray | filter : &#123;<span class="attr">name</span> : <span class="string">'i'</span>&#125; &#125;&#125; <span class="comment">//参数是对象，匹配name属性中含有i的</span></div><div class="line">    &#123;&#123;childrenArray | filter : func &#125;&#125;  <span class="comment">//参数是函数，指定返回age&gt;4的</span></div></pre></td></tr></table></figure>
+<h3 id="4-json-格式化json对象"><a href="#4-json-格式化json对象" class="headerlink" title="4. json(格式化json对象)"></a>4. json(格式化json对象)</h3><p>&#160; &#160; &#160; &#160;json过滤器可以把一个js对象格式化为json字符串，没有参数。这东西有什么用呢，我一般也不会在页面上输出一个json串啊，官网说它可以用来进行调试，嗯，是个不错的选择。或者，也可以用在js中使用，作用就和我们熟悉的JSON.stringify()一样。用法超级简单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; jsonTest | json&#125;&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-limitTo-限制数组长度或字符串长度"><a href="#5-limitTo-限制数组长度或字符串长度" class="headerlink" title="5. limitTo(限制数组长度或字符串长度)"></a>5. limitTo(限制数组长度或字符串长度)</h3><p>&#160; &#160; &#160; &#160;limitTo过滤器用来截取数组或字符串，接收一个参数用来指定截取的长度，如果参数是负值，则从数组尾部开始截取。个人觉得这个filter有点鸡肋，首先只能从数组或字符串的开头/尾部进行截取，其次，js原生的函数就可以代替它了，看看怎么用吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; childrenArray | limitTo : <span class="number">2</span> &#125;&#125;  <span class="comment">//将会显示数组中的前两项</span></div></pre></td></tr></table></figure>
+<p>　　</p>
+<h3 id="6-lowercase-小写"><a href="#6-lowercase-小写" class="headerlink" title="6. lowercase(小写)"></a>6. lowercase(小写)</h3><p>&#160; &#160; &#160; &#160;把数据转化为全部小写。太简单了，不多解释。同样是很鸡肋的一个filter，没有参数，只能把整个字符串变为小写，不能指定字母。怎么用我都懒得写了。</p>
+<h3 id="7-uppercase-大写"><a href="#7-uppercase-大写" class="headerlink" title="7. uppercase(大写)"></a>7. uppercase(大写)</h3><p>同上。</p>
+<h3 id="8-number-格式化数字"><a href="#8-number-格式化数字" class="headerlink" title="8. number(格式化数字)"></a>8. number(格式化数字)</h3><p>&#160; &#160; &#160; &#160;number过滤器可以为一个数字加上千位分割，像这样，123,456,789。同时接收一个参数，可以指定float类型保留几位小数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; num | number : <span class="number">2</span> &#125;&#125;</div></pre></td></tr></table></figure>
+<p>　　</p>
+<h3 id="9-orderBy-排序"><a href="#9-orderBy-排序" class="headerlink" title="9. orderBy(排序)"></a>9. orderBy(排序)</h3><p>&#160; &#160; &#160; &#160;orderBy过滤器可以将一个数组中的元素进行排序，接收一个参数来指定排序规则，参数可以是一个字符串，表示以该属性名称进行排序。可以是一个函数，定义排序属性。还可以是一个数组，表示依次按数组中的属性值进行排序（若按第一项比较的值相等，再按第二项比较），还是拿上面的孩子数组举例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&#123;&#123; childrenArray | orderBy : 'age' &#125;&#125;&lt;/div&gt;      //按age属性值进行排序，若是-age，则倒序</div><div class="line">&lt;div&gt;&#123;&#123; childrenArray | orderBy : orderFunc &#125;&#125;&lt;/div&gt;   //按照函数的返回值进行排序</div><div class="line">&lt;div&gt;&#123;&#123; childrenArray | orderBy : ['age','name'] &#125;&#125;&lt;/div&gt;  //如果age相同，按照name进行排序　　内置的过滤器介绍</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;完了，写的我都快睡着了。。。正如你所看到的，ng内置的过滤器也并不是万能的，事实上好多都比较鸡肋。更个性化的需求就需要我们来定义自己的过滤器了，下面来看看如何自定义过滤器。</p>
+<h2 id="3-自定义过滤器及示例"><a href="#3-自定义过滤器及示例" class="headerlink" title="3.自定义过滤器及示例"></a>3.自定义过滤器及示例</h2><p>&#160; &#160; &#160; &#160;filter的自定义方式也很简单，使用module的filter方法，返回一个函数，该函数接收<br>输入值，并返回处理后的结果。话不多说，我们来写一个看看。比如我需要一个过滤器，它可以返回一个数组中下标为奇数的元素，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.filter(<span class="string">'odditems'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">inputArray</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> array = [];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;inputArray.length;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(i%<span class="number">2</span>!==<span class="number">0</span>)&#123;</div><div class="line">                array.push(inputArray[i]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> array;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;格式就是这样，你的处理逻辑就写在内部的那个闭包函数中。你也可以让自己的过滤器接收参数，参数就定义在return的那个函数中，作为第二个参数，或者更多个参数也可以。</p>
+<p>&#160; &#160; &#160; &#160;格式就是这样，你的处理逻辑就写在内部的那个闭包函数中。你也可以让自己的过滤器接收参数，参数就定义在return的那个函数中，作为第二个参数，或者更多个参数也可以。<br>自定义过滤器实例（例04）:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* View html */</span></div><div class="line">First name：&lt;input ng-model=<span class="string">"user.firstName"</span>/&gt;<span class="xml"><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span></div><div class="line">Last  name：&lt;input ng-model=<span class="string">"user.lastName"</span>/&gt; <span class="xml"><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span></div><div class="line">First name：&#123;&#123;user.firstName&#125;&#125;      Last  name：&#123;&#123;user.lastName&#125;&#125; &lt;br/&gt;</div><div class="line">Fullname：&#123;&#123;user | flFullname&#125;&#125;&lt;br/&gt;</div><div class="line">Fullname：&#123;&#123;user | flFullname:<span class="string">"－"</span>&#125;&#125;&lt;br/&gt;</div><div class="line">Fullname：&#123;&#123;user | flFullname:<span class="string">"•"</span> | uppercase &#125;&#125;</div><div class="line"><span class="comment">/* Controller js */</span></div><div class="line">demoApp.filter(<span class="string">"flFullname"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">user, sep</span>) </span>&#123;</div><div class="line">        sep = sep || <span class="string">" "</span>;</div><div class="line">        user = user || &#123;&#125;;</div><div class="line">        fullName = <span class="string">""</span>;</div><div class="line">        <span class="keyword">if</span>(user.firstName)&#123;fullName += user.firstName;&#125;</div><div class="line">        <span class="keyword">if</span>(user.lastName)&#123;fullName = fullName + sep + user.lastName;&#125;</div><div class="line">        <span class="keyword">if</span>(fullName &amp;&amp; fullName.length&gt;<span class="number">0</span>)&#123;<span class="keyword">return</span> fullName;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;<span class="keyword">return</span> <span class="string">""</span>;&#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-05-14T14:15:22.852Z" itemprop="dateUpdated">2017-05-14 22:15:22</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/25/angular-4/" target="_blank" rel="external">http://yoursite.com/2017/04/25/angular-4/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.png" alt="wyx">
+            wyx
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular过滤器/">angular过滤器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular-4/&title=《angularjs(四)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular-4/&title=《angularjs(四)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular-4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularjs(四)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular-4/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular-4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/25/cookie/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Token ，Cookie和Session的区别</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/25/angular-5/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">angularjs(五)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wyx &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular-4/&title=《angularjs(四)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular-4/&title=《angularjs(四)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular-4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularjs(四)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular-4/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular-4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABvUlEQVR42u3ay47CMAwFUP7/pxmJ1YxGwLWdhCKdrCpa2tMuLD9yu8Xr/li/j5P1//pnvyxeuLi4Y27+yISeE/NPgIuL+yluNXhVo82zs7kBFxf3mtzXj0zOJsERFxf3u7jNpCQuqHBxca/Gnbc2cvro5XFxcY9wJ0Fn1fH2/i4uLu6iqUQS1CaU8tNxcXGPcF+3PKJSpDWMyYurW4LAxcVdyk2gybaJ6taK5GwzhOHi4o65k5opb4jM06M33xgXF3cbN09NeiEpT5LeBERcXNzN3B5l1aaKvED608XBxcU9wq1urpqUPdXmaQGEi4u7iNsbe1TzjXmjBBcX9zw3KT8mW7IKSUx1rIKLi7uNm6QXvW2U8+2buLi457m9IFVtcyRjlWiIi4uLe4RbDSXVDVvVl4laM7i4uJu593hVH5+XQMm/cHFxz3Mno9NqmlJtjOLi4n6KWw1nk9FstayKJrG4uLhLudWAMml2JPfMz+Li4u7m5sFr1Th21C7BxcU9yO0Fr/yVmhEUFxf38ty1d84br7i4uN/F3Zfc4OLiXoFbDS55ozMZyRSuxMXFPcLtJStrC6FeyxUXF3cD9wc0Lk3UF2YLxAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

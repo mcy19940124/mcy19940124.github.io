@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>angularjs(三) | 要么庸俗要么孤独</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="angularjs,前端框架">
+    <meta name="description" content="本文主要介绍了AngularJS的数据绑定、scopes、module、controller、ajax、表达式">
+<meta name="keywords" content="angularjs,前端框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs(三)">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/angular-3/index.html">
+<meta property="og:site_name" content="要么庸俗要么孤独">
+<meta property="og:description" content="本文主要介绍了AngularJS的数据绑定、scopes、module、controller、ajax、表达式">
+<meta property="og:updated_time" content="2017-05-14T14:15:26.117Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularjs(三)">
+<meta name="twitter:description" content="本文主要介绍了AngularJS的数据绑定、scopes、module、controller、ajax、表达式">
+    
+        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wyx</h5>
+          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Modify01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">angularjs(三)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">angularjs(三)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-25T05:17:02.000Z" itemprop="datePublished" class="page-time">
+  2017-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-数据绑定"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.数据绑定</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-scopes、module、controller"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.scopes、module、controller</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-scopes"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">2.1 scopes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-module"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2.2 module</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-ng-controller"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">2.3 ng-controller</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-ajax"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">4.3 ajax</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4表达式"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">4.4表达式</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-angular-3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">angularjs(三)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-25 13:17:02" datetime="2017-04-25T05:17:02.000Z"  itemprop="datePublished">2017-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AngularJS/">AngularJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>功能介绍</code></center></p>
+<hr>
+<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1.数据绑定"></a>1.数据绑定</h2><p>&#160; &#160; &#160; &#160;AngularJS的双向数据绑定，意味着你可以在<code>Mode(JS)</code>中改变数据，而这些变动立刻就会自动出现在<code>View</code>上，<code>反之亦然</code>。即：一方面可以做到model变化驱动了DOM中元素变化，另一方面也可以做到DOM元素的变化也会影响到Model。<br>&#160; &#160; &#160; &#160;在我们使用jQuery的时候，代码中会大量充斥类似这样的语句：var val = $(‘#id’).val(); $(‘#id’).html(str);等等，即频繁的DOM操作（读取和写入），其实我们的最终目的并不是要操作DOM，而是要实现业务逻辑。ng的绑定将让你摆脱DOM操作，只要模板与数据通过声明进行了绑定，两者将随时保持同步，最新的数据会实时显示在页面中，页面中用户修改的数据也会实时被记录在数据模型中。<br><strong>从View到Controller再到View的数据交互（例01）：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;html ng-app=<span class="string">"demoApp"</span>&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"text"</span> ng-model=<span class="string">"user.name"</span> placeholder=<span class="string">"请输入名称"</span>/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello, &#123;&#123; user.name &#125;&#125;！</div></pre></td></tr></table></figure>
+<p><code>关键</code>： ng-app 、 ng-model 和 { {user.name } }<br><code>首先</code>： <html>元素的ng-app属性。标识这个DOM里面的内容将启用AngularJS应用。<br><code>其次</code>：告诉AngularJS，对页面上的“user.name” 这个Model进行双向数据绑定。<br><code>第三</code>：告诉AngularJS，在“”这个指令模版上显示“user.name”这个Model的数据。<br><strong>从Server到Controller再到View的数据交互（例02）：</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"demoApp"</span>&gt;</span></div></pre></td></tr></table></figure></html></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>  <span class="attr">ng-controller</span>=<span class="string">"demoController"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"user.name"</span> <span class="attr">disabled</span>=<span class="string">"disabled"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span>获取名字<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"demoController"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http, $scope</span>)</span>&#123;</div><div class="line">$scope. getAjaxUser = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="comment">// $http.get(&#123;url:"../xxx.action"&#125;).success(function(data)&#123;</span></div><div class="line"><span class="comment">// $scope.user= data;</span></div><div class="line"><span class="comment">// &#125;);</span></div><div class="line">$scope.user = &#123;<span class="string">"name"</span>:<span class="string">"从JOSN中获取的名称"</span>,<span class="string">"age"</span>:<span class="number">22</span>&#125;;</div><div class="line">&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>改变$scope中的user，View也会自动更新。</p>
+<h2 id="2-scopes、module、controller"><a href="#2-scopes、module、controller" class="headerlink" title="2.scopes、module、controller"></a>2.scopes、module、controller</h2><h3 id="2-1-scopes"><a href="#2-1-scopes" class="headerlink" title="2.1 scopes"></a>2.1 scopes</h3><p>&#160; &#160; &#160; &#160;$scope是一个把view（一个DOM元素）连结到controller上的对象。在我们的MVC结构里，这个 $scope 将成为model，它提供一个绑定到DOM元素（以及其子元素）上的excecution context。</p>
+<p>&#160; &#160; &#160; &#160;尽管听起来有点复杂，但 $scope 实际上就是一个JavaScript对象，controller和view都可以访问它，所以我们可以利用它在两者间传递信息。在这个 $scope 对象里，我们既存储数据，又存储将要运行在view上的函数。</p>
+<p>&#160; &#160; &#160; &#160;每一个Angular应用都会有一个 $rootScope。这个 $rootScope 是最顶级的scope，它对应着含有 ng-app 指令属性的那个DOM元素。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope</span>) </span>&#123; $rootScope.name = <span class="string">"张三"</span>; &#125;);</div></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;如果页面上没有明确设定 $scope ，Angular 就会把数据和函数都绑定到这里， 第一部分中的例子就是靠这一点成功运行的。<br>&#160; &#160; &#160; &#160;这样，我们就可以在view的任何地方访问这个name属性，使用模版表达式，像这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;name&#125;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-2-module"><a href="#2-2-module" class="headerlink" title="2.2 module"></a>2.2 module</h3><p>&#160; &#160; &#160; &#160;首先需要明确一下模板的概念。在我还不知道有模板这个东西的时候，曾经用js拼接出很长的HTML字符串，然后append到页面中，这种方式想想真是又土又笨。后来又看到可以把HTML代码包裹在一个&lt;script&gt;标签中当作模板，然后按需要取来使用。<br>&#160; &#160; &#160; &#160;在ng中，模板十分简单，它就是我们页面上的HTML代码，不需要附加任何额外的东西。在模板中可以使用各种指令来增强它的功能，这些指令可以让你把模板和数据巧妙的绑定起来。<br>在&lt;html&gt;标签上多了一个属性ng-app=”MyApp”，它的作用就是用来指定ng的作用域是在&lt;html&gt;标签以内部分。在js中，我们调用angular对象的module方法来声明一个模块，模块的名字和ng-app的值对应。这样声明一下就可以让ng运行起来了。<br>示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"demoApp"</span>&gt;</span></div><div class="line">var demoApp = angular.module('demoApp', []);</div></pre></td></tr></table></figure></p>
+<h3 id="2-3-ng-controller"><a href="#2-3-ng-controller" class="headerlink" title="2.3 ng-controller"></a>2.3 ng-controller</h3><p>&#160; &#160; &#160; &#160;要明确创建一个$scope 对象，我们就要给DOM元素安上一个<code>controlle</code>r对象，使用的是ng-controller 指令属性：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"MyController"</span>&gt;</span> &#123;&#123; person.name &#125;&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;ng-controller指令给所在的DOM元素创建了一个新的$scope 对象，并将这个$scope 对象包含进外层DOM元素的$scope 对象里。在上面的例子里，这个外层DOM元素的$scope 对象，就是$rootScope 对象。这个scope链是这样的：</p>
+<p>&#160; &#160; &#160; &#160;所有scope都遵循原型继承（prototypal inheritance），这意味着它们都能访问父scope们。对任何属性和方法，如果AngularJS在当前scope上找不到，就会到父 scope上去找，如果在父scope上也没找到，就会继续向上回溯，一直到$rootScope 上。即如果controller是多层嵌套的，就会从最里面一直往外找，这个scope链是这样的：</p>
+<p>&#160; &#160; &#160; &#160;唯一的例外：有些指令属性可以选择性地创建一个独立的scope，让这个scope不继承它的父scope们，这个会在指令详解中说明。</p>
+<h3 id="4-3-ajax"><a href="#4-3-ajax" class="headerlink" title="4.3 ajax"></a>4.3 ajax</h3><p>&#160; &#160; &#160; &#160;$http 服务是AngularJS的核心服务之一，它帮助我们通过XMLHttpRequest对象或JSONP与远程HTTP服务进行交流。<br>&#160; &#160; &#160; &#160;$http 服务是这样一个函数：它接受一个设置对象，其中指定了如何创建HTTP请求；它将返回一个承诺（*参考JavaScript异步编程的promise模式），其中提供两个方法： s<code>uccess</code>方法和<code>error</code>方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"demoController"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http, $scope</span>)</span>&#123;</div><div class="line">$scope. getAjaxUser = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">$http.get(&#123;<span class="attr">url</span>:<span class="string">"../xxx.action"</span>&#125;).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">alert(data);</div><div class="line">&#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">Alert(“出错了！”);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>AngularJS的AJAX与jquery等框架的AJAX基本一致，这里就不多说了。</p>
+<h3 id="4-4表达式"><a href="#4-4表达式" class="headerlink" title="4.4表达式"></a>4.4表达式</h3><p>&#160; &#160; &#160; &#160;ng中的表达式与javascript表达式类似但是不可以划等号，它是ng自己定义的一套模式。表达式可以作为指令的值，如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ng-modle=<span class="string">"people.name"</span>、ng-click=<span class="string">"showMe()"</span></div></pre></td></tr></table></figure></p>
+<p> ，看起来是如此像字符串，故而也叫字符串表达式。也可以在标记中使用表达式，如<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;<span class="number">1</span>+<span class="number">2</span>&#125;&#125;</div></pre></td></tr></table></figure></p>
+<p> ，或者与过滤器一起使用<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;<span class="number">1</span>+<span class="number">2</span> | currency&#125;&#125;</div></pre></td></tr></table></figure></p>
+<p> 。在框架内部，字符串不会简单的使用<code>eval()</code>来执行，而是有一个专门的$parse服务来处理。在ng表达式中不可以使用循环语句、判断语句，事实上在模板中使用复杂的表达式也是一个不推荐的做法，这样视图与逻辑就混杂在一起了<br>我们在使用其他模板库时，一般都会有模板的循环输出、分支输出、逻辑判断等类似的控制。<br>要想理解指令属性的运作，我们必须先理解表达式。在之前的例子里我们已经见过表达式，例如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; user.name &#125;&#125;</div></pre></td></tr></table></figure></p>
+<p>请查看例03、例04、例05。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; <span class="number">8</span> + <span class="number">1</span> &#125;&#125; <span class="number">9</span></div><div class="line">&#123;&#123; person &#125;&#125; &#123;<span class="string">"name"</span>:<span class="string">"Ari Lerner"</span>&#125;</div><div class="line">&#123;&#123; <span class="number">10</span> * <span class="number">3.3</span> | currency &#125;&#125; $<span class="number">33.00</span></div></pre></td></tr></table></figure></p>
+<p>表达式粗略来看有点像 eval(javascript) 的结果。它们会经过Angular.js的处理，从而拥有以下重要而<code>独特</code>的性质：<br><code>1</code> 所有表达式都在scope这个context里被执行，因此可以使用所有本地 $scope 中的变量。<br><code>2</code> 如果一个表达式的执行导致类型错误或引用错误，这些错误将不会被抛出。<br><code>3</code> 表达式里不允许任何控制函数流程的功能（如if/else等条件语句）<br><code>4</code> 表达式可接受一个或多个串联起来的过滤器。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-05-14T14:15:26.117Z" itemprop="dateUpdated">2017-05-14 22:15:26</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/25/angular-3/" target="_blank" rel="external">http://yoursite.com/2017/04/25/angular-3/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.png" alt="wyx">
+            wyx
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular-3/&title=《angularjs(三)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular-3/&title=《angularjs(三)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular-3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularjs(三)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular-3/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular-3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/25/angular-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">angularjs(一)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/25/mxdx/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Javascript 面向对象编程（一）：封装</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wyx &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/angular-3/&title=《angularjs(三)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/angular-3/&title=《angularjs(三)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/angular-3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularjs(三)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/angular-3/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/angular-3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwElEQVR42u3aQYrDMAwF0N7/0h2Y1Qwh5suy3RSeVyUN6XMXQv7K6xWv9++6fr7e83ddr99dWbxwcXHb3Pdw3XGT+5Mr+TNxcXHPc5PilT80/zY34OLiPpM73sYYlD8TFxf3u7jj40r1SIOLi/t8bn6YyduaJEDZeFbDxcVtcDtFZ9XnQ/kuLi5ueyqRl6Q5SvnXcXFxj3DvHl1tTZIWJ4lIog3j4uJu5lbLTb7VJEDJCxwuLu55bh55jB839+pG0h5FHRkuLu4i7qoSNtcS5RFqOTTBxcVtcHfstYpLSti/uouLi7uZW60P1aanPyUpnJxwcXEXcavQTlTaCUpwcXHPc/sjkM4rF8n2CikOLi7uUm7e1swNZTsHLVxc3M9y85ijVZKK4QsuLu5Jbj7U7EeonUMRLi7uSe64cOSHorn7y5EKLi7uQe6qODVpU6qDFlxc3E9x85UfkLaMZnFxcY9wqwVlrpDl9PxbXFzc3dy5UWtrKNKJS3BxcQ9y++1IeSjSb19wcXEfwK22MvlrGYW/BhcX95HcuVlutbnBxcV9Arcw7GyHpNUoZDIWwcXFbXA7gWn15Yy5QomLi3uQ+wNJ0nadUsKMFAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
