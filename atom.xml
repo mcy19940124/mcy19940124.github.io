@@ -90,9 +90,9 @@
       <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
     
     
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
     
       <category term="Vue的数据绑定" scheme="http://yoursite.com/tags/Vue%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/"/>
     
@@ -135,6 +135,119 @@
     
     
       <category term="CSS3" scheme="http://yoursite.com/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue(Vue事件处理)</title>
+    <link href="http://yoursite.com/2017/05/25/Vue%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2017/05/25/Vue入门之事件绑定处理/</id>
+    <published>2017-05-25T05:17:02.000Z</published>
+    <updated>2017-06-23T15:00:38.171Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之事件处理</code></center></p>
+<hr>
+<h1 id="Vue事件处理"><a href="#Vue事件处理" class="headerlink" title="Vue事件处理"></a>Vue事件处理</h1><h2 id="监听事件的Vue处理"><a href="#监听事件的Vue处理" class="headerlink" title="监听事件的Vue处理"></a>监听事件的Vue处理</h2><p>Vue提供了协助我们为标签绑定时间的方法，当然我们可以直接用dom原生的方式去绑定事件。Vue提供的指令进行绑定也是非常方便，而且能让ViewModel更简洁，逻辑更彻底。所以还是推荐大家使用的。</p>
+<p>Vue提供了<code>v-on</code>指令帮助我们进行事件的绑定。<br>基本的内联事件处理方法[官方demo]：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example-1"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 为按钮绑定点击事件，执行counter += 1的任务。 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"counter += 1"</span>&gt;</span>增加 1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这个按钮被点击了 &#123;&#123; counter &#125;&#125; 次。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">var example1 = new Vue(&#123;</div><div class="line">  el: '#example-1',</div><div class="line">  data: &#123;</div><div class="line">    counter: 0</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="事件处理方法集成到Vue对象"><a href="#事件处理方法集成到Vue对象" class="headerlink" title="事件处理方法集成到Vue对象"></a>事件处理方法集成到Vue对象</h2><p>内联的方式绑定的事件，只能处理简单的事件的处理逻辑。复杂的情况还是封装到js中最方便，也不容易出错。<br>Vue对象中可以添加methods属性，开发者可以把事件处理函数的逻辑放到methods中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之动态显示表格<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; number &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加[绑定事件处理器]"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加[内联方法调用]"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber()"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">    var app = new Vue(&#123;</div><div class="line">      el: '#app',</div><div class="line">      data: &#123;</div><div class="line">        number: 1</div><div class="line">      &#125;,</div><div class="line">      methods: &#123;</div><div class="line">        // 事件响应方法的逻辑代码</div><div class="line">        getNumber: function (e) &#123;</div><div class="line">          this.number += 1;   // 不管是内联方法调用，还是绑定事件处理器两种方式执行事件响应方法的时候 this都是指向 app</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><p>官网上写的非常好，这块就直接用管网的吧。在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在 methods 中轻松实现这点，但更好的方式是：methods 只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。<br>为了解决这个问题， Vue.js 为 v-on 提供了 事件修饰符。通过由点(.)表示的指令后缀来调用修饰符。</p>
+<ul>
+<li>.stop</li>
+<li>.prevent</li>
+<li>.capture</li>
+<li>.self</li>
+<li>.once</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 阻止单击事件冒泡 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 修饰符可以串联  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 只有修饰符 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加事件侦听器时使用事件捕获模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- the click event will be triggered at most once --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.once</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h2><p>在监听键盘事件时，我们经常需要监测常见的键值。 Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 只有在 keyCode 是 13 时调用 vm.submit() --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.13</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">记住所有的 keyCode 比较困难，所以 Vue 为最常用的按键提供了别名：</div><div class="line"><span class="comment">&lt;!-- 同上 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缩写语法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>全部的按键别名：</p>
+<ul>
+<li>.enter</li>
+<li>.tab</li>
+<li>.delete (捕获 “删除” 和 “退格” 键)</li>
+<li>.esc</li>
+<li>.space</li>
+<li>.up</li>
+<li>.down</li>
+<li>.left</li>
+<li>.right</li>
+<li>.ctrl</li>
+<li>.alt</li>
+<li>.shift</li>
+<li>.meta</li>
+</ul>
+<h2 id="事件绑定的简写"><a href="#事件绑定的简写" class="headerlink" title="事件绑定的简写"></a>事件绑定的简写</h2><p>Vue中属性的绑定的简写直接是<code>:</code> === ‘v-bind:’<br>而事件的缩写是直接变成<code>@</code>.  也就是说：  <code>v-on:</code> === <code>@</code><br>看下面的例子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="事件绑定总结"><a href="#事件绑定总结" class="headerlink" title="事件绑定总结"></a>事件绑定总结</h2><p>Vue为了方便大家进行开发，提供了事件的相关的封装，可以让我们方便我们用Vue对事件进行开发，尤其是v-on指令的非常方便的跟Vue对象中methods进行配合进行复杂的事件处理，非常方便。另外事件的事件修饰符和按键修饰符也可以让Vue事件这块锦上添花。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Vue事件处理
+    
+    </summary>
+    
+      <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
+    
+    
+      <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="Vue事件处理" scheme="http://yoursite.com/tags/Vue%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue(Vue列表渲染及条件渲染实战)</title>
+    <link href="http://yoursite.com/2017/05/25/vue%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/"/>
+    <id>http://yoursite.com/2017/05/25/vue入门之列表渲染/</id>
+    <published>2017-05-25T05:17:02.000Z</published>
+    <updated>2017-06-23T14:41:10.450Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue列表渲染及条件渲染实战</code></center></p>
+<hr>
+<h1 id="Vue列表渲染及条件渲染实战"><a href="#Vue列表渲染及条件渲染实战" class="headerlink" title="Vue列表渲染及条件渲染实战"></a>Vue列表渲染及条件渲染实战</h1><h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><p>有时候我们要根据数据的情况，决定标签是否进行显示或者有其他动作。最常见的就是，表格渲染的时候，如果表格没有数据，就显示无数据。如果有数据就显示表格数据。<br>Vue帮我们提供了一个<code>v-if</code>的指令，帮助我们完成判断的模板处理。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">"ok"</span>&gt;</span>Yes<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>No<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 当ok为true的时候，输出： Yes， 否则输出： No --&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">      <span class="attr">ok</span>: <span class="literal">true</span>      <span class="comment">// true,返回：Yes，   false=&gt; No</span></div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>v-if</code>指令可以根据数据绑定的情况进行插入标签或者移除标签。<br>当然，如果熟悉js的都清楚，有if，肯定会有else。 Vue提供的是 <code>v-else</code>指令。</p>
+<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><h3 id="基本v-for循环渲染标签"><a href="#基本v-for循环渲染标签" class="headerlink" title="基本v-for循环渲染标签"></a>基本v-for循环渲染标签</h3><p>模板引擎都会提供循环的支持。Vue也不例外，Vue是提供了一个<code>v-for</code>指令。基本的用法类似于foreach的用法。还是看例子最直接，上代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>年龄<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>地址<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 每次for循环，都会创建一个tr标签。item是遍历的元素。 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tr</span> <span class="attr">v-for</span>=<span class="string">"item in UserList"</span> &gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.name &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.age &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.address &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">     <span class="attr">UserList</span>: [</div><div class="line">      &#123;<span class="string">'name'</span>: <span class="string">'malun'</span>, <span class="string">'age'</span>: <span class="number">18</span>, <span class="string">'address'</span>: <span class="string">'北京黑地下室'</span>&#125;,</div><div class="line">      &#123;<span class="string">'name'</span>: <span class="string">'flydragon'</span>, <span class="string">'age'</span>: <span class="number">22</span>, <span class="string">'address'</span>: <span class="string">'厦门的很多热的地方'</span>&#125;,</div><div class="line">      &#123;<span class="string">'name'</span>: <span class="string">'temp'</span>, <span class="string">'age'</span>: <span class="number">25</span>, <span class="string">'address'</span>: <span class="string">'东北松花江上'</span>&#125;</div><div class="line">     ]</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Template循环渲染多标签"><a href="#Template循环渲染多标签" class="headerlink" title="Template循环渲染多标签"></a>Template循环渲染多标签</h3><p>上面的例子，我们演示的是 每次循环输出一个tr标签。如果我们希望每次循环生成两个tr标签呢？如果还有生成其他的标签呢？</p>
+<p>Vue给我们提供了template标签，供我们用于v-for循环中进行处理。</p>
+<p>上代码喽：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 通过template标签，可以一次循环，输出两个li标签 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"item in items"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; item.msg &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="表格显示的综合案例"><a href="#表格显示的综合案例" class="headerlink" title="表格显示的综合案例"></a>表格显示的综合案例</h2><p>下面是一个综合的案例，每秒钟往表格中添加一条数据。<br>本案例综合使用了v-if 和 v-for循环综合案例。</p>
+<h3 id="关于v-for对应的数组的更新"><a href="#关于v-for对应的数组的更新" class="headerlink" title="关于v-for对应的数组的更新"></a>关于v-for对应的数组的更新</h3><p>由于Vue的机制就是检测数据的变化，自动跟新HTML。数组的变化，Vue之检测部分函数，检测的函数执行时才会触发视图更新。这些方法如下：</p>
+<ul>
+<li>push()</li>
+<li>pop()</li>
+<li>shift()</li>
+<li>unshift()</li>
+<li>splice()</li>
+<li>sort()</li>
+<li>reverse()</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之动态显示表格<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">thead</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">th</span>&gt;</span>年龄<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">th</span>&gt;</span>地址<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 如果列表有数据，直接输出表格数据，没有数据提示用户没有数据 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tbody</span> <span class="attr">v-if</span>=<span class="string">"UserList.length &gt; 0"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tr</span> <span class="attr">v-for</span>=<span class="string">"item in UserList"</span> &gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.name &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.age &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.address &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tbody</span> <span class="attr">v-else</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"3"</span>&gt;</span>没有数据奥！<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">      <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">       <span class="attr">UserList</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 每秒钟插入一条数据。</span></div><div class="line">    setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      app.UserList.push(&#123;<span class="string">'name'</span>: <span class="string">'malun'</span>, <span class="string">'age'</span>: <span class="number">18</span>, <span class="string">'address'</span>: <span class="string">'北京黑地下室'</span>&#125;);</div><div class="line">    &#125;, <span class="number">1000</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="总结列表和条件绑定"><a href="#总结列表和条件绑定" class="headerlink" title="总结列表和条件绑定"></a>总结列表和条件绑定</h2><p>列表的使用其实本质还是js的衍生使用，对于有js开发基础的没有什么难度。关键是多写几个案例就会详细通了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Vue列表渲染及条件渲染实战
+    
+    </summary>
+    
+      <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
+    
+    
+      <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="Vue列表渲染及条件渲染" scheme="http://yoursite.com/tags/Vue%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93%E5%8F%8A%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/"/>
     
   </entry>
   
@@ -210,66 +323,6 @@
   </entry>
   
   <entry>
-    <title>Token ，Cookie和Session的区别</title>
-    <link href="http://yoursite.com/2017/04/25/cookie/"/>
-    <id>http://yoursite.com/2017/04/25/cookie/</id>
-    <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-18T08:08:59.122Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Token ，Cookie和Session的区别</code></center></p>
-<hr>
-<p>&#160; &#160; &#160; &#160;在做接口测试时，经常会碰到请求参数为token的类型，但是可能大部分测试人员对token，cookie，session的区别还是一知半解。为此我查阅大量的资料做了如下总结。 </p>
-<p>&#160; &#160; &#160; &#160;此篇文章也许是最全最通俗的关于Token ，Cookie和Session的区别的文章，好好揣摩文章的每一个字，也许你会有更深的理解！</p>
-<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>&#160; &#160; &#160; &#160;cookie 是一个非常具体的东西，指的就是浏览器里面能永久存储的一种数据，仅仅是浏览器实现的一种数据存储功能。</p>
-<p>&#160; &#160; &#160; &#160;cookie由服务器生成，发送给浏览器，浏览器把cookie以kv形式保存到某个目录下的文本文件内，下一次请求同一网站时会把该cookie发送给服务器。由于cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。</p>
-<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>&#160; &#160; &#160; &#160;session 从字面上讲，就是会话。这个就类似于你和一个人交谈，你怎么知道当前和你交谈的是张三而不是李四呢？对方肯定有某种特征（长相等）表明他就是张三。</p>
-<p>&#160; &#160; &#160; &#160;session 也是类似的道理，服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了。至于客户端怎么保存这个“身份标识”，可以有很多种方式，对于浏览器客户端，大家都默认采用 cookie 的方式。</p>
-<p>&#160; &#160; &#160; &#160;服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。这种用户信息存储方式相对cookie来说更安全，可是session有一个缺陷：如果web服务器做了负载均衡，那么下一个操作请求到了另一台服务器的时候session会丢失。</p>
-<h2 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h2><p>&#160; &#160; &#160; &#160;token的意思是“令牌”，是用户身份的验证方式，最简单的token组成:uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，由token的前几位+盐以哈希算法压缩成一定长的十六进制字符串，可以防止恶意第三方拼接token请求服务器)。还可以把不变的参数也放进token，避免多次查库！</p>
-<h2 id="传统身份验证"><a href="#传统身份验证" class="headerlink" title="传统身份验证"></a>传统身份验证</h2><p>&#160; &#160; &#160; &#160;HTTP 是一种没有状态的协议，也就是它并不知道是谁是访问应用。这里我们把用户看成是客户端，客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求时候，还得再验证一下。</p>
-<p>&#160; &#160; &#160; &#160;解决的方法就是，当用户请求登录的时候，如果没有问题，我们在服务端生成一条记录，这个记录里可以说明一下登录的用户是谁，然后把这条记录的 ID 号发送给客户端，客户端收到以后把这个 ID 号存储在 Cookie 里，下次这个用户再向服务端发送请求的时候，可以带着这个 Cookie ，这样服务端会验证一个这个 Cookie 里的信息，看看能不能在服务端这里找到对应的记录，如果可以，说明用户已经通过了身份验证，就把用户请求的数据返回给客户端。</p>
-<p>&#160; &#160; &#160; &#160;上面说的就是 Session，我们需要在服务端存储为登录的用户生成的 Session ，这些 Session 可能会存储在内存，磁盘，或者数据库里。我们可能需要在服务端定期的去清理过期的 Session 。</p>
-<h2 id="基于-Token-的身份验证"><a href="#基于-Token-的身份验证" class="headerlink" title="基于 Token 的身份验证"></a>基于 Token 的身份验证</h2><p>&#160; &#160; &#160; &#160;使用基于 Token 的身份验证方法，在服务端不需要存储用户的登录记录。大概的流程是这样的：</p>
-<ul>
-<li>客户端使用用户名跟密码请求登录</li>
-<li>服务端收到请求，去验证用户名与密码</li>
-<li>验证成功后，服务端会签发一个 Token，再把这个 Token 发送给客户端</li>
-<li>客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage 里</li>
-<li>客户端每次向服务端请求资源的时候需要带着服务端签发的 Token</li>
-<li>服务端收到请求，然后去验证客户端请求里面带着的Token，如果验证成功，就向客户端返回请求数据</li>
-</ul>
-<p>&#160; &#160; &#160; &#160;APP登录的时候发送加密的用户名和密码到服务器，服务器验证用户名和密码，如果成功，以某种方式比如随机生成32位的字符串作为token，存储到服务器中，并返回token到APP，以后APP请求时，凡是需要验证的地方都要带上该token，然后服务器端验证token，成功返回所需要的结果，失败返回错误信息，让他重新登录。其中服务器上token设置一个有效期，每次APP请求的时候都验证token和有效期。</p>
-<p>&#160; &#160; &#160; &#160;那么我的问题来了： 1.服务器上的token存储到数据库中，每次查询会不会很费时。如果不存储到数据库，应该存储到哪里呢。 2.客户端得到的token肯定要加密存储的，发送token的时候再解密。存储到数据库还是配置文件呢？</p>
-<p>&#160; &#160; &#160; &#160;token是个易失数据，丢了无非让用户重新登录一下，新浪微博动不动就让我重新登录，反正这事儿我是无所谓啦。 </p>
-<p>&#160; &#160; &#160; &#160;所以如果你觉得普通的数据库表撑不住了，可以放到 MSSQL/<code>MySQL</code> 的内存表里（不过据说mysql的内存表性能提升有限），可以放到 Memcache里（讲真，这个是挺常见的策略），可以放到<code>Redis</code>里（我做过这样的实现），甚至可以放到 OpenResty 的变量字典里（只要你有信心不爆内存）。</p>
-<p>&#160; &#160; &#160; &#160;token是个凭条，不过它比门票温柔多了，门票丢了重新花钱买，token丢了重新操作下认证一个就可以了，因此token丢失的代价是可以忍受的——前提是你别丢太频繁，要是让用户隔三差五就认证一次那就损失用户体验了。</p>
-<p>&#160; &#160; &#160; &#160;基于这个出发点，如果你认为用数据库来保持token查询时间太长，会成为你系统的瓶颈或者隐患，可以放在内存当中。<br>比如memcached、redis，KV方式很适合你对token查询的需求。<br>&#160; &#160; &#160; &#160;这个不会太占内存，比如你的token是32位字符串，要是你的用户量在百万级或者千万级，那才多少内存。 </p>
-<p>&#160; &#160; &#160; &#160;要是数据量真的大到单机内存扛不住，或者觉得一宕机全丢风险大，只要这个token生成是足够均匀的，高低位切一下分到不同机器上就行，内存绝对不会是问题。</p>
-<p>&#160; &#160; &#160; &#160;客户端方面这个除非你有一个非常安全的办法，比如操作系统提供的隐私数据存储，那token肯定会存在泄露的问题。比如我拿到你的手机，把你的token拷出来，在过期之前就都可以以你的身份在别的地方登录。 </p>
-<p>解决这个问题的一个简单办法:</p>
-<p>1、在存储的时候把token进行对称加密存储，用时解开。<br>2、将请求URL、时间戳、token三者进行合并加盐签名，服务端校验有效性。<br>这两种办法的出发点都是：窃取你存储的数据较为容易，而反汇编你的程序hack你的加密解密和签名算法是比较难的。然而其实说难也不难，所以终究是防君子不防小人的做法。话说加密存储一个你要是被人扒开客户端看也不会被喷明文存储……<br>方法1它拿到存储的密文解不开、方法2它不知道你的签名算法和盐，两者可以结合食用。<br>但是如果token被人拷走，他自然也能植入到自己的手机里面，那到时候他的手机也可以以你的身份来用着，这你就瞎了。<br>于是可以提供一个让用户可以主动expire一个过去的token类似的机制，在被盗的时候能远程止损。</p>
-<p>在网络层面上token明文传输的话会非常的危险，所以建议一定要使用HTTPS，并且把token放在post body里。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要介绍了Token ，Cookie和Session的区别
-    
-    </summary>
-    
-      <category term="数据交互" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/"/>
-    
-    
-      <category term="cookie" scheme="http://yoursite.com/tags/cookie/"/>
-    
-      <category term="Session" scheme="http://yoursite.com/tags/Session/"/>
-    
-      <category term="Token" scheme="http://yoursite.com/tags/Token/"/>
-    
-  </entry>
-  
-  <entry>
     <title>angularjs(四)</title>
     <link href="http://yoursite.com/2017/04/25/angular-4/"/>
     <id>http://yoursite.com/2017/04/25/angular-4/</id>
@@ -333,9 +386,9 @@
       <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
     
     
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
       <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
     
       <category term="angular过滤器" scheme="http://yoursite.com/tags/angular%E8%BF%87%E6%BB%A4%E5%99%A8/"/>
     
@@ -447,6 +500,67 @@
   </entry>
   
   <entry>
+    <title>angular(六)</title>
+    <link href="http://yoursite.com/2017/04/25/angular_6/"/>
+    <id>http://yoursite.com/2017/04/25/angular_6/</id>
+    <published>2017-04-25T05:17:02.000Z</published>
+    <updated>2017-05-14T14:15:45.899Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>服务</code></center></p>
+<hr>
+<h2 id="服务（service）"><a href="#服务（service）" class="headerlink" title="服务（service）"></a>服务（service）</h2><h3 id="服务介绍"><a href="#服务介绍" class="headerlink" title="服务介绍"></a>服务介绍</h3><p>&#160; &#160; &#160; &#160;服务这个概念其实并不陌生，在其他语言中如Java便有这样的概念，其作用就是对外提供某个特定的功能，如消息服务，文件压缩服务等，是一个独立的模块。ng的服务是这样定义的：</p>
+<ul>
+<li>Angular services are singletons objects or functions that carry out specific tasks common to web apps.</li>
+</ul>
+<p>它是一个单例对象或函数，对外提供特定的功能。<br>首先是一个单例，即无论这个服务被注入到任何地方，对象始终只有一个实例。<br>其次这与我们自己定义一个function然后在其他地方调用不同，因为服务被定义在一个模块中，所以其使用范围是可以被我们管理的。ng的避免全局变量污染意识非常强。</p>
+<p>&#160; &#160; &#160; &#160;ng提供了很多内置的服务，可以到API中查看[<a href="http://docs.angularjs.org/api/。" target="_blank" rel="external">http://docs.angularjs.org/api/。</a>]<br>知道了概念，我们来拉一个service出来溜溜，看看到底是个什么用法。　<br>　<br>&#160; &#160; &#160; &#160;我们在controller中直接声明$location服务，这依靠ng的依赖注入机制。$location提供地址栏相关的服务，我们在此只是简单的获取当前的地址。</p>
+<p>&#160; &#160; &#160; &#160;服务的使用是如此简单，我们可以把服务注入到controller、指令或者是其他服务中。</p>
+<h3 id="自定义服务"><a href="#自定义服务" class="headerlink" title="自定义服务"></a>自定义服务</h3><p>&#160; &#160; &#160; &#160;如同指令一样，系统内置的服务以$开头，我们也可以自己定义一个服务。定义服务的方式有如下几种：</p>
+<ul>
+<li>使用系统内置的$provide服务；</li>
+<li>使用Module的factory方法；</li>
+<li>使用Module的service方法。</li>
+</ul>
+<p>&#160; &#160; &#160; &#160;下面通过一个小例子来分别试验一下。我们定义一个名为remoteData服务，它可以从远程获取数据，这也是我们在程序中经常使用的功能。不过我这里没有远程服务器，就写死一点数据模拟一下。<br>//使用$provide来定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用$provide来定义</span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.factory(<span class="string">'remoteData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用factory方法</span></div><div class="line">app.factory(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">    <span class="keyword">return</span> data;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用service方法</span></div><div class="line">app.service(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'n'</span>;</div><div class="line">    <span class="keyword">this</span>.value = <span class="string">'v'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;Module的factory和$provide的factory方法是一模一样的，从官网文档看它们其实就是一回事。至于Module内部是如何调用的，我此处并不打算深究，我只要知道怎么用就好了。</p>
+<p>&#160; &#160; &#160; &#160;再看Module的service方法，它没有return任何东西，是因为service方法本身返回一个构造器，系统会自动使用new关键字来创建出一个对象。所以我们看到在构造器函数内可以使用this，这样调用该服务的地方便可以直接通过remoteData.name来访问数据了。</p>
+<h3 id="管理服务的依赖关系"><a href="#管理服务的依赖关系" class="headerlink" title="管理服务的依赖关系"></a>管理服务的依赖关系</h3><p>&#160; &#160; &#160; &#160;服务与服务中间可以有依赖关系，例如我们这里定义一个名为validate的服务，它的作用是验证数据是否合法，它需要依赖我们从远程获取数据的服务remoteData。代码如下：</p>
+<p> &#160; &#160; &#160; &#160;在factory的参数中，我们可以直接传入服务remoteData，ng的依赖注入机制便帮我们做好了其他工作。不过一定要保证这个参数的名称与服务名称一致，ng是根据名称来识别的。若参数的名次与服务名称不一致，你就必须显示的声明一下，方式如下：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> app.factory(<span class="string">'validate'</span>,[<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">remoteDataService</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(remoteDataService.name==<span class="string">'n'</span>)&#123;</div><div class="line">            alert(<span class="string">'验证通过'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>  &#160; &#160; &#160; &#160;我们在controller中注入服务也是同样的道理，使用的名称需要与服务名称一致才可以正确注入。否则，你必须使用$inject来手动指定注入的服务。比如：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">testC</span>(<span class="params">scope,rd</span>)</span>&#123;</div><div class="line">    scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">testC.$inject = [<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>];</div></pre></td></tr></table></figure>
+<p>   &#160; &#160; &#160; &#160;在controller中注入服务，也可以在定义controller时使用数组作为第二个参数，在此处<br>把服务注入进去，这样在函数体中使用不一致的服务名称也是可以的，不过要确保注入的顺序是一致的，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'testC'</span>,[<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,rd</span>)</span>&#123;</div><div class="line">    $scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<h3 id="自定义服务示例"><a href="#自定义服务示例" class="headerlink" title="自定义服务示例"></a>自定义服务示例</h3><p>&#160; &#160; &#160; &#160;接下来让我们看下例子（例08 自定义服务）代码，自定义userService服务：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.factory(<span class="string">'userService'</span>, [<span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> doGetUser = <span class="function"><span class="keyword">function</span>(<span class="params">userId, path</span>) </span>&#123;</div><div class="line"><span class="comment">//return $http(&#123;</span></div><div class="line"><span class="comment">//method: 'JSONP',</span></div><div class="line"><span class="comment">//url: path</span></div><div class="line"><span class="comment">//&#125;);</span></div><div class="line"><span class="comment">/*手动指定数据*/</span></div><div class="line"><span class="keyword">var</span> data = &#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！"</span>&#125;;;</div><div class="line"><span class="keyword">if</span>(userId==<span class="string">'zhangsan'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己"</span>&#125;;</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(userId==<span class="string">'lisi'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> &#123;</div><div class="line"><span class="comment">/*userService对外暴露的函数，可有多个*/</span></div><div class="line">getUser: <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>) </span>&#123; </div><div class="line"><span class="keyword">return</span> doGetUser(userId, <span class="string">'../xxx/xxx.action'</span>); </div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;我们创建了一个只有一个方法的userService，getUser为这个服务从后台获取用户信息的函数，并且对外暴露。当然，由于这是一个静态的例子，无法访问后台，那么我们便制定其返回的数据。</p>
+<p>&#160; &#160; &#160; &#160;然后我们把这个服务添加到我们的controller中。我们建立一个controller并加载（或者注入）userService作为运行时依赖，我们把service的名字作为参数传递给controller 函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"test8Controller"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope,userService</span>)</span>&#123;</div><div class="line"><span class="comment">/*文章信息*/</span></div><div class="line">$scope.articles = [&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"爱飞像风"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"zhangsan"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"张三"</span></div><div class="line">&#125;,&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"无法停止的雨"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"lisi"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"李四"</span></div><div class="line">&#125;];</div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;<span class="comment">//显示作者详细信息开关</span></div><div class="line">$scope.currentUser = &#123;&#125;; <span class="comment">//当前选中的作者</span></div><div class="line">$scope.getUserInfo = <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>)</span>&#123;</div><div class="line">$scope.currentUser = userService.getUser(userId);</div><div class="line"><span class="comment">//调用 userService的getUser函数</span></div><div class="line">$scope.showUserInfo = <span class="literal">true</span>;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//定时器：隐藏作者详细信息</span></div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;我们的userService注入到我们的test8Controller后，我们就可以像使用其他服务（我们前面提到的$http服务）一样的使用userService了。</p>
+<p>相关的HTML代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/* View HTML*/</div><div class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"article_ in articles"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">&#123;&#123;article_.title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-show</span>=<span class="string">"showUserInfo"</span>&gt;</span></div><div class="line">用户ID：&#123;&#123;currentUser.userId&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户名：&#123;&#123;currentUser.userName&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户简介：&#123;&#123;currentUser.userInfo&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      本文主要介绍了angular中的服务
+    
+    </summary>
+    
+      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
+    
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
+    
+      <category term="angular服务" scheme="http://yoursite.com/tags/angular%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
     <title>angular(八)</title>
     <link href="http://yoursite.com/2017/04/25/angular_8/"/>
     <id>http://yoursite.com/2017/04/25/angular_8/</id>
@@ -512,72 +626,11 @@
       <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
     
     
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
       <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
     
       <category term="angular路由" scheme="http://yoursite.com/tags/angular%E8%B7%AF%E7%94%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>angular(六)</title>
-    <link href="http://yoursite.com/2017/04/25/angular_6/"/>
-    <id>http://yoursite.com/2017/04/25/angular_6/</id>
-    <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:45.899Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>服务</code></center></p>
-<hr>
-<h2 id="服务（service）"><a href="#服务（service）" class="headerlink" title="服务（service）"></a>服务（service）</h2><h3 id="服务介绍"><a href="#服务介绍" class="headerlink" title="服务介绍"></a>服务介绍</h3><p>&#160; &#160; &#160; &#160;服务这个概念其实并不陌生，在其他语言中如Java便有这样的概念，其作用就是对外提供某个特定的功能，如消息服务，文件压缩服务等，是一个独立的模块。ng的服务是这样定义的：</p>
-<ul>
-<li>Angular services are singletons objects or functions that carry out specific tasks common to web apps.</li>
-</ul>
-<p>它是一个单例对象或函数，对外提供特定的功能。<br>首先是一个单例，即无论这个服务被注入到任何地方，对象始终只有一个实例。<br>其次这与我们自己定义一个function然后在其他地方调用不同，因为服务被定义在一个模块中，所以其使用范围是可以被我们管理的。ng的避免全局变量污染意识非常强。</p>
-<p>&#160; &#160; &#160; &#160;ng提供了很多内置的服务，可以到API中查看[<a href="http://docs.angularjs.org/api/。" target="_blank" rel="external">http://docs.angularjs.org/api/。</a>]<br>知道了概念，我们来拉一个service出来溜溜，看看到底是个什么用法。　<br>　<br>&#160; &#160; &#160; &#160;我们在controller中直接声明$location服务，这依靠ng的依赖注入机制。$location提供地址栏相关的服务，我们在此只是简单的获取当前的地址。</p>
-<p>&#160; &#160; &#160; &#160;服务的使用是如此简单，我们可以把服务注入到controller、指令或者是其他服务中。</p>
-<h3 id="自定义服务"><a href="#自定义服务" class="headerlink" title="自定义服务"></a>自定义服务</h3><p>&#160; &#160; &#160; &#160;如同指令一样，系统内置的服务以$开头，我们也可以自己定义一个服务。定义服务的方式有如下几种：</p>
-<ul>
-<li>使用系统内置的$provide服务；</li>
-<li>使用Module的factory方法；</li>
-<li>使用Module的service方法。</li>
-</ul>
-<p>&#160; &#160; &#160; &#160;下面通过一个小例子来分别试验一下。我们定义一个名为remoteData服务，它可以从远程获取数据，这也是我们在程序中经常使用的功能。不过我这里没有远程服务器，就写死一点数据模拟一下。<br>//使用$provide来定义</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用$provide来定义</span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.factory(<span class="string">'remoteData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用factory方法</span></div><div class="line">app.factory(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">    <span class="keyword">return</span> data;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用service方法</span></div><div class="line">app.service(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'n'</span>;</div><div class="line">    <span class="keyword">this</span>.value = <span class="string">'v'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;Module的factory和$provide的factory方法是一模一样的，从官网文档看它们其实就是一回事。至于Module内部是如何调用的，我此处并不打算深究，我只要知道怎么用就好了。</p>
-<p>&#160; &#160; &#160; &#160;再看Module的service方法，它没有return任何东西，是因为service方法本身返回一个构造器，系统会自动使用new关键字来创建出一个对象。所以我们看到在构造器函数内可以使用this，这样调用该服务的地方便可以直接通过remoteData.name来访问数据了。</p>
-<h3 id="管理服务的依赖关系"><a href="#管理服务的依赖关系" class="headerlink" title="管理服务的依赖关系"></a>管理服务的依赖关系</h3><p>&#160; &#160; &#160; &#160;服务与服务中间可以有依赖关系，例如我们这里定义一个名为validate的服务，它的作用是验证数据是否合法，它需要依赖我们从远程获取数据的服务remoteData。代码如下：</p>
-<p> &#160; &#160; &#160; &#160;在factory的参数中，我们可以直接传入服务remoteData，ng的依赖注入机制便帮我们做好了其他工作。不过一定要保证这个参数的名称与服务名称一致，ng是根据名称来识别的。若参数的名次与服务名称不一致，你就必须显示的声明一下，方式如下：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> app.factory(<span class="string">'validate'</span>,[<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">remoteDataService</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(remoteDataService.name==<span class="string">'n'</span>)&#123;</div><div class="line">            alert(<span class="string">'验证通过'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<p>  &#160; &#160; &#160; &#160;我们在controller中注入服务也是同样的道理，使用的名称需要与服务名称一致才可以正确注入。否则，你必须使用$inject来手动指定注入的服务。比如：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">testC</span>(<span class="params">scope,rd</span>)</span>&#123;</div><div class="line">    scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">testC.$inject = [<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>];</div></pre></td></tr></table></figure>
-<p>   &#160; &#160; &#160; &#160;在controller中注入服务，也可以在定义controller时使用数组作为第二个参数，在此处<br>把服务注入进去，这样在函数体中使用不一致的服务名称也是可以的，不过要确保注入的顺序是一致的，如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'testC'</span>,[<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,rd</span>)</span>&#123;</div><div class="line">    $scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<h3 id="自定义服务示例"><a href="#自定义服务示例" class="headerlink" title="自定义服务示例"></a>自定义服务示例</h3><p>&#160; &#160; &#160; &#160;接下来让我们看下例子（例08 自定义服务）代码，自定义userService服务：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.factory(<span class="string">'userService'</span>, [<span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> doGetUser = <span class="function"><span class="keyword">function</span>(<span class="params">userId, path</span>) </span>&#123;</div><div class="line"><span class="comment">//return $http(&#123;</span></div><div class="line"><span class="comment">//method: 'JSONP',</span></div><div class="line"><span class="comment">//url: path</span></div><div class="line"><span class="comment">//&#125;);</span></div><div class="line"><span class="comment">/*手动指定数据*/</span></div><div class="line"><span class="keyword">var</span> data = &#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！"</span>&#125;;;</div><div class="line"><span class="keyword">if</span>(userId==<span class="string">'zhangsan'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己"</span>&#125;;</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(userId==<span class="string">'lisi'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> &#123;</div><div class="line"><span class="comment">/*userService对外暴露的函数，可有多个*/</span></div><div class="line">getUser: <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>) </span>&#123; </div><div class="line"><span class="keyword">return</span> doGetUser(userId, <span class="string">'../xxx/xxx.action'</span>); </div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;我们创建了一个只有一个方法的userService，getUser为这个服务从后台获取用户信息的函数，并且对外暴露。当然，由于这是一个静态的例子，无法访问后台，那么我们便制定其返回的数据。</p>
-<p>&#160; &#160; &#160; &#160;然后我们把这个服务添加到我们的controller中。我们建立一个controller并加载（或者注入）userService作为运行时依赖，我们把service的名字作为参数传递给controller 函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"test8Controller"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope,userService</span>)</span>&#123;</div><div class="line"><span class="comment">/*文章信息*/</span></div><div class="line">$scope.articles = [&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"爱飞像风"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"zhangsan"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"张三"</span></div><div class="line">&#125;,&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"无法停止的雨"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"lisi"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"李四"</span></div><div class="line">&#125;];</div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;<span class="comment">//显示作者详细信息开关</span></div><div class="line">$scope.currentUser = &#123;&#125;; <span class="comment">//当前选中的作者</span></div><div class="line">$scope.getUserInfo = <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>)</span>&#123;</div><div class="line">$scope.currentUser = userService.getUser(userId);</div><div class="line"><span class="comment">//调用 userService的getUser函数</span></div><div class="line">$scope.showUserInfo = <span class="literal">true</span>;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//定时器：隐藏作者详细信息</span></div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;我们的userService注入到我们的test8Controller后，我们就可以像使用其他服务（我们前面提到的$http服务）一样的使用userService了。</p>
-<p>相关的HTML代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/* View HTML*/</div><div class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"article_ in articles"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">&#123;&#123;article_.title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-show</span>=<span class="string">"showUserInfo"</span>&gt;</span></div><div class="line">用户ID：&#123;&#123;currentUser.userId&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户名：&#123;&#123;currentUser.userName&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户简介：&#123;&#123;currentUser.userInfo&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要介绍了angular中的服务
-    
-    </summary>
-    
-      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
-    
-    
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="angular服务" scheme="http://yoursite.com/tags/angular%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
@@ -604,7 +657,7 @@
 <li>删除数据行时，将行ID发送到后台，后台在数据库中删除，数据库删除成功后，在页面DOM中将数据- 行也删除。</li>
 </ul>
 <h2 id="ajax伪造"><a href="#ajax伪造" class="headerlink" title="ajax伪造"></a>ajax伪造</h2><p>&#160; &#160; &#160; &#160;iframe就是我们常用的iframe标签:<em><em>&lt;iframe&gt;</em></em>。iframe标签是框架的一种形式，也比较常用到，iframe一般用来包含别的页面，例如我们可以在我们自己的网站页面加载别人网站或者本站其他页面的内容。iframe标签的最大作用就是让页面变得美观。iframe标签的用法有很多，主要区别在于对iframe标签定义的形式不同，例如定义iframe的长宽高。<br>因此，iframe标签具有局部加载内容的特性，所以可以使用其来伪造<code>Ajax</code>请求。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>伪造AJAX<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>请输入要加载的地址：<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"currentTime"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"url"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> <span class="attr">onclick</span>=<span class="string">"LoadPage();"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>加载页面位置：<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"iframePosition"</span> <span class="attr">style</span>=<span class="string">"width: 100%;height: 500px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">            <span class="built_in">window</span>.onload= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> myDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">                <span class="built_in">document</span>.getElementById(<span class="string">'currentTime'</span>).innerText = myDate.getTime();</div><div class="line"> </div><div class="line">            &#125;;</div><div class="line">            <span class="function"><span class="keyword">function</span> <span class="title">LoadPage</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> targetUrl =  <span class="built_in">document</span>.getElementById(<span class="string">'url'</span>).value;</div><div class="line">                <span class="built_in">document</span>.getElementById(<span class="string">"iframePosition"</span>).src = targetUrl;</div><div class="line">            &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>伪造AJAX<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>请输入要加载的地址：<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"currentTime"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"url"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> <span class="attr">onclick</span>=<span class="string">"LoadPage();"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>加载页面位置：<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"iframePosition"</span> <span class="attr">style</span>=<span class="string">"width: 100%;height: 500px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">            window.onload= function()&#123;</div><div class="line">                var myDate = new Date();</div><div class="line">                document.getElementById('currentTime').innerText = myDate.getTime();</div><div class="line"> </div><div class="line">            &#125;;</div><div class="line">            function LoadPage()&#123;</div><div class="line">                var targetUrl =  document.getElementById('url').value;</div><div class="line">                document.getElementById("iframePosition").src = targetUrl;</div><div class="line">            &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>&#160; &#160; &#160; &#160;原理是这样的，设置一个提交按钮，再设置一个输入框，当我们输入一个网址的时候，在当前的页面加载输入网址的页面信息，呈现在iframe框里，这样就能做到不刷新URL来提交不同的信息。</p>
 <h2 id="原生ajax"><a href="#原生ajax" class="headerlink" title="原生ajax"></a>原生ajax</h2><p><code>Ajax</code>的核心是XMLHttpRequest对象(XHR)。XHR为向服务器发送请求和解析服务器响应提供了接口。能够以异步方式从服务器获取新数据。</p>
 <h3 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h3><p><code>Ajax</code>的核心是XMLHttpRequest对象(XHR)。XHR为向服务器发送请求和解析服务器响应提供了接口。能够以异步方式从服务器获取新数据。<br>XHR的主要方法有：</p>
@@ -681,6 +734,91 @@
   </entry>
   
   <entry>
+    <title>Vue(入门及简介)</title>
+    <link href="http://yoursite.com/2017/04/25/vue%E5%85%A5%E9%97%A8%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/2017/04/25/vue入门简介/</id>
+    <published>2017-04-25T05:17:02.000Z</published>
+    <updated>2017-06-23T10:18:38.594Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue简介及入门</code></center></p>
+<hr>
+<h1 id="Vue入门之概念及Helloworld"><a href="#Vue入门之概念及Helloworld" class="headerlink" title="Vue入门之概念及Helloworld"></a>Vue入门之概念及Helloworld</h1><h2 id="Vue简介"><a href="#Vue简介" class="headerlink" title="Vue简介"></a>Vue简介</h2><p><code>Vue</code>是一个前端的双向绑定类的框架，发音[读音 /vjuː/, 类似于 view]。新的Vue版本参考了React的部分设计，当然也有自己独特的地方，比如Vue的单文件组件开发方式都很有创新，另外Vue自身的一些绑定的语法、用法等都非常精炼，很容易上手，而且第三方的插件都非常丰富，社区非常活跃，最新的文档都有中文版本。而且Vue配合官方的和第三方的库可以实现单文件的组件化开发、SPA等现代化前端开发。<br>详情请参考<a href="https://cn.vuejs.org/" target="_blank" rel="external">Vue官网</a></p>
+<h2 id="Vue的入门demo"><a href="#Vue的入门demo" class="headerlink" title="Vue的入门demo"></a>Vue的入门demo</h2><p><code>Vue</code> 可以直接把它当做一个js库使用，所以它可以很容易的接入到你的项目或者单个页面中。甚至你可以只使用它的双向绑定功能。所以它很容易上手。</p>
+<p>比如：我们有一个需求，一个网页上一个Div标签，我们有一个json对象存储数据，把json对象上的数据放到Div上去。</p>
+<p>接下来是步骤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">第一步： 创建一个文件夹并创建一个html文件 比如：index.html.</div><div class="line">当如你可以选择你自己的编辑器，我就用VSCode。</div><div class="line"></div><div class="line">第二步：引入Vue库</div><div class="line">&lt;script src=&quot;https://unpkg.com/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</div><div class="line">当然了你可以直接下载Vue的js文件，推荐你直接用上面的cdn即可。</div><div class="line"></div><div class="line">第三步：创建一个Div，给它一个id，比如：app</div><div class="line"></div><div class="line">第四步：创建Vue的对象，并把数据绑定到上面创建好的div上去。</div></pre></td></tr></table></figure></p>
+<p>最终的代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> <span class="comment">&lt;!--第一步：创建文件夹及html文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之Helloworld<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!--第二步：引入Vue库--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!--第三步:创建一个Div--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--Vue的模板的绑定数据的方法， 类似于很多其他前端的模板，可以用两对花括号进行绑定Vue中的数据对象的属性 --&gt;</span></div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!--第四步：创建Vue的对象，并把数据绑定到上面创建好的div上去。--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;         <span class="comment">// 创建Vue对象。Vue的核心对象。</span></div><div class="line">      el: <span class="string">'#app'</span>,               <span class="comment">// el属性：把当前Vue对象挂载到 div标签上，#app是id选择器</span></div><div class="line">      data: &#123;                   <span class="comment">// data: 是Vue对象中绑定的数据</span></div><div class="line">        message: <span class="string">'Hello Vue!'</span>   <span class="comment">// message 自定义的数据</span></div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>最终的结果就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello Vue!</div></pre></td></tr></table></figure></p>
+<h2 id="Vue的Helloworld总结"><a href="#Vue的Helloworld总结" class="headerlink" title="Vue的Helloworld总结"></a>Vue的Helloworld总结</h2><ul>
+<li>Vue构造函数的：选项el属性，就是element缩写，当前Vue对象挂载到哪个标签上的语法，支持CSS选择器或者dom对象，一般用id选择器选择当前页面的标签。</li>
+<li>Vue的选项：data属性是自定义数据。这里我们只是演示了一个message属性，vue会把自定义的数据可以与html的模板数据进行绑定。</li>
+<li>Vue 数据绑定的方式就是用&#123;&#123;  &#125;&#125;，类似于handlebars.</li>
+<li>上面这个demo就是演示了Vue的绑定数据的基本模型。注意点，标签先创建好了之后，再创建Vue对象，具体你应该懂吧。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://orzuutv5f.bkt.clouddn.com/01vue-helloworld.png" alt="helloworld" title="">
+                </div>
+                <div class="image-caption">helloworld</div>
+            </figure>]]></content>
+    
+    <summary type="html">
+    
+      本文主要介绍了Vue的入门及简单介绍
+    
+    </summary>
+    
+      <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
+    
+    
+      <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="Vue的入门简介" scheme="http://yoursite.com/tags/Vue%E7%9A%84%E5%85%A5%E9%97%A8%E7%AE%80%E4%BB%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>angularjs(一)</title>
+    <link href="http://yoursite.com/2017/04/25/angular-1/"/>
+    <id>http://yoursite.com/2017/04/25/angular-1/</id>
+    <published>2017-04-25T05:17:02.000Z</published>
+    <updated>2017-05-14T14:15:33.125Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言 "></a><center style="font-size: 30px">1.前言 </center></h2><p>&#160; &#160; &#160; &#160;前端技术的发展是如此之快，各种优秀技术、优秀框架的出现简直让人目不暇接，紧跟时代潮流，学习掌握新知识自然是不敢怠慢。</p>
+<p>&#160; &#160; &#160; &#160;<code>AngularJS</code>是google在维护，其在国外已经十分火热，可是国内的使用情况却有不小的差距，参考文献/网络文章也很匮乏。这里便将我学习AngularJS写成文档，一方面作为自己学习路程上的记录，另一方面也给有兴趣的同学一些参考。</p>
+<p>&#160; &#160; &#160; &#160;首先我自己也是一名学习者，会以学习者的角度来整理我的行文思路，这里可能只是些探索，有理解或是技术上的错误还请大家指出；其次我特别喜欢编写小例子来把一件事情说明白，故在文中会尽可能多的用示例加代码讲解，我相信这会是一种比较好的方式；最后，我深知AngularJS的使用方式跟<code>jQuery</code>的使用方式有很大不同，在大家都有jquery、ext经验的条件下对于angular的学习会困难重重，不过我更相信在大家的坚持下，能够快速的学好AngularJS，至少咱也能深入了解到AngularJS的基本思想，对咱们以后自己的插件开发、项目开发都会有很大的启示。</p>
+<h2 id="2-AngularJS概述"><a href="#2-AngularJS概述" class="headerlink" title="2 AngularJS概述 "></a><center style="font-size: 30px">2 AngularJS概述 </center></h2><h2 id="2-1-AngularJS是什么？"><a href="#2-1-AngularJS是什么？" class="headerlink" title="2.1 AngularJS是什么？"></a>2.1 AngularJS是什么？</h2><p>&#160; &#160; &#160; &#160;AngularJs（后面就简称ng了）是一个用于设计动态web应用的结构框架。首先，它是一个框架，不是类库，是像EXT一样提供一整套方案用于设计web应用。它不仅仅是一个<code>JavaScript</code>框架，因为它的核心其实是对HTML标签的增强。</p>
+<p>&#160; &#160; &#160; &#160;何为HTML标签增强？其实就是使你能够用标签完成一部分页面逻辑，具体方式就是通过自定义标签、自定义属性等，这些HTML原生没有的标签/属性在ng中有一个名字：指令（directive）。后面会详细介绍。那么，什么又是动态web应用呢？与传统web系统相区别，web应用能为用户提供丰富的操作，能够随用户操作不断更新视图而不进行url跳转。ng官方也声明它更适用于开发CRUD应用，即数据操作比较多的应用，而非是游戏或图像处理类应用。</p>
+<p>&#160; &#160; &#160; &#160;为了实现这些，ng引入了一些非常棒的特性，包括模板机制、数据绑定、模块、指令、依赖注入、路由。通过数据与模板的绑定，能够让我们摆脱繁琐的DOM操作，而将注意力集中在业务逻辑上。</p>
+<p>&#160; &#160; &#160; &#160;另外一个疑问，ng是MVC框架吗？还是MVVM框架？官网有提到ng的设计采用了MVC的基本思想，而又不完全是MVC，因为在书写代码时我们确实是在用ng-controller这个指令(起码从名字上看，是MVC吧)，但这个controller处理的业务基本上都是与view进行交互，这么看来又很接近MVVM。让我们把目光移到官网那个非醒目的title上：“AngularJS — Superheroic JavaScript MVW Framework”。</p>
+<h2 id="2-2-AngularJS简单介绍"><a href="#2-2-AngularJS简单介绍" class="headerlink" title="2.2 AngularJS简单介绍"></a>2.2 AngularJS简单介绍</h2><p>&#160; &#160; &#160; &#160;AngularJS 重新定义了前端应用的开发方式。面对HTML和JavaScript之间的界线，它<br>非但不畏缩不前，反而正面出击，提出了有效的解决方案。</p>
+<p>&#160; &#160; &#160; &#160;很多前端应用的开发框架，比如Backbone、EmberJS等，都要求开发者继承此框架特有的一些JavaScript对象。这种方式有其长处，但它不必要地污染了开发者自己代码的对象空间，还要求开发者去了解内存里那些抽象对象。尽管如此我们还是接受了这种方式，因为网络最初的设计无法提供 我们今天所需的交互性，于是我们需要框架，来帮我们填补JavaScript和HTML之间的鸿沟。而且有了它，你不用再“直接”操控DOM，只要给你的DOM注上metadata（即AngularJS里的directive们），然后让AngularJS来帮你操纵DOM。同时，AngularJS不依赖（也不妨碍）任何其他的框架。你甚至可以基于其它的框架来开发AngularJS应用。<br>API地址：<a href="http://docs.angularjs.org/api/；" target="_blank" rel="external">http://docs.angularjs.org/api/；</a><br>AngularJS在github上的中文粗译版地址：<a href="https://github.com/basestyle/angularjs-cn。" target="_blank" rel="external">https://github.com/basestyle/angularjs-cn。</a></p>
+<h2 id="2-3-什么时候该用AngularJS"><a href="#2-3-什么时候该用AngularJS" class="headerlink" title="2.3 什么时候该用AngularJS"></a>2.3 什么时候该用AngularJS</h2><p>&#160; &#160; &#160; &#160;AngularJS是一个 MV* 框架，最适于开发客户端的单页面应用。它不是个功能库，而是用来开发动态网页的框架。它专注于扩展HTML的功能，提供动态数据绑定（data binding），而且它能跟其它框架（如jQuery）合作融洽。</p>
+<p>&#160; &#160; &#160; &#160;如果你要开发的是单页应用，AngularJS就是你的上上之选。Gmail、Google Docs、Twitter和Facebook这样的应用，都很能发挥AngularJS的长处。但是像游戏开发之类对DOM进行大量操纵、又或者单纯需要 极高运行速度的应用，就不是AngularJS的用武之地了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      本文主要介绍了AngularJS是什么？什么时候该用AngularJS？
+    
+    </summary>
+    
+      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
+    
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
+    
+      <category term="angular介绍" scheme="http://yoursite.com/tags/angular%E4%BB%8B%E7%BB%8D/"/>
+    
+  </entry>
+  
+  <entry>
     <title>angularjs(二)</title>
     <link href="http://yoursite.com/2017/04/25/angular-2/"/>
     <id>http://yoursite.com/2017/04/25/angular-2/</id>
@@ -733,49 +871,11 @@
       <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
     
     
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
       <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
     
       <category term="AngularJS特性" scheme="http://yoursite.com/tags/AngularJS%E7%89%B9%E6%80%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>angularjs(一)</title>
-    <link href="http://yoursite.com/2017/04/25/angular-1/"/>
-    <id>http://yoursite.com/2017/04/25/angular-1/</id>
-    <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:33.125Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言 "></a><center style="font-size: 30px">1.前言 </center></h2><p>&#160; &#160; &#160; &#160;前端技术的发展是如此之快，各种优秀技术、优秀框架的出现简直让人目不暇接，紧跟时代潮流，学习掌握新知识自然是不敢怠慢。</p>
-<p>&#160; &#160; &#160; &#160;<code>AngularJS</code>是google在维护，其在国外已经十分火热，可是国内的使用情况却有不小的差距，参考文献/网络文章也很匮乏。这里便将我学习AngularJS写成文档，一方面作为自己学习路程上的记录，另一方面也给有兴趣的同学一些参考。</p>
-<p>&#160; &#160; &#160; &#160;首先我自己也是一名学习者，会以学习者的角度来整理我的行文思路，这里可能只是些探索，有理解或是技术上的错误还请大家指出；其次我特别喜欢编写小例子来把一件事情说明白，故在文中会尽可能多的用示例加代码讲解，我相信这会是一种比较好的方式；最后，我深知AngularJS的使用方式跟<code>jQuery</code>的使用方式有很大不同，在大家都有jquery、ext经验的条件下对于angular的学习会困难重重，不过我更相信在大家的坚持下，能够快速的学好AngularJS，至少咱也能深入了解到AngularJS的基本思想，对咱们以后自己的插件开发、项目开发都会有很大的启示。</p>
-<h2 id="2-AngularJS概述"><a href="#2-AngularJS概述" class="headerlink" title="2 AngularJS概述 "></a><center style="font-size: 30px">2 AngularJS概述 </center></h2><h2 id="2-1-AngularJS是什么？"><a href="#2-1-AngularJS是什么？" class="headerlink" title="2.1 AngularJS是什么？"></a>2.1 AngularJS是什么？</h2><p>&#160; &#160; &#160; &#160;AngularJs（后面就简称ng了）是一个用于设计动态web应用的结构框架。首先，它是一个框架，不是类库，是像EXT一样提供一整套方案用于设计web应用。它不仅仅是一个<code>JavaScript</code>框架，因为它的核心其实是对HTML标签的增强。</p>
-<p>&#160; &#160; &#160; &#160;何为HTML标签增强？其实就是使你能够用标签完成一部分页面逻辑，具体方式就是通过自定义标签、自定义属性等，这些HTML原生没有的标签/属性在ng中有一个名字：指令（directive）。后面会详细介绍。那么，什么又是动态web应用呢？与传统web系统相区别，web应用能为用户提供丰富的操作，能够随用户操作不断更新视图而不进行url跳转。ng官方也声明它更适用于开发CRUD应用，即数据操作比较多的应用，而非是游戏或图像处理类应用。</p>
-<p>&#160; &#160; &#160; &#160;为了实现这些，ng引入了一些非常棒的特性，包括模板机制、数据绑定、模块、指令、依赖注入、路由。通过数据与模板的绑定，能够让我们摆脱繁琐的DOM操作，而将注意力集中在业务逻辑上。</p>
-<p>&#160; &#160; &#160; &#160;另外一个疑问，ng是MVC框架吗？还是MVVM框架？官网有提到ng的设计采用了MVC的基本思想，而又不完全是MVC，因为在书写代码时我们确实是在用ng-controller这个指令(起码从名字上看，是MVC吧)，但这个controller处理的业务基本上都是与view进行交互，这么看来又很接近MVVM。让我们把目光移到官网那个非醒目的title上：“AngularJS — Superheroic JavaScript MVW Framework”。</p>
-<h2 id="2-2-AngularJS简单介绍"><a href="#2-2-AngularJS简单介绍" class="headerlink" title="2.2 AngularJS简单介绍"></a>2.2 AngularJS简单介绍</h2><p>&#160; &#160; &#160; &#160;AngularJS 重新定义了前端应用的开发方式。面对HTML和JavaScript之间的界线，它<br>非但不畏缩不前，反而正面出击，提出了有效的解决方案。</p>
-<p>&#160; &#160; &#160; &#160;很多前端应用的开发框架，比如Backbone、EmberJS等，都要求开发者继承此框架特有的一些JavaScript对象。这种方式有其长处，但它不必要地污染了开发者自己代码的对象空间，还要求开发者去了解内存里那些抽象对象。尽管如此我们还是接受了这种方式，因为网络最初的设计无法提供 我们今天所需的交互性，于是我们需要框架，来帮我们填补JavaScript和HTML之间的鸿沟。而且有了它，你不用再“直接”操控DOM，只要给你的DOM注上metadata（即AngularJS里的directive们），然后让AngularJS来帮你操纵DOM。同时，AngularJS不依赖（也不妨碍）任何其他的框架。你甚至可以基于其它的框架来开发AngularJS应用。<br>API地址：<a href="http://docs.angularjs.org/api/；" target="_blank" rel="external">http://docs.angularjs.org/api/；</a><br>AngularJS在github上的中文粗译版地址：<a href="https://github.com/basestyle/angularjs-cn。" target="_blank" rel="external">https://github.com/basestyle/angularjs-cn。</a></p>
-<h2 id="2-3-什么时候该用AngularJS"><a href="#2-3-什么时候该用AngularJS" class="headerlink" title="2.3 什么时候该用AngularJS"></a>2.3 什么时候该用AngularJS</h2><p>&#160; &#160; &#160; &#160;AngularJS是一个 MV* 框架，最适于开发客户端的单页面应用。它不是个功能库，而是用来开发动态网页的框架。它专注于扩展HTML的功能，提供动态数据绑定（data binding），而且它能跟其它框架（如jQuery）合作融洽。</p>
-<p>&#160; &#160; &#160; &#160;如果你要开发的是单页应用，AngularJS就是你的上上之选。Gmail、Google Docs、Twitter和Facebook这样的应用，都很能发挥AngularJS的长处。但是像游戏开发之类对DOM进行大量操纵、又或者单纯需要 极高运行速度的应用，就不是AngularJS的用武之地了。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要介绍了AngularJS是什么？什么时候该用AngularJS？
-    
-    </summary>
-    
-      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
-    
-    
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="angular介绍" scheme="http://yoursite.com/tags/angular%E4%BB%8B%E7%BB%8D/"/>
     
   </entry>
   
@@ -825,9 +925,9 @@
       <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
     
     
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
       <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
     
   </entry>
   
@@ -860,49 +960,62 @@
   </entry>
   
   <entry>
-    <title>Vue(入门及简介)</title>
-    <link href="http://yoursite.com/2017/04/25/vue%E5%85%A5%E9%97%A8%E7%AE%80%E4%BB%8B/"/>
-    <id>http://yoursite.com/2017/04/25/vue入门简介/</id>
+    <title>Token ，Cookie和Session的区别</title>
+    <link href="http://yoursite.com/2017/04/25/cookie/"/>
+    <id>http://yoursite.com/2017/04/25/cookie/</id>
     <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-06-23T10:18:38.594Z</updated>
+    <updated>2017-05-18T08:08:59.122Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue简介及入门</code></center></p>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Token ，Cookie和Session的区别</code></center></p>
 <hr>
-<h1 id="Vue入门之概念及Helloworld"><a href="#Vue入门之概念及Helloworld" class="headerlink" title="Vue入门之概念及Helloworld"></a>Vue入门之概念及Helloworld</h1><h2 id="Vue简介"><a href="#Vue简介" class="headerlink" title="Vue简介"></a>Vue简介</h2><p><code>Vue</code>是一个前端的双向绑定类的框架，发音[读音 /vjuː/, 类似于 view]。新的Vue版本参考了React的部分设计，当然也有自己独特的地方，比如Vue的单文件组件开发方式都很有创新，另外Vue自身的一些绑定的语法、用法等都非常精炼，很容易上手，而且第三方的插件都非常丰富，社区非常活跃，最新的文档都有中文版本。而且Vue配合官方的和第三方的库可以实现单文件的组件化开发、SPA等现代化前端开发。<br>详情请参考<a href="https://cn.vuejs.org/" target="_blank" rel="external">Vue官网</a></p>
-<h2 id="Vue的入门demo"><a href="#Vue的入门demo" class="headerlink" title="Vue的入门demo"></a>Vue的入门demo</h2><p><code>Vue</code> 可以直接把它当做一个js库使用，所以它可以很容易的接入到你的项目或者单个页面中。甚至你可以只使用它的双向绑定功能。所以它很容易上手。</p>
-<p>比如：我们有一个需求，一个网页上一个Div标签，我们有一个json对象存储数据，把json对象上的数据放到Div上去。</p>
-<p>接下来是步骤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">第一步： 创建一个文件夹并创建一个html文件 比如：index.html.</div><div class="line">当如你可以选择你自己的编辑器，我就用VSCode。</div><div class="line"></div><div class="line">第二步：引入Vue库</div><div class="line">&lt;script src=&quot;https://unpkg.com/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</div><div class="line">当然了你可以直接下载Vue的js文件，推荐你直接用上面的cdn即可。</div><div class="line"></div><div class="line">第三步：创建一个Div，给它一个id，比如：app</div><div class="line"></div><div class="line">第四步：创建Vue的对象，并把数据绑定到上面创建好的div上去。</div></pre></td></tr></table></figure></p>
-<p>最终的代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> <span class="comment">&lt;!--第一步：创建文件夹及html文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之Helloworld<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!--第二步：引入Vue库--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!--第三步:创建一个Div--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--Vue的模板的绑定数据的方法， 类似于很多其他前端的模板，可以用两对花括号进行绑定Vue中的数据对象的属性 --&gt;</span></div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!--第四步：创建Vue的对象，并把数据绑定到上面创建好的div上去。--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;         <span class="comment">// 创建Vue对象。Vue的核心对象。</span></div><div class="line">      el: <span class="string">'#app'</span>,               <span class="comment">// el属性：把当前Vue对象挂载到 div标签上，#app是id选择器</span></div><div class="line">      data: &#123;                   <span class="comment">// data: 是Vue对象中绑定的数据</span></div><div class="line">        message: <span class="string">'Hello Vue!'</span>   <span class="comment">// message 自定义的数据</span></div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>最终的结果就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello Vue!</div></pre></td></tr></table></figure></p>
-<h2 id="Vue的Helloworld总结"><a href="#Vue的Helloworld总结" class="headerlink" title="Vue的Helloworld总结"></a>Vue的Helloworld总结</h2><ul>
-<li>Vue构造函数的：选项el属性，就是element缩写，当前Vue对象挂载到哪个标签上的语法，支持CSS选择器或者dom对象，一般用id选择器选择当前页面的标签。</li>
-<li>Vue的选项：data属性是自定义数据。这里我们只是演示了一个message属性，vue会把自定义的数据可以与html的模板数据进行绑定。</li>
-<li>Vue 数据绑定的方式就是用&#123;&#123;  &#125;&#125;，类似于handlebars.</li>
-<li>上面这个demo就是演示了Vue的绑定数据的基本模型。注意点，标签先创建好了之后，再创建Vue对象，具体你应该懂吧。</li>
+<p>&#160; &#160; &#160; &#160;在做接口测试时，经常会碰到请求参数为token的类型，但是可能大部分测试人员对token，cookie，session的区别还是一知半解。为此我查阅大量的资料做了如下总结。 </p>
+<p>&#160; &#160; &#160; &#160;此篇文章也许是最全最通俗的关于Token ，Cookie和Session的区别的文章，好好揣摩文章的每一个字，也许你会有更深的理解！</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>&#160; &#160; &#160; &#160;cookie 是一个非常具体的东西，指的就是浏览器里面能永久存储的一种数据，仅仅是浏览器实现的一种数据存储功能。</p>
+<p>&#160; &#160; &#160; &#160;cookie由服务器生成，发送给浏览器，浏览器把cookie以kv形式保存到某个目录下的文本文件内，下一次请求同一网站时会把该cookie发送给服务器。由于cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。</p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>&#160; &#160; &#160; &#160;session 从字面上讲，就是会话。这个就类似于你和一个人交谈，你怎么知道当前和你交谈的是张三而不是李四呢？对方肯定有某种特征（长相等）表明他就是张三。</p>
+<p>&#160; &#160; &#160; &#160;session 也是类似的道理，服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了。至于客户端怎么保存这个“身份标识”，可以有很多种方式，对于浏览器客户端，大家都默认采用 cookie 的方式。</p>
+<p>&#160; &#160; &#160; &#160;服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。这种用户信息存储方式相对cookie来说更安全，可是session有一个缺陷：如果web服务器做了负载均衡，那么下一个操作请求到了另一台服务器的时候session会丢失。</p>
+<h2 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h2><p>&#160; &#160; &#160; &#160;token的意思是“令牌”，是用户身份的验证方式，最简单的token组成:uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，由token的前几位+盐以哈希算法压缩成一定长的十六进制字符串，可以防止恶意第三方拼接token请求服务器)。还可以把不变的参数也放进token，避免多次查库！</p>
+<h2 id="传统身份验证"><a href="#传统身份验证" class="headerlink" title="传统身份验证"></a>传统身份验证</h2><p>&#160; &#160; &#160; &#160;HTTP 是一种没有状态的协议，也就是它并不知道是谁是访问应用。这里我们把用户看成是客户端，客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求时候，还得再验证一下。</p>
+<p>&#160; &#160; &#160; &#160;解决的方法就是，当用户请求登录的时候，如果没有问题，我们在服务端生成一条记录，这个记录里可以说明一下登录的用户是谁，然后把这条记录的 ID 号发送给客户端，客户端收到以后把这个 ID 号存储在 Cookie 里，下次这个用户再向服务端发送请求的时候，可以带着这个 Cookie ，这样服务端会验证一个这个 Cookie 里的信息，看看能不能在服务端这里找到对应的记录，如果可以，说明用户已经通过了身份验证，就把用户请求的数据返回给客户端。</p>
+<p>&#160; &#160; &#160; &#160;上面说的就是 Session，我们需要在服务端存储为登录的用户生成的 Session ，这些 Session 可能会存储在内存，磁盘，或者数据库里。我们可能需要在服务端定期的去清理过期的 Session 。</p>
+<h2 id="基于-Token-的身份验证"><a href="#基于-Token-的身份验证" class="headerlink" title="基于 Token 的身份验证"></a>基于 Token 的身份验证</h2><p>&#160; &#160; &#160; &#160;使用基于 Token 的身份验证方法，在服务端不需要存储用户的登录记录。大概的流程是这样的：</p>
+<ul>
+<li>客户端使用用户名跟密码请求登录</li>
+<li>服务端收到请求，去验证用户名与密码</li>
+<li>验证成功后，服务端会签发一个 Token，再把这个 Token 发送给客户端</li>
+<li>客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage 里</li>
+<li>客户端每次向服务端请求资源的时候需要带着服务端签发的 Token</li>
+<li>服务端收到请求，然后去验证客户端请求里面带着的Token，如果验证成功，就向客户端返回请求数据</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/01vue-helloworld.png" alt="helloworld" title="">
-                </div>
-                <div class="image-caption">helloworld</div>
-            </figure>]]></content>
+<p>&#160; &#160; &#160; &#160;APP登录的时候发送加密的用户名和密码到服务器，服务器验证用户名和密码，如果成功，以某种方式比如随机生成32位的字符串作为token，存储到服务器中，并返回token到APP，以后APP请求时，凡是需要验证的地方都要带上该token，然后服务器端验证token，成功返回所需要的结果，失败返回错误信息，让他重新登录。其中服务器上token设置一个有效期，每次APP请求的时候都验证token和有效期。</p>
+<p>&#160; &#160; &#160; &#160;那么我的问题来了： 1.服务器上的token存储到数据库中，每次查询会不会很费时。如果不存储到数据库，应该存储到哪里呢。 2.客户端得到的token肯定要加密存储的，发送token的时候再解密。存储到数据库还是配置文件呢？</p>
+<p>&#160; &#160; &#160; &#160;token是个易失数据，丢了无非让用户重新登录一下，新浪微博动不动就让我重新登录，反正这事儿我是无所谓啦。 </p>
+<p>&#160; &#160; &#160; &#160;所以如果你觉得普通的数据库表撑不住了，可以放到 MSSQL/<code>MySQL</code> 的内存表里（不过据说mysql的内存表性能提升有限），可以放到 Memcache里（讲真，这个是挺常见的策略），可以放到<code>Redis</code>里（我做过这样的实现），甚至可以放到 OpenResty 的变量字典里（只要你有信心不爆内存）。</p>
+<p>&#160; &#160; &#160; &#160;token是个凭条，不过它比门票温柔多了，门票丢了重新花钱买，token丢了重新操作下认证一个就可以了，因此token丢失的代价是可以忍受的——前提是你别丢太频繁，要是让用户隔三差五就认证一次那就损失用户体验了。</p>
+<p>&#160; &#160; &#160; &#160;基于这个出发点，如果你认为用数据库来保持token查询时间太长，会成为你系统的瓶颈或者隐患，可以放在内存当中。<br>比如memcached、redis，KV方式很适合你对token查询的需求。<br>&#160; &#160; &#160; &#160;这个不会太占内存，比如你的token是32位字符串，要是你的用户量在百万级或者千万级，那才多少内存。 </p>
+<p>&#160; &#160; &#160; &#160;要是数据量真的大到单机内存扛不住，或者觉得一宕机全丢风险大，只要这个token生成是足够均匀的，高低位切一下分到不同机器上就行，内存绝对不会是问题。</p>
+<p>&#160; &#160; &#160; &#160;客户端方面这个除非你有一个非常安全的办法，比如操作系统提供的隐私数据存储，那token肯定会存在泄露的问题。比如我拿到你的手机，把你的token拷出来，在过期之前就都可以以你的身份在别的地方登录。 </p>
+<p>解决这个问题的一个简单办法:</p>
+<p>1、在存储的时候把token进行对称加密存储，用时解开。<br>2、将请求URL、时间戳、token三者进行合并加盐签名，服务端校验有效性。<br>这两种办法的出发点都是：窃取你存储的数据较为容易，而反汇编你的程序hack你的加密解密和签名算法是比较难的。然而其实说难也不难，所以终究是防君子不防小人的做法。话说加密存储一个你要是被人扒开客户端看也不会被喷明文存储……<br>方法1它拿到存储的密文解不开、方法2它不知道你的签名算法和盐，两者可以结合食用。<br>但是如果token被人拷走，他自然也能植入到自己的手机里面，那到时候他的手机也可以以你的身份来用着，这你就瞎了。<br>于是可以提供一个让用户可以主动expire一个过去的token类似的机制，在被盗的时候能远程止损。</p>
+<p>在网络层面上token明文传输的话会非常的危险，所以建议一定要使用HTTPS，并且把token放在post body里。</p>
+]]></content>
     
     <summary type="html">
     
-      本文主要介绍了Vue的入门及简单介绍
+      本文主要介绍了Token ，Cookie和Session的区别
     
     </summary>
     
-      <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
+      <category term="数据交互" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/"/>
     
     
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+      <category term="cookie" scheme="http://yoursite.com/tags/cookie/"/>
     
-      <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
+      <category term="Session" scheme="http://yoursite.com/tags/Session/"/>
     
-      <category term="Vue的入门简介" scheme="http://yoursite.com/tags/Vue%E7%9A%84%E5%85%A5%E9%97%A8%E7%AE%80%E4%BB%8B/"/>
+      <category term="Token" scheme="http://yoursite.com/tags/Token/"/>
     
   </entry>
   
