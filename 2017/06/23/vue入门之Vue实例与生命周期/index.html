@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Vue(Vue实例详解与生命周期) | 要么庸俗要么孤独</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Vuejs,前端框架,Vue实例详解，Vue生命周期">
+    <meta name="description" content="Vue实例详解与生命周期">
+<meta name="keywords" content="Vuejs,前端框架,Vue实例详解，Vue生命周期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue(Vue实例详解与生命周期)">
+<meta property="og:url" content="http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/index.html">
+<meta property="og:site_name" content="要么庸俗要么孤独">
+<meta property="og:description" content="Vue实例详解与生命周期">
+<meta property="og:image" content="http://orzuutv5f.bkt.clouddn.com/lifecycle-%E6%A0%87%E6%B3%A8%E7%89%88%E6%9C%AC.png">
+<meta property="og:updated_time" content="2017-06-24T02:46:56.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue(Vue实例详解与生命周期)">
+<meta name="twitter:description" content="Vue实例详解与生命周期">
+<meta name="twitter:image" content="http://orzuutv5f.bkt.clouddn.com/lifecycle-%E6%A0%87%E6%B3%A8%E7%89%88%E6%9C%AC.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wyx</h5>
+          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Modify01" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Vue(Vue实例详解与生命周期)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Vue(Vue实例详解与生命周期)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-23T05:17:02.000Z" itemprop="datePublished" class="page-time">
+  2017-06-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VueJS/">VueJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Vue实例详解与生命周期"><span class="post-toc-number">2.</span> <span class="post-toc-text">Vue实例详解与生命周期</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue实例初始化的选项配置对象详解"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Vue实例初始化的选项配置对象详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue实例的data对象"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">Vue实例的data对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue实例的computed"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">Vue实例的computed</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#methods"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">methods</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#watch"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置el的详解"><span class="post-toc-number">2.1.5.</span> <span class="post-toc-text">设置el的详解</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue实例的生命周期"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Vue实例的生命周期</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue实例的全局配置"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Vue实例的全局配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue的全局API"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Vue的全局API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-nextTick"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">Vue.nextTick</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-set"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">Vue.set</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-compile"><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">Vue.compile</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局API总结"><span class="post-toc-number">2.4.4.</span> <span class="post-toc-text">全局API总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue实例与生命周期总结"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Vue实例与生命周期总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-vue入门之Vue实例与生命周期"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Vue(Vue实例详解与生命周期)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-23 13:17:02" datetime="2017-06-23T05:17:02.000Z"  itemprop="datePublished">2017-06-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VueJS/">VueJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue实例详解与生命周期</code></center></p>
+<hr>
+<h1 id="Vue实例详解与生命周期"><a href="#Vue实例详解与生命周期" class="headerlink" title="Vue实例详解与生命周期"></a>Vue实例详解与生命周期</h1><p>Vue的实例是Vue框架的入口，其实也就是前端的ViewModel，它包含了页面中的业务逻辑处理、数据模型等，当然它也有自己的一系列的生命周期的事件钩子，辅助我们进行对整个Vue实例生成、编译、挂载、销毁等过程进行js控制。</p>
+<h2 id="Vue实例初始化的选项配置对象详解"><a href="#Vue实例初始化的选项配置对象详解" class="headerlink" title="Vue实例初始化的选项配置对象详解"></a>Vue实例初始化的选项配置对象详解</h2><p>前面我们已经用了很多次 <code>new Vue({...})</code>的代码，而且Vue初始化的选项都已经用了<code>data</code>、<code>methods</code>、<code>el</code>、<code>computed</code>等,估计您看到这里时，应该已经都明白了他们的作用，我们就详细讲解一下他们的使用情况。更详细的请参考<a href="https://cn.vuejs.org/v2/api/#data" target="_blank" rel="external">官网内容</a></p>
+<h3 id="Vue实例的data对象"><a href="#Vue实例的data对象" class="headerlink" title="Vue实例的data对象"></a>Vue实例的data对象</h3><ul>
+<li>介绍</li>
+</ul>
+<p>Vue的实例的数据对象data 我们已经用了很多了，数据绑定离不开data里面的数据。也是Vue的核心属性。<br>它是Vue绑定数据到HTML标签的数据源泉，另外Vue框架会自动监视data里面的数据变化，自动更新数据到HTML标签上去。本质原理是：Vue会自动将data里面的数据进行递归抓换成getter和setter，然后就可以自动更新HTML标签了，当然用getter和setter所以老的浏览器Vue支持的不够好。</p>
+<ul>
+<li><p>data对象的类型：</p>
+<ul>
+<li>类型是Object或者Function。</li>
+<li>如果是组件对象中，data必须是Function类型。【后面学了组件后就明白了，暂时对组件先放放。】</li>
+</ul>
+<ul>
+<li>实例：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建普通的Vue实例</span></div><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: data</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 组件定义【后面会详细讲的】</span></div><div class="line"><span class="comment">// Vue.extend() 中 data 必须是函数</span></div><div class="line"><span class="keyword">var</span> Component = Vue.extend(&#123;</div><div class="line">  <span class="attr">data</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   <span class="comment">//这里必须是函数！！！！</span></div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="Vue实例的computed"><a href="#Vue实例的computed" class="headerlink" title="Vue实例的computed"></a>Vue实例的computed</h3><ul>
+<li>介绍</li>
+</ul>
+<p>Vue的计算属性（computed)的属性会自动混入Vue的实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。这就很强大了，然后计算属性中定义的函数里面可以直接使用指向了vue实例的this，非常方便的啊。</p>
+<ul>
+<li>类型</li>
+</ul>
+<p><code>{ 键：函数}</code><br><code>{ [key: string]: Function | { get: Function, set: Function } }</code><br>当然，可以省略setter,如果省略了setter，那么值就可以是普通函数，但是必须有返回值。</p>
+<ul>
+<li>官方的实例<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">var vm = new Vue(&#123;</div><div class="line">  data: &#123; a: 1 &#125;,</div><div class="line">  computed: &#123;</div><div class="line">    // 仅读取，值只须为函数</div><div class="line">    aDouble: function () &#123;</div><div class="line">      return this.a * 2</div><div class="line">    &#125;,</div><div class="line">    // 读取和设置</div><div class="line">    aPlus: &#123;</div><div class="line">      get: function () &#123;</div><div class="line">        return this.a + 1</div><div class="line">      &#125;,</div><div class="line">      set: function (v) &#123;</div><div class="line">        this.a = v - 1</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.aPlus   // -&gt; 2</div><div class="line">vm.aPlus = 3</div><div class="line">vm.a       // -&gt; 2</div><div class="line">vm.aDouble // -&gt; 4</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h3><ul>
+<li><p>类型: { [key: string]: Function }</p>
+</li>
+<li><p>详细:</p>
+</li>
+</ul>
+<p>methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。</p>
+<p>注意，不应该使用箭头函数来定义 method 函数 (例如 plus: () =&gt; this.a++)。理由是箭头函数绑定了父级作用域的上下文，所以 this 将不会按照期望指向 Vue 实例，this.a 将是 undefined。</p>
+<ul>
+<li>示例:</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    <span class="attr">plus</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.a++</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.plus()</div><div class="line">vm.a <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><ul>
+<li>类型</li>
+</ul>
+<p><code>{ [key: string]: string | Function | Object }</code></p>
+<ul>
+<li>详细:</li>
+</ul>
+<p>一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 $watch()，遍历 watch 对象的每一个属性。</p>
+<ul>
+<li>示例:</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">b</span>: <span class="number">2</span>,</div><div class="line">    <span class="attr">c</span>: <span class="number">3</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    <span class="comment">// 监控a变量变化的时候，自动执行此函数</span></div><div class="line">    a: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'new: %s, old: %s'</span>, val, oldVal)</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 深度 watcher</span></div><div class="line">    c: &#123;</div><div class="line">      <span class="attr">handler</span>: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;,</div><div class="line">      <span class="attr">deep</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.a = <span class="number">2</span> <span class="comment">// -&gt; new: 2, old: 1</span></div><div class="line"><span class="comment">//注意，不应该使用箭头函数来定义 watcher 函数 (例如 searchQuery: newValue =&gt; this.updateAutocomplete(newValue))。理由是箭头函数绑定了父级作用域的上下文，所以 this 将不会按照期望指向 Vue 实例，this.updateAutocomplete 将是 undefined。</span></div></pre></td></tr></table></figure>
+<p>参考综合案例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之数据监控<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; number &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber()"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">      <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">number</span>: <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">methods</span>: &#123;</div><div class="line">        <span class="comment">// 事件响应方法的逻辑代码</span></div><div class="line">        getNumber: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">          <span class="keyword">this</span>.number += <span class="number">1</span>;   <span class="comment">// 不管是内联方法调用，还是绑定事件处理器两种方式执行事件响应方法的时候 this都是指向 app</span></div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">watch</span>: &#123;</div><div class="line">        <span class="comment">// 监控number的变化，并自动执行下面的函数</span></div><div class="line">        number: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'val:'</span> + val + <span class="string">' - oldVal: '</span> + oldVal);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="设置el的详解"><a href="#设置el的详解" class="headerlink" title="设置el的详解"></a>设置el的详解</h3><ul>
+<li>类型</li>
+</ul>
+<p><code>string | HTMLElement</code></p>
+<p>限制： 只在由 new 创建的实例中遵守。</p>
+<ul>
+<li>详细：</li>
+</ul>
+<p>提供一个在页面上已存在的 DOM 元素作为 Vue 实例的挂载目标,也就是说Vue绑定数据到哪里去找。可以是<code>CSS 选择器</code>，也可以是一个 <code>HTMLElement实例</code>。</p>
+<p>在实例挂载之后(生命周期的内容后面会详细讲的奥)， 元素可以用 vm.$el 访问。</p>
+<p>如果这个选项在实例化时有作用，实例将立即进入编译过程，否则，需要显式调用 vm.$mount() 手动开启编译。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 几乎所有例子都用到这个，所以就不再赘述</span></div><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">  ...</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Vue实例的生命周期"><a href="#Vue实例的生命周期" class="headerlink" title="Vue实例的生命周期"></a>Vue实例的生命周期</h2><p>Vue实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模板、挂载Dom、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。</p>
+<p>在Vue的整个生命周期中，它提供了一系列的事件，可以让我们注册js方法，可以让我们达到控制整个过程的目的地，哇赛，如果你搞过Asp.Net WebForm的话，你会发现整个就是WebForm的翻版嘛哈哈。值得注意的是，在这些事件响应方法中的this直接指向的是vue的实例。</p>
+<p>首先看看下面官网的一张生命周期的图，我做一下标注，看看整体的流程，后面我们上代码做一下效果。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://orzuutv5f.bkt.clouddn.com/lifecycle-%E6%A0%87%E6%B3%A8%E7%89%88%E6%9C%AC.png" alt="生命周期图" title="">
+                </div>
+                <div class="image-caption">生命周期图</div>
+            </figure>
+<p>Vue提供的可以注册的钩子都在上图片的红色框标注。<br>他们是：</p>
+<ul>
+<li><code>beforeCreate</code></li>
+</ul>
+<p>在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。</p>
+<ul>
+<li><code>created</code></li>
+</ul>
+<p>实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。</p>
+<ul>
+<li><code>beforeMount</code></li>
+</ul>
+<p>在挂载开始之前被调用：相关的 render 函数首次被调用。</p>
+<ul>
+<li><code>mounted</code></li>
+</ul>
+<p>el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.$el 也在文档内。</p>
+<ul>
+<li><code>beforeUpdate</code></li>
+</ul>
+<p>数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。<br>你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。</p>
+<ul>
+<li><code>updated</code></li>
+</ul>
+<p>由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。</p>
+<p>当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。</p>
+<p>该钩子在服务器端渲染期间不被调用。</p>
+<ul>
+<li><code>beforeDestroy</code></li>
+</ul>
+<p>实例销毁之前调用。在这一步，实例仍然完全可用。</p>
+<ul>
+<li><code>destroyed</code></li>
+</ul>
+<p>Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。<br>该钩子在服务器端渲染期间不被调用。</p>
+<p>接下来我们做一个例子，看一下Vue中所有的生命周期怎么用的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之生命周期<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; number &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"btnSetNumber"</span> <span class="attr">v-model</span>=<span class="string">"number"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">      <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">number</span>: <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">beforeCreate</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'beforeCreate 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">cteated</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'cteated 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">beforeMount</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'beforeMount 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">mounted</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'mounted 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">beforeUpdate</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'beforeUpdate 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">updated</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'updated 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">beforeDestroy</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'beforeDestroy 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">destroyed</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'destroyed 钩子执行...'</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number)</div><div class="line">      &#125;,</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>再看一个综合的实战的例子，可能涉及到ajax和组件，不过先看一下vue的生命周期的例子的用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Axios <span class="keyword">from</span> <span class="string">'axios'</span>       <span class="comment">// 这是一个轻量级的ajax库，import是es6模块导入的语法。</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;                <span class="comment">// 这是一个vue的模块，后面讲奥。</span></div><div class="line">  name: <span class="string">'app'</span>,</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">data</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">list</span>: []</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">mounted</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;          <span class="comment">// 挂在完成后的生命周期钩子注册。</span></div><div class="line">    <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  <span class="comment">// 等待下一次更新完成后执行业务处理代码。</span></div><div class="line">      Axios.get(<span class="string">'/api/menulist'</span>, &#123;<span class="comment">// 将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新</span></div><div class="line">        params: &#123;</div><div class="line">        &#125;</div><div class="line">      &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.list = res.data</div><div class="line">      &#125;.bind(<span class="keyword">this</span>))</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Vue实例的全局配置"><a href="#Vue实例的全局配置" class="headerlink" title="Vue实例的全局配置"></a>Vue实例的全局配置</h2><p>这一块都是一些小的知识点，我就不赘述了，直接copy <a href="https://cn.vuejs.org/v2/api/#silent" target="_blank" rel="external">官网</a><br>Vue.config 是一个对象，包含 Vue 的全局配置。可以在启动应用之前修改下列属性：</p>
+<ul>
+<li><p>silent</p>
+<ul>
+<li><p>类型： boolean</p>
+</li>
+<li><p>默认值： false</p>
+</li>
+<li><p>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Vue.config.silent = <span class="literal">true</span></div><div class="line"><span class="comment">//取消 Vue 所有的日志与警告。</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>optionMergeStrategies</p>
+</li>
+<li><p>类型： { [key: string]: Function }</p>
+</li>
+<li><p>默认值： {}</p>
+</li>
+<li><p>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Vue.config.optionMergeStrategies._my_option = <span class="function"><span class="keyword">function</span> (<span class="params">parent, child, vm</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> child + <span class="number">1</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> Profile = Vue.extend(&#123;</div><div class="line">  <span class="attr">_my_option</span>: <span class="number">1</span></div><div class="line">&#125;)</div><div class="line"><span class="comment">// Profile.options._my_option = 2</span></div><div class="line"><span class="comment">//自定义合并策略的选项。</span></div><div class="line"><span class="comment">//合并策略选项分别接受第一个参数作为父实例，第二个参数为子实例，Vue实例上下文被作为第三个参数传入。</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>devtools</p>
+</li>
+<li><p>类型： boolean</p>
+</li>
+<li><p>默认值： true (生产版为 false)</p>
+</li>
+<li><p>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 务必在加载 Vue 之后，立即同步设置以下内容</span></div><div class="line">Vue.config.devtools = <span class="literal">true</span></div><div class="line"><span class="comment">//配置是否允许 vue-devtools 检查代码。开发版本默认为 true，生产版本默认为 false。生产版本设为 true 可以启用检查。</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>errorHandler</p>
+</li>
+<li><p>类型： Function</p>
+</li>
+<li><p>默认值： 默认抛出错误</p>
+</li>
+<li><p>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span> (<span class="params">err, vm</span>) </span>&#123;</div><div class="line">  <span class="comment">// handle error</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 Vue 实例。</span></div><div class="line"><span class="comment">//Sentry, an error tracking service, provides official integration using this option.</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>ignoredElements</p>
+<ul>
+<li><p>类型: Array<string></string></p>
+</li>
+<li><p>默认值: []</p>
+</li>
+<li><p>用法:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Vue.config.ignoredElements = [</div><div class="line">  <span class="string">'my-custom-web-component'</span>, <span class="string">'another-web-component'</span></div><div class="line">]</div><div class="line">须使 Vue 忽略在 Vue 之外的自定义元素 (e.g., 使用了 Web Components APIs)。否则，它会假设你忘记注册全局组件或者拼错了组件名称，从而抛出一个关于 Unknown custom element 的警告。</div></pre></td></tr></table></figure>
+</li>
+<li><p>keyCodes</p>
+</li>
+<li><p>类型： { [key: string]: number | Array<number> }</number></p>
+</li>
+<li><p>默认值： {}</p>
+</li>
+<li><p>用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Vue.config.keyCodes = &#123;</div><div class="line">  <span class="attr">v</span>: <span class="number">86</span>,</div><div class="line">  <span class="attr">f1</span>: <span class="number">112</span>,</div><div class="line">  <span class="attr">mediaPlayPause</span>: <span class="number">179</span>,</div><div class="line">  <span class="attr">up</span>: [<span class="number">38</span>, <span class="number">87</span>]</div><div class="line">&#125;</div><div class="line"><span class="comment">//给 v-on 自定义键位别名。</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Vue的全局API"><a href="#Vue的全局API" class="headerlink" title="Vue的全局API"></a>Vue的全局API</h2></li>
+</ul>
+<p>Vue的全局API提供大量的功能，我这里就给大家罗列几个常用的结果，其他的还是参考<a href="https://cn.vuejs.org/v2/api/#全局-API" target="_blank" rel="external">官网</a>.</p>
+<h3 id="Vue-nextTick"><a href="#Vue-nextTick" class="headerlink" title="Vue.nextTick"></a>Vue.nextTick</h3><p><code>语法： Vue.nextTick( [callback, context] )</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">参数：</div><div class="line">&#123;Function&#125; [callback]</div><div class="line">&#123;Object&#125; [context]</div></pre></td></tr></table></figure>
+<p>用法：<br>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 修改数据</span></div><div class="line">vm.msg = <span class="string">'Hello'</span></div><div class="line"><span class="comment">// DOM 还没有更新</span></div><div class="line">Vue.nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// DOM 更新了</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="Vue-set"><a href="#Vue-set" class="headerlink" title="Vue.set"></a>Vue.set</h3><p><code>语法： Vue.set( object, key, value )</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">参数：</div><div class="line">&#123;Object&#125; object</div><div class="line">&#123;string&#125; key</div><div class="line">&#123;any&#125; value</div><div class="line">返回值： 设置的值.</div></pre></td></tr></table></figure>
+<p>用法：<br>设置对象的属性。如果对象是响应式的，确保属性被创建后也是响应式的，同时触发视图更新。这个方法主要用于避开 Vue 不能检测属性被添加的限制。<br>注意对象不能是 Vue 实例，或者 Vue 实例的根数据对象。</p>
+<h3 id="Vue-compile"><a href="#Vue-compile" class="headerlink" title="Vue.compile"></a>Vue.compile</h3><ul>
+<li><p>语法：<br><code>Vue.compile( template )</code></p>
+</li>
+<li><p>参数：</p>
+</li>
+</ul>
+<p><code>{string} template</code></p>
+<ul>
+<li>用法：<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在render函数中编译模板字符串。只在独立构建时有效</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> res = Vue.compile(<span class="string">'&lt;div&gt;&lt;span&gt;&#123;&#123; msg &#125;&#125;&lt;/span&gt;&lt;/div&gt;'</span>)</div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">msg</span>: <span class="string">'hello'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">render</span>: res.render,</div><div class="line">  <span class="attr">staticRenderFns</span>: res.staticRenderFns</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="全局API总结"><a href="#全局API总结" class="headerlink" title="全局API总结"></a>全局API总结</h3><p>其实还有几个其他的全局API，不打算在这里讲了，比如扩展组件Vue.extend 的用法、Vue.use加载插件、Vue.filter加载过滤器、Vue.directive自定义指令等<br>后面再讲其他Vue的知识点的时候，再加上这些，全局API其实就是Vue类型的静态方法，全局范围内都可以使用的，某些实例的方法本质也是调用了这些全局的，后面用到时候再说。</p>
+<h2 id="Vue实例与生命周期总结"><a href="#Vue实例与生命周期总结" class="headerlink" title="Vue实例与生命周期总结"></a>Vue实例与生命周期总结</h2><p>Vue的实例封装的还是挺有艺术性的，很符合开发者的思维规范，它的生命周期也非常清晰，使用起来也非常方便。Vue确实一个好框架。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2017-06-24T02:46:56.818Z" itemprop="dateUpdated">2017-06-24 10:46:56</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/06/23/vue入门之Vue实例与生命周期/" target="_blank" rel="external">http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.png" alt="wyx">
+            wyx
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue实例详解，Vue生命周期/">Vue实例详解，Vue生命周期</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/&title=《Vue(Vue实例详解与生命周期)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/&title=《Vue(Vue实例详解与生命周期)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue(Vue实例详解与生命周期)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/23/vue数据绑定/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vue(数据绑定)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/23/Vue入门之组件化/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Vue(Vue入门之组件化开发)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wyx &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/&title=《Vue(Vue实例详解与生命周期)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/&title=《Vue(Vue实例详解与生命周期)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue(Vue实例详解与生命周期)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACyklEQVR42u3awW4iMRAEUP7/p3elnFZaMFVum3B4c0IJGfyMNN2p9uMRX39+rv9/8u/16rfrOySvX33KsQsPDw9va+mvrnxx679N7pZsWb5mPDw8vNu8dTFIHtbrB3deBvItSwoYHh4e3u/ykkf2uhjkbXHeguPh4eF9M2/S/uZRxaQI4eHh4X2Stxco5LFCGzEkvMNZCx4eHl7Maxvcb3h9cb6Hh4eHN5iq54/dJJ5Yt9TtIC1aJx4eHt4F3jxg3Wt2T8UTUcHAw8PDO8prw4K2a92LZdv3vPwC8PDw8C7zRuP5cpyWl6VR04+Hh4d3mZcPn9rl5nfIG/RRjIuHh4c3np5Pwoj2nW1Em4fF0ckIPDw8vDEvP1zVPvT33j95zj9ZMx4eHt4HeXkLnpMm4e9me42Hh4d3gZdHpW1TO7lP23y/KRt4eHh4R3nRAH4Lkwe1e8cUoiKEh4eHd4GXP4JvjNOSO+9t0Ju6h4eHh3eUNzk4NS8qecl5E+DuJS54eHh4Ma9d6NktWA/b2uMLeHh4eJ/kJc10+7jP2+XJcavo0/Hw8PAO8fJFJP/8t615G3O0pQsPDw/vBq/9yPb41NkhWV6W8PDw8G7z9sb57TGpUxta5wx4eHh413j5Etsmu22j82Ai2lA8PDy8C7y9f/6TReTNcVsqkgMHeHh4eLd5+aLzVrsNJtqN3oxx8fDw8Ma8deOb/LY9dpAfV22LQX0mAg8PD2/MmzfW7VGqvea7iH3x8PDwjvL2hv15szvpcvd+/si/ATw8PLwzs6cDC5oMydaRblKo9rYbDw8Pr+XlzfEkZs2b5nao9qYw4OHh4V3jTcKIZLnJ4G0eQzy5Gx4eHt4X8NrhVtIizzf32AAMDw8P7yhvcqQgD47bowbH5nt4eHh4Ja89BDBZVr7ESXiBh4eHd4+3NwDLo4E2gGhJo8keHh4eXsf7C1hMu2DVUeFqAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
