@@ -13,24 +13,24 @@
     
     
     
-    <title>Javascript 面向对象编程（一）：封装 | 要么庸俗要么孤独</title>
+    <title>剖析Vue原理&amp;实现双向绑定MVVM | 要么庸俗要么孤独</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Javascript,面向对象">
-    <meta name="description" content="Javascript 面向对象编程（一）：封装">
-<meta name="keywords" content="Javascript,面向对象">
+    <meta name="keywords" content="Vuejs,双向数据绑定,JavaScript">
+    <meta name="description" content="剖析Vue原理&amp;实现双向绑定MVVM">
+<meta name="keywords" content="Vuejs,双向数据绑定,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript 面向对象编程（一）：封装">
-<meta property="og:url" content="http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/index.html">
+<meta property="og:title" content="剖析Vue原理&amp;实现双向绑定MVVM">
+<meta property="og:url" content="http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/index.html">
 <meta property="og:site_name" content="要么庸俗要么孤独">
-<meta property="og:description" content="Javascript 面向对象编程（一）：封装">
-<meta property="og:updated_time" content="2017-09-07T02:01:10.007Z">
+<meta property="og:description" content="剖析Vue原理&amp;实现双向绑定MVVM">
+<meta property="og:updated_time" content="2017-09-07T06:38:10.333Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript 面向对象编程（一）：封装">
-<meta name="twitter:description" content="Javascript 面向对象编程（一）：封装">
+<meta name="twitter:title" content="剖析Vue原理&amp;实现双向绑定MVVM">
+<meta name="twitter:description" content="剖析Vue原理&amp;实现双向绑定MVVM">
     
         <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
     
@@ -114,7 +114,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Javascript 面向对象编程（一）：封装</div>
+        <div class="flex-col header-title ellipsis">剖析Vue原理&amp;实现双向绑定MVVM</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -136,15 +136,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Javascript 面向对象编程（一）：封装</h1>
+        <h1 class="title">剖析Vue原理&amp;实现双向绑定MVVM</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-04-25T05:17:02.000Z" itemprop="datePublished" class="page-time">
-  2017-04-25
+                <time datetime="2017-09-07T06:36:02.000Z" itemprop="datePublished" class="page-time">
+  2017-09-07
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/面向对象/">面向对象</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/双向数据绑定/">双向数据绑定</a></li></ul>
 
             
         </h5>
@@ -161,20 +161,20 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#服务介绍"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">服务介绍</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-Javascript 面向对象编程（一）：封装"
+<article id="post-剖析Vue原理&amp;实现双向绑定MVVM"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Javascript 面向对象编程（一）：封装</h1>
+        <h1 class="post-card-title">剖析Vue原理&实现双向绑定MVVM</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-04-25 13:17:02" datetime="2017-04-25T05:17:02.000Z"  itemprop="datePublished">2017-04-25</time>
+            <time class="post-time" title="2017-09-07 14:36:02" datetime="2017-09-07T06:36:02.000Z"  itemprop="datePublished">2017-09-07</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/面向对象/">面向对象</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/双向数据绑定/">双向数据绑定</a></li></ul>
 
 
 
@@ -187,9 +187,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>封装</code></center></p>
-<hr>
-<h3 id="服务介绍"><a href="#服务介绍" class="headerlink" title="服务介绍"></a>服务介绍</h3><p>&#160; &#160; &#160; &#160;服务这个概念其实并不陌生，在其他语言中如Java便有这样的概念，其作用就是对外提供某个特定的功能，如消息服务，文件压缩服务等，是一个独立的模块。ng的服务是这样定义的：</p>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>关于eslint使用规则，和各种报错对应规则</code></center></p>
 
         </div>
 
@@ -197,12 +195,12 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2017-09-07T02:01:10.007Z" itemprop="dateUpdated">2017-09-07 10:01:10</time>
+    Last updated: <time datetime="2017-09-07T06:38:10.333Z" itemprop="dateUpdated">2017-09-07 14:38:10</time>
 </span><br>
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/25/Javascript 面向对象编程（一）：封装/" target="_blank" rel="external">http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/09/07/剖析Vue原理&amp;实现双向绑定MVVM/" target="_blank" rel="external">http://yoursite.com/2017/09/07/剖析Vue原理&amp;实现双向绑定MVVM/</a>
         
     </div>
     <footer>
@@ -222,7 +220,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/双向数据绑定/">双向数据绑定</a></li></ul>
 
 
             
@@ -232,7 +230,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/&title=《Javascript 面向对象编程（一）：封装》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -242,22 +240,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/&title=《Javascript 面向对象编程（一）：封装》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Javascript 面向对象编程（一）：封装》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -277,21 +275,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/04/26/前端构建工具gulp入门教程/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">前端构建工具gulp入门教程</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/04/25/Token ，Cookie和Session的区别/" id="post-next" class="post-nav-link">
+      <a href="/2017/09/07/关于eslint使用规则，和各种报错对应规则/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Token ，Cookie和Session的区别</h4>
+        <h4 class="title">关于eslint使用规则，和各种报错对应规则</h4>
       </a>
     </div>
   
@@ -392,7 +383,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/&title=《Javascript 面向对象编程（一）：封装》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -402,22 +393,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/&title=《Javascript 面向对象编程（一）：封装》 — 要么庸俗要么孤独&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Javascript 面向对象编程（一）：封装》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/04/25/Javascript 面向对象编程（一）：封装/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -428,7 +419,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3awW4bMQwE0Pz/T6dAT0UNxzOkZBfF21PgbLx6OiyZob6+4uv79/X4yZ/X453P/mr2DY/fduzCw8PDGy392fV4T/JXj/f/vFntFhdPxMPDw7vGS76ufXEnjJ8XlxSPF0/Ew8PD+ygvaYj3r3s8PDy8/4/XFpJZ+z4LJvDw8PDeyWsf2UYDLSNfw7GsBQ8PD69LVoeN76d+vjjfw8PDw1tM1ZPXbl5OkvKQ3FmsEw8PD+8Crw0d8t/eK055m46Hh4d3g5cM+1tGsojN58kT8fDw8D7L2wy68qVs4t2n34yHh4d3gdemoEkA0R5BmA2x6iKBh4eHd4jXxg2njhokzXrb7hd1Dw8PD+8Cb9NAJ7BNs46Hh4f3L/DaIKCNa9vlJg161MTj4eHhXePlkUEbWOyHam2Mi4eHh/ce3ilGXk7aowPDIBgPDw/v7bwZpl1EPmarz1Ph4eHhXeC1//DPYtlkgxJYew8eHh7eDV7C2LfFm0NXqwMEeHh4eBd4+dg+H0ptgtd7DTceHh7eWV4++sqj3rZN3xy6ihprPDw8vKO8pAC01FncsIkwojKGh4eHd5Q3ixWSl/VsC/ZBMB4eHt57eG0YcSq2yMvPcMqHh4eHd4jXvujbFrx4cY8a+hdbhoeHh3eB1w7g20MD7aCrLSHDlAUPDw9vwUvCgvZQVLJxs9FXG+bi4eHh3eDNBv9nX/3D5ZblCg8PD+8U77u82oe19yQRRrK5X8lO4+Hh4Y14h2tLPO6axcf5AYIaiYeHh1fykmKQ35MfAmgjiXZteHh4eLd5eTFoY4hVszsqXav+HQ8PD++NvH2Mm6/qA4UBDw8Pb8SbHQiYHR3Ix2Mvyg8eHh7eNV4eRuQN9CzaaNkvtgAPDw/vAm/zr/5sDNYeC2i3+1iSgYeHh/f3J78A5BZK39CR5qcAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwUlEQVR42u3a0U7EMAwEQP7/p0HiCQkadp2mHNL06dSDNNOTYsv221t8vX9e3z9/vfP1Wq/w/b+Sda5WvuHCw8PDG2396rrayvr+mrTeQ/Jtsmc8PDy807w2GCSPWW86DyrtfvDw8PBeh7d1QI/S8fVz8fDw8P4vb5ZGt0k5Hh4e3qvxkmLETrLblonXezhSa8HDw8ObVAbqBthffX6ov4eHh4e3UYTNj+n8uJ+Vbot94uHh4R3g5els/m3S7N8vFq+fUmfreHh4eCWvXSK/nw9yzQJAUgjGw8PDO8fLixH7aXTeDCtS5516DB4eHl7Max+ZB4l8yCApc8xeBx4eHt45Xl5KaAsNbSOtjWlRYMDDw8O7lbcDu8LsFA7y5LsYMsDDw8M7wGuP/llKvf/6ZgMHeHh4ePfy2iLCfjs/T9Pbo//yF8PDw8O7lZcv3RZYk1R4nVjvDLDi4eHhPcMrsu/4YXXLauP6JTDg4eHh3cTLSwbtYEE7RtCOFERJOR4eHt7jvNnR376IvMi7vvPDynh4eHiP8HbKqfuN/+QqisV4eHh4j/DyBPeuUkIxONUGGzw8PLxHeLOH5Wlunljn61/ex8PDwzvGyxtU7WHdDiIUhYYkOOHh4eEd4J1LcHPA7BXUo1d4eHh4N/Hygmx7HLcJdPtttB88PDy8A7z1oXxv0tw2zJI4VgQePDw8vJt4bZLaHtxtuXZ2//Jv8PDw8A7wdg7xJM2dlSraIsgw7uHh4eGNeLMGfzti1YaEPNj8sj4eHh7eAd5si3mLK2fs9/p3fgA8PDy8lpcHgxaQp9ptUl6MheHh4eEd47XtpbY4m5OSgFEEGzw8PLyX4c1KsXmZI0nH8fDw8F6fN2tE5YXXfEyh2CceHh7eMV5ejNhJkdsGW9vuqgcI8PDw8Ea8nQZYEgzaQka7/hYMDw8Pr+N9AD/Zu2AqtDNxAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
