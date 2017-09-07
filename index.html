@@ -178,8 +178,10 @@
 
     
         
-正文开始关于eslint使用规则，和各种报错对应规则
+正文开始剖析Vue原理&amp;实现双向绑定MVVM
 
+
+本文能帮你做什么？1、了解vue的双向数据绑定原理以及核心代码模块2、缓解好奇心的同时了解如何实现双向绑定为了便于说明原理与实现，本文相关代码主要摘自vue源码, 并进行了简化改造，相对较简陋，并未考虑到数组的处理、数据的循环依赖等，也难免存在一些问题，欢迎大家指正。不过这些并不会影响大家的阅读和理解，相信看完本文后对大家在阅读vu...
     
 
         <a href="/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" class="post-more waves-effect waves-button">
@@ -534,6 +536,56 @@ Vue实例初始化的选项配置对象详解前面我们已经用了很多次 n
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-Vue入门之组件化"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-06-23 13:17:02" datetime="2017-06-23T05:17:02.000Z"  itemprop="datePublished">2017-06-23</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VueJS/">VueJS</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/06/23/Vue入门之组件化/">Vue(Vue入门之组件化开发)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+正文开始Vue入门之组件化开发
+
+Vue入门之组件化开发组件其实就是一个拥有样式、动画、js逻辑、HTML结构的综合块。前端组件化确实让大的前端团队更高效的开发前端项目。而作为前端比较流行的框架之一，Vue的组件和也做的非常彻底，而且有自己的特色。尤其是她单文件组件开发的方式更是非常方便，而且第三方工具支持也非常丰富，社区也非常活跃，第三方组件也呈井喷之势。当然学习和使用Vue的组件也是我...
+    
+
+        <a href="/2017/06/23/Vue入门之组件化/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue组件化/">Vue组件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Vue入门之事件绑定处理"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -578,56 +630,6 @@ Vue提供了v-on指令帮助我们进行事件的绑定。基本的内联事件�
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue事件处理/">Vue事件处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Vue入门之组件化"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-06-23 13:17:02" datetime="2017-06-23T05:17:02.000Z"  itemprop="datePublished">2017-06-23</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VueJS/">VueJS</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/06/23/Vue入门之组件化/">Vue(Vue入门之组件化开发)</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-正文开始Vue入门之组件化开发
-
-Vue入门之组件化开发组件其实就是一个拥有样式、动画、js逻辑、HTML结构的综合块。前端组件化确实让大的前端团队更高效的开发前端项目。而作为前端比较流行的框架之一，Vue的组件和也做的非常彻底，而且有自己的特色。尤其是她单文件组件开发的方式更是非常方便，而且第三方工具支持也非常丰富，社区也非常活跃，第三方组件也呈井喷之势。当然学习和使用Vue的组件也是我...
-    
-
-        <a href="/2017/06/23/Vue入门之组件化/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue组件化/">Vue组件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
 
     </div>
     
