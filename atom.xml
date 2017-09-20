@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-20T02:55:07.086Z</updated>
+  <updated>2017-09-20T02:56:59.441Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/09/20/webpack%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%9C%9F%E5%AE%9E%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/"/>
     <id>http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/</id>
     <published>2017-09-20T15:42:26.000Z</published>
-    <updated>2017-09-20T02:55:07.086Z</updated>
+    <updated>2017-09-20T02:56:59.441Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a><code>正文部分</code></h1><left style="font-size: 30px; font-weight:700"><code>webpack：从入门到真实项目配置</code></left>
@@ -292,12 +292,10 @@
     
     </summary>
     
-      <category term="构建工具" scheme="http://yoursite.com/categories/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/"/>
+      <category term="webpack" scheme="http://yoursite.com/categories/webpack/"/>
     
     
       <category term="前端构建工具" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="打包压缩工具" scheme="http://yoursite.com/tags/%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/"/>
     
       <category term="webpack" scheme="http://yoursite.com/tags/webpack/"/>
     
@@ -975,6 +973,69 @@
   </entry>
   
   <entry>
+    <title>Vue(Vue事件处理)</title>
+    <link href="http://yoursite.com/2017/06/23/Vue%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2017/06/23/Vue入门之事件绑定处理/</id>
+    <published>2017-06-23T05:17:02.000Z</published>
+    <updated>2017-09-06T08:20:35.137Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之事件处理</code></center></p>
+<hr>
+<h1 id="Vue事件处理"><a href="#Vue事件处理" class="headerlink" title="Vue事件处理"></a>Vue事件处理</h1><h2 id="监听事件的Vue处理"><a href="#监听事件的Vue处理" class="headerlink" title="监听事件的Vue处理"></a>监听事件的Vue处理</h2><p>Vue提供了协助我们为标签绑定时间的方法，当然我们可以直接用dom原生的方式去绑定事件。Vue提供的指令进行绑定也是非常方便，而且能让ViewModel更简洁，逻辑更彻底。所以还是推荐大家使用的。</p>
+<p>Vue提供了<code>v-on</code>指令帮助我们进行事件的绑定。<br>基本的内联事件处理方法[官方demo]：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example-1"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 为按钮绑定点击事件，执行counter += 1的任务。 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"counter += 1"</span>&gt;</span>增加 1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这个按钮被点击了 &#123;&#123; counter &#125;&#125; 次。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> example1 = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#example-1'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">counter</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="事件处理方法集成到Vue对象"><a href="#事件处理方法集成到Vue对象" class="headerlink" title="事件处理方法集成到Vue对象"></a>事件处理方法集成到Vue对象</h2><p>内联的方式绑定的事件，只能处理简单的事件的处理逻辑。复杂的情况还是封装到js中最方便，也不容易出错。<br>Vue对象中可以添加methods属性，开发者可以把事件处理函数的逻辑放到methods中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之动态显示表格<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; number &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加[绑定事件处理器]"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加[内联方法调用]"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber()"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">      <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">number</span>: <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">methods</span>: &#123;</div><div class="line">        <span class="comment">// 事件响应方法的逻辑代码</span></div><div class="line">        getNumber: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">          <span class="keyword">this</span>.number += <span class="number">1</span>;   <span class="comment">// 不管是内联方法调用，还是绑定事件处理器两种方式执行事件响应方法的时候 this都是指向 app</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><p>官网上写的非常好，这块就直接用管网的吧。在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在 methods 中轻松实现这点，但更好的方式是：methods 只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。<br>为了解决这个问题， Vue.js 为 v-on 提供了 事件修饰符。通过由点(.)表示的指令后缀来调用修饰符。</p>
+<ul>
+<li>.stop</li>
+<li>.prevent</li>
+<li>.capture</li>
+<li>.self</li>
+<li>.once</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 阻止单击事件冒泡 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 修饰符可以串联  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 只有修饰符 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加事件侦听器时使用事件捕获模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- the click event will be triggered at most once --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.once</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h2><p>在监听键盘事件时，我们经常需要监测常见的键值。 Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 只有在 keyCode 是 13 时调用 vm.submit() --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.13</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">记住所有的 keyCode 比较困难，所以 Vue 为最常用的按键提供了别名：</div><div class="line"><span class="comment">&lt;!-- 同上 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缩写语法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>全部的按键别名：</p>
+<ul>
+<li>.enter</li>
+<li>.tab</li>
+<li>.delete (捕获 “删除” 和 “退格” 键)</li>
+<li>.esc</li>
+<li>.space</li>
+<li>.up</li>
+<li>.down</li>
+<li>.left</li>
+<li>.right</li>
+<li>.ctrl</li>
+<li>.alt</li>
+<li>.shift</li>
+<li>.meta</li>
+</ul>
+<h2 id="事件绑定的简写"><a href="#事件绑定的简写" class="headerlink" title="事件绑定的简写"></a>事件绑定的简写</h2><p>Vue中属性的绑定的简写直接是<code>:</code> === ‘v-bind:’<br>而事件的缩写是直接变成<code>@</code>.  也就是说：  <code>v-on:</code> === <code>@</code><br>看下面的例子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="事件绑定总结"><a href="#事件绑定总结" class="headerlink" title="事件绑定总结"></a>事件绑定总结</h2><p>Vue为了方便大家进行开发，提供了事件的相关的封装，可以让我们方便我们用Vue对事件进行开发，尤其是v-on指令的非常方便的跟Vue对象中methods进行配合进行复杂的事件处理，非常方便。另外事件的事件修饰符和按键修饰符也可以让Vue事件这块锦上添花。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Vue事件处理
+    
+    </summary>
+    
+      <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
+    
+    
+      <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="Vue事件处理" scheme="http://yoursite.com/tags/Vue%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Vue(Vue实例详解与生命周期)</title>
     <link href="http://yoursite.com/2017/06/23/vue%E5%85%A5%E9%97%A8%E4%B9%8BVue%E5%AE%9E%E4%BE%8B%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     <id>http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/</id>
@@ -1332,69 +1393,6 @@
   </entry>
   
   <entry>
-    <title>Vue(Vue事件处理)</title>
-    <link href="http://yoursite.com/2017/06/23/Vue%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2017/06/23/Vue入门之事件绑定处理/</id>
-    <published>2017-06-23T05:17:02.000Z</published>
-    <updated>2017-09-06T08:20:35.137Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之事件处理</code></center></p>
-<hr>
-<h1 id="Vue事件处理"><a href="#Vue事件处理" class="headerlink" title="Vue事件处理"></a>Vue事件处理</h1><h2 id="监听事件的Vue处理"><a href="#监听事件的Vue处理" class="headerlink" title="监听事件的Vue处理"></a>监听事件的Vue处理</h2><p>Vue提供了协助我们为标签绑定时间的方法，当然我们可以直接用dom原生的方式去绑定事件。Vue提供的指令进行绑定也是非常方便，而且能让ViewModel更简洁，逻辑更彻底。所以还是推荐大家使用的。</p>
-<p>Vue提供了<code>v-on</code>指令帮助我们进行事件的绑定。<br>基本的内联事件处理方法[官方demo]：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example-1"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 为按钮绑定点击事件，执行counter += 1的任务。 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"counter += 1"</span>&gt;</span>增加 1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这个按钮被点击了 &#123;&#123; counter &#125;&#125; 次。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> example1 = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#example-1'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">counter</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="事件处理方法集成到Vue对象"><a href="#事件处理方法集成到Vue对象" class="headerlink" title="事件处理方法集成到Vue对象"></a>事件处理方法集成到Vue对象</h2><p>内联的方式绑定的事件，只能处理简单的事件的处理逻辑。复杂的情况还是封装到js中最方便，也不容易出错。<br>Vue对象中可以添加methods属性，开发者可以把事件处理函数的逻辑放到methods中。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之动态显示表格<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; number &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加[绑定事件处理器]"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"btnGetNumber"</span> <span class="attr">value</span>=<span class="string">"增加[内联方法调用]"</span> <span class="attr">v-on:click</span>=<span class="string">"getNumber()"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">      <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">number</span>: <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">methods</span>: &#123;</div><div class="line">        <span class="comment">// 事件响应方法的逻辑代码</span></div><div class="line">        getNumber: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">          <span class="keyword">this</span>.number += <span class="number">1</span>;   <span class="comment">// 不管是内联方法调用，还是绑定事件处理器两种方式执行事件响应方法的时候 this都是指向 app</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><p>官网上写的非常好，这块就直接用管网的吧。在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在 methods 中轻松实现这点，但更好的方式是：methods 只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。<br>为了解决这个问题， Vue.js 为 v-on 提供了 事件修饰符。通过由点(.)表示的指令后缀来调用修饰符。</p>
-<ul>
-<li>.stop</li>
-<li>.prevent</li>
-<li>.capture</li>
-<li>.self</li>
-<li>.once</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 阻止单击事件冒泡 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 修饰符可以串联  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 只有修饰符 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 添加事件侦听器时使用事件捕获模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- the click event will be triggered at most once --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.once</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h2><p>在监听键盘事件时，我们经常需要监测常见的键值。 Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 只有在 keyCode 是 13 时调用 vm.submit() --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.13</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">记住所有的 keyCode 比较困难，所以 Vue 为最常用的按键提供了别名：</div><div class="line"><span class="comment">&lt;!-- 同上 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缩写语法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>全部的按键别名：</p>
-<ul>
-<li>.enter</li>
-<li>.tab</li>
-<li>.delete (捕获 “删除” 和 “退格” 键)</li>
-<li>.esc</li>
-<li>.space</li>
-<li>.up</li>
-<li>.down</li>
-<li>.left</li>
-<li>.right</li>
-<li>.ctrl</li>
-<li>.alt</li>
-<li>.shift</li>
-<li>.meta</li>
-</ul>
-<h2 id="事件绑定的简写"><a href="#事件绑定的简写" class="headerlink" title="事件绑定的简写"></a>事件绑定的简写</h2><p>Vue中属性的绑定的简写直接是<code>:</code> === ‘v-bind:’<br>而事件的缩写是直接变成<code>@</code>.  也就是说：  <code>v-on:</code> === <code>@</code><br>看下面的例子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="事件绑定总结"><a href="#事件绑定总结" class="headerlink" title="事件绑定总结"></a>事件绑定总结</h2><p>Vue为了方便大家进行开发，提供了事件的相关的封装，可以让我们方便我们用Vue对事件进行开发，尤其是v-on指令的非常方便的跟Vue对象中methods进行配合进行复杂的事件处理，非常方便。另外事件的事件修饰符和按键修饰符也可以让Vue事件这块锦上添花。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      Vue事件处理
-    
-    </summary>
-    
-      <category term="VueJS" scheme="http://yoursite.com/categories/VueJS/"/>
-    
-    
-      <category term="Vuejs" scheme="http://yoursite.com/tags/Vuejs/"/>
-    
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="Vue事件处理" scheme="http://yoursite.com/tags/Vue%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vue(Vue入门之组件化开发)</title>
     <link href="http://yoursite.com/2017/06/23/Vue%E5%85%A5%E9%97%A8%E4%B9%8B%E7%BB%84%E4%BB%B6%E5%8C%96/"/>
     <id>http://yoursite.com/2017/06/23/Vue入门之组件化/</id>
@@ -1564,6 +1562,44 @@
   </entry>
   
   <entry>
+    <title>angularjs(一)</title>
+    <link href="http://yoursite.com/2017/04/25/angular-1/"/>
+    <id>http://yoursite.com/2017/04/25/angular-1/</id>
+    <published>2017-04-25T05:17:02.000Z</published>
+    <updated>2017-05-14T14:15:33.125Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言 "></a><center style="font-size: 30px">1.前言 </center></h2><p>&#160; &#160; &#160; &#160;前端技术的发展是如此之快，各种优秀技术、优秀框架的出现简直让人目不暇接，紧跟时代潮流，学习掌握新知识自然是不敢怠慢。</p>
+<p>&#160; &#160; &#160; &#160;<code>AngularJS</code>是google在维护，其在国外已经十分火热，可是国内的使用情况却有不小的差距，参考文献/网络文章也很匮乏。这里便将我学习AngularJS写成文档，一方面作为自己学习路程上的记录，另一方面也给有兴趣的同学一些参考。</p>
+<p>&#160; &#160; &#160; &#160;首先我自己也是一名学习者，会以学习者的角度来整理我的行文思路，这里可能只是些探索，有理解或是技术上的错误还请大家指出；其次我特别喜欢编写小例子来把一件事情说明白，故在文中会尽可能多的用示例加代码讲解，我相信这会是一种比较好的方式；最后，我深知AngularJS的使用方式跟<code>jQuery</code>的使用方式有很大不同，在大家都有jquery、ext经验的条件下对于angular的学习会困难重重，不过我更相信在大家的坚持下，能够快速的学好AngularJS，至少咱也能深入了解到AngularJS的基本思想，对咱们以后自己的插件开发、项目开发都会有很大的启示。</p>
+<h2 id="2-AngularJS概述"><a href="#2-AngularJS概述" class="headerlink" title="2 AngularJS概述 "></a><center style="font-size: 30px">2 AngularJS概述 </center></h2><h2 id="2-1-AngularJS是什么？"><a href="#2-1-AngularJS是什么？" class="headerlink" title="2.1 AngularJS是什么？"></a>2.1 AngularJS是什么？</h2><p>&#160; &#160; &#160; &#160;AngularJs（后面就简称ng了）是一个用于设计动态web应用的结构框架。首先，它是一个框架，不是类库，是像EXT一样提供一整套方案用于设计web应用。它不仅仅是一个<code>JavaScript</code>框架，因为它的核心其实是对HTML标签的增强。</p>
+<p>&#160; &#160; &#160; &#160;何为HTML标签增强？其实就是使你能够用标签完成一部分页面逻辑，具体方式就是通过自定义标签、自定义属性等，这些HTML原生没有的标签/属性在ng中有一个名字：指令（directive）。后面会详细介绍。那么，什么又是动态web应用呢？与传统web系统相区别，web应用能为用户提供丰富的操作，能够随用户操作不断更新视图而不进行url跳转。ng官方也声明它更适用于开发CRUD应用，即数据操作比较多的应用，而非是游戏或图像处理类应用。</p>
+<p>&#160; &#160; &#160; &#160;为了实现这些，ng引入了一些非常棒的特性，包括模板机制、数据绑定、模块、指令、依赖注入、路由。通过数据与模板的绑定，能够让我们摆脱繁琐的DOM操作，而将注意力集中在业务逻辑上。</p>
+<p>&#160; &#160; &#160; &#160;另外一个疑问，ng是MVC框架吗？还是MVVM框架？官网有提到ng的设计采用了MVC的基本思想，而又不完全是MVC，因为在书写代码时我们确实是在用ng-controller这个指令(起码从名字上看，是MVC吧)，但这个controller处理的业务基本上都是与view进行交互，这么看来又很接近MVVM。让我们把目光移到官网那个非醒目的title上：“AngularJS — Superheroic JavaScript MVW Framework”。</p>
+<h2 id="2-2-AngularJS简单介绍"><a href="#2-2-AngularJS简单介绍" class="headerlink" title="2.2 AngularJS简单介绍"></a>2.2 AngularJS简单介绍</h2><p>&#160; &#160; &#160; &#160;AngularJS 重新定义了前端应用的开发方式。面对HTML和JavaScript之间的界线，它<br>非但不畏缩不前，反而正面出击，提出了有效的解决方案。</p>
+<p>&#160; &#160; &#160; &#160;很多前端应用的开发框架，比如Backbone、EmberJS等，都要求开发者继承此框架特有的一些JavaScript对象。这种方式有其长处，但它不必要地污染了开发者自己代码的对象空间，还要求开发者去了解内存里那些抽象对象。尽管如此我们还是接受了这种方式，因为网络最初的设计无法提供 我们今天所需的交互性，于是我们需要框架，来帮我们填补JavaScript和HTML之间的鸿沟。而且有了它，你不用再“直接”操控DOM，只要给你的DOM注上metadata（即AngularJS里的directive们），然后让AngularJS来帮你操纵DOM。同时，AngularJS不依赖（也不妨碍）任何其他的框架。你甚至可以基于其它的框架来开发AngularJS应用。<br>API地址：<a href="http://docs.angularjs.org/api/；" target="_blank" rel="external">http://docs.angularjs.org/api/；</a><br>AngularJS在github上的中文粗译版地址：<a href="https://github.com/basestyle/angularjs-cn。" target="_blank" rel="external">https://github.com/basestyle/angularjs-cn。</a></p>
+<h2 id="2-3-什么时候该用AngularJS"><a href="#2-3-什么时候该用AngularJS" class="headerlink" title="2.3 什么时候该用AngularJS"></a>2.3 什么时候该用AngularJS</h2><p>&#160; &#160; &#160; &#160;AngularJS是一个 MV* 框架，最适于开发客户端的单页面应用。它不是个功能库，而是用来开发动态网页的框架。它专注于扩展HTML的功能，提供动态数据绑定（data binding），而且它能跟其它框架（如jQuery）合作融洽。</p>
+<p>&#160; &#160; &#160; &#160;如果你要开发的是单页应用，AngularJS就是你的上上之选。Gmail、Google Docs、Twitter和Facebook这样的应用，都很能发挥AngularJS的长处。但是像游戏开发之类对DOM进行大量操纵、又或者单纯需要 极高运行速度的应用，就不是AngularJS的用武之地了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      本文主要介绍了AngularJS是什么？什么时候该用AngularJS？
+    
+    </summary>
+    
+      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
+    
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
+    
+      <category term="angular介绍" scheme="http://yoursite.com/tags/angular%E4%BB%8B%E7%BB%8D/"/>
+    
+  </entry>
+  
+  <entry>
     <title>angularjs(三)</title>
     <link href="http://yoursite.com/2017/04/25/angular-3/"/>
     <id>http://yoursite.com/2017/04/25/angular-3/</id>
@@ -1612,67 +1648,6 @@
       <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
     
       <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>angularjs(二)</title>
-    <link href="http://yoursite.com/2017/04/25/angular-2/"/>
-    <id>http://yoursite.com/2017/04/25/angular-2/</id>
-    <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:29.524Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>AugularJS特性</code></center></p>
-<hr>
-<p>&#160; &#160; &#160; &#160;AngularJS是一个新出现的强大客户端技术，提供给大家的一种开发强大应用的方式。这种方式利用并且扩展HTML，CSS和javascript，并且弥补了它们的一些非常明显的不足。本应该使用HTML来实现而现在由它开发的动态一些内容。</p>
-<p>AngularJS有<code>五个</code>最重要的功能和特性：</p>
-<h2 id="特性一：双向的数据绑定"><a href="#特性一：双向的数据绑定" class="headerlink" title="特性一：双向的数据绑定"></a>特性一：双向的数据绑定</h2><p>&#160; &#160; &#160; &#160;数据绑定可能是AngularJS最酷最实用的特性。它能够帮助你避免书写大量的初始代码从而节约开发时间。一个典型的web应用可能包含了80%的代码用来处理，查询和监听DOM。数据绑定是的代码更少，你可以专注于你的应用。</p>
-<p>&#160; &#160; &#160; &#160;我们想象一下Model是你的应用中的简单事实。你的Model是你用来读取或者更新的部分。数据绑定指令提供了你的Model投射到view的方法。这些投射可以无缝的，毫不影响的应用到web应用中。</p>
-<p>&#160; &#160; &#160; &#160;传统来说，当model变化了。 开发人员需要手动处理DOM元素并且将属性反映到这些变化中。这个一个双向的过程。一方面，model变化驱动了DOM中元素变化，另一方面，DOM元素的变化也会影响到Model。这个在用户互动中更加复杂，因为开发人员需要处理和解析<br>这些互动，然后融合到一个model中，并且更新View。这是一个手动的复杂过程，当一个应用非常庞大的时候，将会是一件非常费劲的事情。</p>
-<p>这里肯定有更好的解决方案！那就是AngularJS的双向数据绑定，能够同步DOM和Model等等。<br>这里有一个非常简单的例子，用来演示一个input输入框和&lt; h1&gt;元素的双向绑定(例01)：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>angular双向数据绑定<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;content&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!-- 因为使用了双向绑定content指向的都是同一个值，所以h1的内容就是text输入框的内容 --&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">ng-model</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!-- 设置双向绑定 --&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://code.angularjs.org/angular-1.0.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="特性二：模板"><a href="#特性二：模板" class="headerlink" title="特性二：模板"></a>特性二：模板</h2><p>&#160; &#160; &#160; &#160;在AngularJS中，一个模板就是一个HTML文件。但是HTML的内容扩展了，包含了很多帮助你映射model到view的内容。</p>
-<p>&#160; &#160; &#160; &#160;HTML模板将会被浏览器解析到DOM中。DOM然后成为AngularJS编译器的输入。AngularJS将会遍历DOM模板来生成一些指导，即，directive（指令）。所有的指令都负责针对view来设置数据绑定。</p>
-<p>&#160; &#160; &#160; &#160;我们要理解AuguarJS并不把模板当做String来操作。输入AngularJS的是DOM而非string。数据绑定是DOM变化，不是字符串的连接或者innerHTML变化。使用DOM作为输入，而不是字符串，是AngularJS区别于其它的框架的最大原因。使用DOM允许你扩展指令词汇并且可以创建你自己的指令，甚至开发可重用的组件。</p>
-<p>&#160; &#160; &#160; &#160;最大的好处是为设计师和开发者创建了一个紧密的工作流。设计师可以像往常一样开发标签，然后开发者拿过来添加上功能，通过数据绑定将会使得这个过程非常简单。<br>这里有一个例子，我们使用ng-repeat指令来循环图片数组并且加入img模板，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">AlbumCtrl</span>(<span class="params">$scope</span>) </span>&#123;</div><div class="line">    scope.images = [</div><div class="line">        &#123;<span class="string">"image"</span>:<span class="string">"img/image_01.png"</span>, <span class="string">"description"</span>:<span class="string">"Image 01 description"</span>&#125;,</div><div class="line">        &#123;<span class="string">"image"</span>:<span class="string">"img/image_02.png"</span>, <span class="string">"description"</span>:<span class="string">"Image 02 description"</span>&#125;,</div><div class="line">        &#123;<span class="string">"image"</span>:<span class="string">"img/image_03.png"</span>, <span class="string">"description"</span>:<span class="string">"Image 03 description"</span>&#125;,</div><div class="line">        &#123;<span class="string">"image"</span>:<span class="string">"img/image_04.png"</span>, <span class="string">"description"</span>:<span class="string">"Image 04 description"</span>&#125;,</div><div class="line">        &#123;<span class="string">"image"</span>:<span class="string">"img/image_05.png"</span>, <span class="string">"description"</span>:<span class="string">"Image 05 description"</span>&#125;</div><div class="line">    ];</div><div class="line">&#125;</div><div class="line">&lt;div ng-controller=<span class="string">"AlbumCtrl"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"image in images"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">ng-src</span>=<span class="string">"http://wangyuxuan.win/&#123;&#123;image.thumbnail&#125;&#125;"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;这里还有一件事值得提一句，AngularJS并不强制你学习一个新的语法或者从你的应用中提出你的模板。</p>
-<h2 id="特性三：MVC"><a href="#特性三：MVC" class="headerlink" title="特性三：MVC"></a>特性三：MVC</h2><p>&#160; &#160; &#160; &#160;针对客户端应用开发AngularJS吸收了传统的MVC基本原则。MVC或者Model-View-Controll设计模式针对不同的人可能意味不同的东西。AngularJS并不执行传统意义上的MVC，更接近于MVVM（Moodel-View-ViewModel)。</p>
-<p><code>Model</code></p>
-<p>&#160; &#160; &#160; &#160;model是应用中的简单数据。一般是简单的javascript对象。这里没有必要继承框架的classes，使用proxy对象封装或者使用特别的setter/getter方法来访问。事实上我们处理vanilla javascript的方法就是一个非常好的特性，这种方法使得我们更少使用应用的原型。</p>
-<p><code>ViewModel</code></p>
-<p>&#160; &#160; &#160; &#160;viewmodel是一个用来提供特别数据和方法从而维护指定view的对象。<br>viewmodel是$scope的对象，只存在于AnguarJS的应用中。$scope只是一个简单的js对象，这个对象使用简单的API来侦测和广播状态变化。</p>
-<p><code>Controller</code></p>
-<p>&#160; &#160; &#160; &#160;controller负责设置初始状态和参数化$scope方法用以控制行为。需要指出的controller并不保存状态也不和远程服务互动。</p>
-<p><code>View</code></p>
-<p>&#160; &#160; &#160; &#160;view是AngularJS解析后渲染和绑定后生成的HTML 。这个部分帮助你创建web应用的架构。$scope拥有一个针对数据的参考，controller定义行为，view处理布局和互动。</p>
-<h2 id="特性四：服务和依赖注入"><a href="#特性四：服务和依赖注入" class="headerlink" title="特性四：服务和依赖注入"></a>特性四：服务和依赖注入</h2><p>&#160; &#160; &#160; &#160;AngularJS服务其作用就是对外提供某个特定的功能。</p>
-<p>&#160; &#160; &#160; &#160;AngularJS拥有内建的依赖注入（DI）子系统，可以帮助开发人员更容易的开发，理解和测试应用。</p>
-<p>&#160; &#160; &#160; &#160;DI允许你请求你的依赖，而不是自己找寻它们。比如，我们需要一个东西，DI负责找创建并且提供给我们。</p>
-<p>&#160; &#160; &#160; &#160;为了而得到核心的AngularJS服务，只需要添加一个简单服务作为参数，AngularJS会侦测并且提供给你：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">EditCtrl</span>(<span class="params">$scope, $location, $routeParams</span>) </span>&#123;</div><div class="line">     <span class="comment">// Something clever here...</span></div><div class="line">&#125;</div><div class="line">你也可以定义自己的服务并且让它们注入：</div><div class="line">angular.module(<span class="string">'MyServiceModule'</span>, []).</div><div class="line">    factory(<span class="string">'notify'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">win</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">        win.alert(msg);</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myController</span>(<span class="params">scope, notifyService</span>) </span>&#123;</div><div class="line">    scope.callNotify = <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">        notifyService(msg);</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">myController.$inject = [<span class="string">'$scope'</span>, <span class="string">'notify'</span>];</div></pre></td></tr></table></figure></p>
-<h2 id="特性五：指令（Directives）"><a href="#特性五：指令（Directives）" class="headerlink" title="特性五：指令（Directives）"></a>特性五：指令（Directives）</h2><p>&#160; &#160; &#160; &#160;指令是我个人最喜欢的特性。你是不是也希望浏览器可以做点儿有意思的事情？那么AngularJS可以做到。</p>
-<p>&#160; &#160; &#160; &#160;指令可以用来创建自定义的标签。它们可以用来装饰元素或者操作DOM属性。可以作为标签、属性、注释和类名使用。</p>
-<p>这里是一个例子，它监听一个事件并且针对的更新它的$scope ，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">myModule.directive(<span class="string">'myComponent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">mySharedService</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">restrict</span>: <span class="string">'E'</span>,</div><div class="line">        <span class="attr">controller</span>: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $attrs, mySharedService</span>) </span>&#123;</div><div class="line">            $scope.$on(<span class="string">'handleBroadcast'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                $scope.message = <span class="string">'Directive: '</span> + mySharedService.message;</div><div class="line">            &#125;);</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">replace</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">template</span>: <span class="string">'&lt;input&gt;'</span></div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>然后，你可以使用这个自定义的directive来使用：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;my-component ng-model=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
-<p>使用一系列的组件来创建你自己的应用将会让你更方便的添加，删除和更新功能。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结:"></a>小结:</h2><p>个人推荐一个学习angular.js的网站<a href="http://www.apjs.net/" target="_blank" rel="external">http://www.apjs.net/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要介绍了AngularJS的几种特性
-    
-    </summary>
-    
-      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
-    
-    
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
-      <category term="AngularJS特性" scheme="http://yoursite.com/tags/AngularJS%E7%89%B9%E6%80%A7/"/>
     
   </entry>
   
