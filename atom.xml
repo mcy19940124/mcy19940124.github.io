@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-20T02:56:59.441Z</updated>
+  <updated>2017-11-06T07:00:48.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,123 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Airbnb JavaScript风格指南（）</title>
+    <link href="http://yoursite.com/2017/11/06/javascript%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/"/>
+    <id>http://yoursite.com/2017/11/06/javascript风格指南/</id>
+    <published>2017-11-06T02:11:26.000Z</published>
+    <updated>2017-11-06T07:00:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a><code>正文部分</code></h1><center style="font-size: 30px; font-weight:700; color:blue;"><code>JavaScript风格指南</code></center>
+
+<hr>
+<p>一种最合理的JavaScript方法</p>
+<p>其他风格指南</p>
+<ul>
+<li>ES5</li>
+<li>React</li>
+<li>CSS和Sass</li>
+<li>Ruby</li>
+</ul>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>1.1.1 基本数据类型：当你访问一个基本数据类型时，你直接使用它的值。</p>
+<ul>
+<li>string</li>
+</ul>
+<ul>
+<li>number</li>
+</ul>
+<ul>
+<li>boolean</li>
+</ul>
+<ul>
+<li>null</li>
+</ul>
+<ul>
+<li>undefined</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> foo = <span class="number">1</span>;</div><div class="line"><span class="keyword">let</span> bar = foo;</div><div class="line"></div><div class="line">bar = <span class="number">9</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(foo, bar); <span class="comment">// =&gt; 1, 9</span></div></pre></td></tr></table></figure>
+<p>1.1.2 复杂：当你访问一个复杂的类型时，你需要引用它的值。</p>
+<ul>
+<li>object</li>
+<li>array</li>
+<li>function</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> foo = [<span class="number">1</span>, <span class="number">2</span>];</div><div class="line"><span class="keyword">const</span> bar = foo;</div><div class="line"></div><div class="line">bar[<span class="number">0</span>] = <span class="number">9</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(foo[<span class="number">0</span>], bar[<span class="number">0</span>]); <span class="comment">// =&gt; 9, 9</span></div></pre></td></tr></table></figure>
+<p><a href="#正文部分">⬆回到顶部</a></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li>1.2.1使用<code>const</code>您的所有引用的; 避免使用<code>var</code>。<em>eslint</em>： prefer-const，no-const-assign<br>为什么？这可以确保您不能重新分配您的引用，这可能会导致错误和难以理解的代码。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.2.2如果您必须重新分配引用，请使用<code>let</code>而不是<code>var</code>。<em>eslint</em>：no-varjscs：disallowVar<br>为什么？<code>let</code>是块范围的而不是函数范围的<code>var</code>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">  count += <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.2.3注意，两个let和const是块作用域。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// const and let only exist in the blocks they are defined in.</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</div><div class="line">  <span class="keyword">const</span> b = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">// ReferenceError</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">// ReferenceError</span></div></pre></td></tr></table></figure>
+<p><a href="#正文部分">⬆回到顶部</a></p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><ul>
+<li>1.3.1使用文字语法创建对象。<em>eslint</em>：no-new-object</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> item = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> item = &#123;&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.2如果您的代码将在脚本上下文中的浏览器中执行，请不要使用保留字作为键。它不会在IE8中工作。更多信息。在ES6模块和服务器端代码中使用它们是可以的。<em>JSCS</em>：disallowIdentifierNames</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> superman = &#123;</div><div class="line">  <span class="attr">default</span>: &#123; <span class="attr">clark</span>: <span class="string">'kent'</span> &#125;,</div><div class="line">  <span class="attr">private</span>: <span class="literal">true</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> superman = &#123;</div><div class="line">  <span class="attr">defaults</span>: &#123; <span class="attr">clark</span>: <span class="string">'kent'</span> &#125;,</div><div class="line">  <span class="attr">hidden</span>: <span class="literal">true</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.3使用可读的同义词代替保留字。<em>JSCS</em>：disallowIdentifierNames</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> superman = &#123;</div><div class="line">  <span class="attr">class</span>: <span class="string">'alien'</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> superman = &#123;</div><div class="line">  <span class="attr">klass</span>: <span class="string">'alien'</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> superman = &#123;</div><div class="line">  <span class="attr">type</span>: <span class="string">'alien'</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.4使用动态属性名称创建对象时使用计算的属性名称。<br>为什么？它们允许你在一个地方定义一个对象的所有属性。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getKey</span>(<span class="params">k</span>) </span>&#123; <span class="keyword">return</span> a key named $&#123;k&#125;; &#125;</div><div class="line"></div><div class="line"><span class="comment">// bad </span></div><div class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">id</span>: <span class="number">5</span>, <span class="attr">name</span>: <span class="string">'San Francisco'</span>&#125;; </div><div class="line">obj[getKey(<span class="string">'enabled'</span>)] = <span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"> <span class="keyword">const</span> obj = &#123; <span class="attr">id</span>: <span class="number">5</span>, <span class="attr">name</span>: <span class="string">'San Francisco'</span>, [getKey(<span class="string">'enabled'</span>)]: <span class="literal">true</span>&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.5使用对象方法速记。<em>eslint</em>：object-shorthandjscs：requireEnhancedObjectLiterals</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> atom = &#123;</div><div class="line">  <span class="attr">value</span>: <span class="number">1</span>,</div><div class="line"></div><div class="line">  <span class="attr">addValue</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> atom.value + value;</div><div class="line">  &#125;,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> atom = &#123;</div><div class="line">  <span class="attr">value</span>: <span class="number">1</span>,</div><div class="line"></div><div class="line">  addValue(value) &#123;</div><div class="line">    <span class="keyword">return</span> atom.value + value;</div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.6使用属性值速记。<em>eslint</em>：object-shorthandjscs：requireEnhancedObjectLiterals<br>为什么？写和描述性较短。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> lukeSkywalker = <span class="string">'Luke Skywalker'</span>;</div><div class="line"></div><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> obj = &#123;</div><div class="line">  <span class="attr">lukeSkywalker</span>: lukeSkywalker,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> obj = &#123;</div><div class="line">  lukeSkywalker,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.7 在你的对象声明的开头分组你的速记属性。<br>为什么？判断哪些属性使用简写更容易。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> anakinSkywalker = <span class="string">'Anakin Skywalker'</span>;</div><div class="line"><span class="keyword">const</span> lukeSkywalker = <span class="string">'Luke Skywalker'</span>;</div><div class="line"></div><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> obj = &#123;</div><div class="line">  <span class="attr">episodeOne</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">twoJediWalkIntoACantina</span>: <span class="number">2</span>,</div><div class="line">  lukeSkywalker,</div><div class="line">  <span class="attr">episodeThree</span>: <span class="number">3</span>,</div><div class="line">  <span class="attr">mayTheFourth</span>: <span class="number">4</span>,</div><div class="line">  anakinSkywalker,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> obj = &#123;</div><div class="line">  lukeSkywalker,</div><div class="line">  anakinSkywalker,</div><div class="line">  <span class="attr">episodeOne</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">twoJediWalkIntoACantina</span>: <span class="number">2</span>,</div><div class="line">  <span class="attr">episodeThree</span>: <span class="number">3</span>,</div><div class="line">  <span class="attr">mayTheFourth</span>: <span class="number">4</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.8 只引用无效标识符的属性。<em>eslint</em>：quote-propsjscs：disallowQuotedKeysInObjects<br>为什么？一般来说，我们认为它在主观上更容易阅读。它提高了语法高亮度，并且也被许多JS引擎更容易地优化。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="keyword">const</span> bad = &#123;</div><div class="line"><span class="string">'foo'</span>: <span class="number">3</span>,</div><div class="line"><span class="string">'bar'</span>: <span class="number">4</span>,</div><div class="line"><span class="string">'data-blah'</span>: <span class="number">5</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="keyword">const</span> good = &#123;</div><div class="line"><span class="attr">foo</span>: <span class="number">3</span>,</div><div class="line"><span class="attr">bar</span>: <span class="number">4</span>,</div><div class="line"><span class="string">'data-blah'</span>: <span class="number">5</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>1.3.9不要叫<code>Object.prototype</code>直接的方法，如<code>hasOwnProperty</code>，<code>propertyIsEnumerable</code>和<code>isPrototypeOf</code>。</li>
+</ul>
+<p>为什么？这些方法可能被所讨论的对象的属性所遮蔽 - 考虑<code>{ hasOwnProperty: false }</code>- 或者，对象可能是一个空对象<code>（Object.create(null)）</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line"><span class="built_in">console</span>.log(object.hasOwnProperty(key));</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.hasOwnProperty.call(object, key));</div><div class="line"></div><div class="line"><span class="comment">// best</span></div><div class="line"><span class="keyword">const</span> has = <span class="built_in">Object</span>.prototype.hasOwnProperty; <span class="comment">// cache the lookup once, in module scope.</span></div><div class="line"><span class="comment">/* or */</span></div><div class="line"><span class="keyword">const</span> has = <span class="built_in">require</span>(<span class="string">'has'</span>);</div><div class="line">…</div><div class="line"><span class="built_in">console</span>.log(has.call(object, key));</div></pre></td></tr></table></figure>
+<p><a href="#正文部分">⬆回到顶部</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      一种最合理的JavaScript方法
+    
+    </summary>
+    
+      <category term="ES6" scheme="http://yoursite.com/categories/ES6/"/>
+    
+    
+      <category term="javaScript指南" scheme="http://yoursite.com/tags/javaScript%E6%8C%87%E5%8D%97/"/>
+    
+      <category term="ES6语法" scheme="http://yoursite.com/tags/ES6%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>webpack：从入门到真实项目配置</title>
     <link href="http://yoursite.com/2017/09/20/webpack%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%9C%9F%E5%AE%9E%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/"/>
     <id>http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/</id>
     <published>2017-09-20T15:42:26.000Z</published>
-    <updated>2017-09-20T02:56:59.441Z</updated>
+    <updated>2017-09-20T02:57:00.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a><code>正文部分</code></h1><left style="font-size: 30px; font-weight:700"><code>webpack：从入门到真实项目配置</code></left>
@@ -306,7 +418,7 @@
     <link href="http://yoursite.com/2017/09/11/js%20%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     <id>http://yoursite.com/2017/09/11/js 的正则表达式/</id>
     <published>2017-09-11T02:17:02.000Z</published>
-    <updated>2017-09-11T03:55:16.805Z</updated>
+    <updated>2017-09-11T03:55:18.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><center style="font-size: 30px"><code>js 的正则表达式</code></center>
@@ -425,7 +537,7 @@
     <link href="http://yoursite.com/2017/09/07/%E5%89%96%E6%9E%90Vue%E5%8E%9F%E7%90%86&amp;%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9AMVVM/"/>
     <id>http://yoursite.com/2017/09/07/剖析Vue原理&amp;实现双向绑定MVVM/</id>
     <published>2017-09-07T06:36:02.000Z</published>
-    <updated>2017-09-07T08:55:06.562Z</updated>
+    <updated>2017-09-07T08:55:08.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><center style="font-size: 30px"><code>剖析Vue原理&amp;实现双向绑定MVVM</code></center>
@@ -519,7 +631,7 @@
     <link href="http://yoursite.com/2017/09/07/%E5%85%B3%E4%BA%8Eeslint%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99%EF%BC%8C%E5%92%8C%E5%90%84%E7%A7%8D%E6%8A%A5%E9%94%99%E5%AF%B9%E5%BA%94%E8%A7%84%E5%88%99/"/>
     <id>http://yoursite.com/2017/09/07/关于eslint使用规则，和各种报错对应规则/</id>
     <published>2017-09-07T02:03:02.000Z</published>
-    <updated>2017-09-07T02:41:49.311Z</updated>
+    <updated>2017-09-07T02:41:50.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>关于eslint使用规则，和各种报错对应规则</code></center></p>
@@ -606,7 +718,7 @@
     <link href="http://yoursite.com/2017/06/25/vue%E5%85%A5%E9%97%A8%E4%B9%8B%E8%B7%AF%E7%94%B1/"/>
     <id>http://yoursite.com/2017/06/25/vue入门之路由/</id>
     <published>2017-06-25T05:17:02.000Z</published>
-    <updated>2017-06-25T09:06:12.847Z</updated>
+    <updated>2017-06-25T09:06:14.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之路由详解</code></center></p>
@@ -693,7 +805,7 @@
     <link href="http://yoursite.com/2017/06/25/vue%E5%85%A5%E9%97%A8%E4%B9%8Bvuex%E5%AE%9E%E6%88%98/"/>
     <id>http://yoursite.com/2017/06/25/vue入门之vuex实战/</id>
     <published>2017-06-25T05:17:02.000Z</published>
-    <updated>2017-06-26T12:20:10.802Z</updated>
+    <updated>2017-06-26T12:20:12.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之Vuex实战</code></center></p>
@@ -773,7 +885,7 @@
     <link href="http://yoursite.com/2017/06/25/Vue%E4%B9%8B%E5%85%A5%E9%97%A8%E7%BB%BC%E5%90%88%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
     <id>http://yoursite.com/2017/06/25/Vue之入门综合项目实战/</id>
     <published>2017-06-25T05:17:02.000Z</published>
-    <updated>2017-06-25T09:19:34.489Z</updated>
+    <updated>2017-06-25T09:19:36.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue综合实战项目</code></center></p>
@@ -927,7 +1039,7 @@
     <link href="http://yoursite.com/2017/06/24/vue%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/"/>
     <id>http://yoursite.com/2017/06/24/vue入门之列表渲染/</id>
     <published>2017-06-24T05:17:02.000Z</published>
-    <updated>2017-06-24T02:47:13.967Z</updated>
+    <updated>2017-06-24T02:47:14.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue列表渲染及条件渲染实战</code></center></p>
@@ -977,7 +1089,7 @@
     <link href="http://yoursite.com/2017/06/23/Vue%E5%85%A5%E9%97%A8%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%A4%84%E7%90%86/"/>
     <id>http://yoursite.com/2017/06/23/Vue入门之事件绑定处理/</id>
     <published>2017-06-23T05:17:02.000Z</published>
-    <updated>2017-09-06T08:20:35.137Z</updated>
+    <updated>2017-09-06T08:20:36.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之事件处理</code></center></p>
@@ -1040,7 +1152,7 @@
     <link href="http://yoursite.com/2017/06/23/vue%E5%85%A5%E9%97%A8%E4%B9%8BVue%E5%AE%9E%E4%BE%8B%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     <id>http://yoursite.com/2017/06/23/vue入门之Vue实例与生命周期/</id>
     <published>2017-06-23T05:17:02.000Z</published>
-    <updated>2017-06-24T02:46:56.818Z</updated>
+    <updated>2017-06-24T02:46:58.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue实例详解与生命周期</code></center></p>
@@ -1267,7 +1379,7 @@
     <link href="http://yoursite.com/2017/06/23/vue%E5%85%A5%E9%97%A8%E7%AE%80%E4%BB%8B/"/>
     <id>http://yoursite.com/2017/06/23/vue入门简介/</id>
     <published>2017-06-23T05:17:02.000Z</published>
-    <updated>2017-06-24T02:46:50.281Z</updated>
+    <updated>2017-06-24T02:46:52.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue简介及入门</code></center></p>
@@ -1314,7 +1426,7 @@
     <link href="http://yoursite.com/2017/06/23/vue%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/"/>
     <id>http://yoursite.com/2017/06/23/vue数据绑定/</id>
     <published>2017-06-23T05:17:02.000Z</published>
-    <updated>2017-06-23T11:44:29.134Z</updated>
+    <updated>2017-06-23T11:44:30.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue数据绑定</code></center></p>
@@ -1397,7 +1509,7 @@
     <link href="http://yoursite.com/2017/06/23/Vue%E5%85%A5%E9%97%A8%E4%B9%8B%E7%BB%84%E4%BB%B6%E5%8C%96/"/>
     <id>http://yoursite.com/2017/06/23/Vue入门之组件化/</id>
     <published>2017-06-23T05:17:02.000Z</published>
-    <updated>2017-06-24T06:21:13.042Z</updated>
+    <updated>2017-06-24T06:21:14.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue入门之组件化开发</code></center></p>
@@ -1455,7 +1567,7 @@
     <link href="http://yoursite.com/2017/06/03/css3/"/>
     <id>http://yoursite.com/2017/06/03/css3/</id>
     <published>2017-06-03T05:34:02.000Z</published>
-    <updated>2017-06-03T05:36:14.289Z</updated>
+    <updated>2017-06-03T05:36:16.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px">CSS3</center></p>
@@ -1495,7 +1607,7 @@
     <link href="http://yoursite.com/2017/04/26/%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7gulp%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/"/>
     <id>http://yoursite.com/2017/04/26/前端构建工具gulp入门教程/</id>
     <published>2017-04-26T15:42:26.000Z</published>
-    <updated>2017-09-07T02:00:51.438Z</updated>
+    <updated>2017-09-07T02:00:52.000Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a><code>正文部分</code></h1><h2 id="第一步：安装Node"><a href="#第一步：安装Node" class="headerlink" title="第一步：安装Node"></a>第一步：安装Node</h2><p>&#160; &#160; &#160; &#160;首先，最基本也最重要的是，我们需要搭建<code>node</code>环境。访问 <a href="http://nodejs.org" target="_blank" rel="external">http://nodejs.org</a> ，然后点击大大的绿色的 <code>install</code> 按钮，下载完成后直接运行程序，就一切准备就绪。 npm 会随着安装包一起安装，稍后会用到它</p>
@@ -1562,49 +1674,11 @@
   </entry>
   
   <entry>
-    <title>angularjs(一)</title>
-    <link href="http://yoursite.com/2017/04/25/angular-1/"/>
-    <id>http://yoursite.com/2017/04/25/angular-1/</id>
-    <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:33.125Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言 "></a><center style="font-size: 30px">1.前言 </center></h2><p>&#160; &#160; &#160; &#160;前端技术的发展是如此之快，各种优秀技术、优秀框架的出现简直让人目不暇接，紧跟时代潮流，学习掌握新知识自然是不敢怠慢。</p>
-<p>&#160; &#160; &#160; &#160;<code>AngularJS</code>是google在维护，其在国外已经十分火热，可是国内的使用情况却有不小的差距，参考文献/网络文章也很匮乏。这里便将我学习AngularJS写成文档，一方面作为自己学习路程上的记录，另一方面也给有兴趣的同学一些参考。</p>
-<p>&#160; &#160; &#160; &#160;首先我自己也是一名学习者，会以学习者的角度来整理我的行文思路，这里可能只是些探索，有理解或是技术上的错误还请大家指出；其次我特别喜欢编写小例子来把一件事情说明白，故在文中会尽可能多的用示例加代码讲解，我相信这会是一种比较好的方式；最后，我深知AngularJS的使用方式跟<code>jQuery</code>的使用方式有很大不同，在大家都有jquery、ext经验的条件下对于angular的学习会困难重重，不过我更相信在大家的坚持下，能够快速的学好AngularJS，至少咱也能深入了解到AngularJS的基本思想，对咱们以后自己的插件开发、项目开发都会有很大的启示。</p>
-<h2 id="2-AngularJS概述"><a href="#2-AngularJS概述" class="headerlink" title="2 AngularJS概述 "></a><center style="font-size: 30px">2 AngularJS概述 </center></h2><h2 id="2-1-AngularJS是什么？"><a href="#2-1-AngularJS是什么？" class="headerlink" title="2.1 AngularJS是什么？"></a>2.1 AngularJS是什么？</h2><p>&#160; &#160; &#160; &#160;AngularJs（后面就简称ng了）是一个用于设计动态web应用的结构框架。首先，它是一个框架，不是类库，是像EXT一样提供一整套方案用于设计web应用。它不仅仅是一个<code>JavaScript</code>框架，因为它的核心其实是对HTML标签的增强。</p>
-<p>&#160; &#160; &#160; &#160;何为HTML标签增强？其实就是使你能够用标签完成一部分页面逻辑，具体方式就是通过自定义标签、自定义属性等，这些HTML原生没有的标签/属性在ng中有一个名字：指令（directive）。后面会详细介绍。那么，什么又是动态web应用呢？与传统web系统相区别，web应用能为用户提供丰富的操作，能够随用户操作不断更新视图而不进行url跳转。ng官方也声明它更适用于开发CRUD应用，即数据操作比较多的应用，而非是游戏或图像处理类应用。</p>
-<p>&#160; &#160; &#160; &#160;为了实现这些，ng引入了一些非常棒的特性，包括模板机制、数据绑定、模块、指令、依赖注入、路由。通过数据与模板的绑定，能够让我们摆脱繁琐的DOM操作，而将注意力集中在业务逻辑上。</p>
-<p>&#160; &#160; &#160; &#160;另外一个疑问，ng是MVC框架吗？还是MVVM框架？官网有提到ng的设计采用了MVC的基本思想，而又不完全是MVC，因为在书写代码时我们确实是在用ng-controller这个指令(起码从名字上看，是MVC吧)，但这个controller处理的业务基本上都是与view进行交互，这么看来又很接近MVVM。让我们把目光移到官网那个非醒目的title上：“AngularJS — Superheroic JavaScript MVW Framework”。</p>
-<h2 id="2-2-AngularJS简单介绍"><a href="#2-2-AngularJS简单介绍" class="headerlink" title="2.2 AngularJS简单介绍"></a>2.2 AngularJS简单介绍</h2><p>&#160; &#160; &#160; &#160;AngularJS 重新定义了前端应用的开发方式。面对HTML和JavaScript之间的界线，它<br>非但不畏缩不前，反而正面出击，提出了有效的解决方案。</p>
-<p>&#160; &#160; &#160; &#160;很多前端应用的开发框架，比如Backbone、EmberJS等，都要求开发者继承此框架特有的一些JavaScript对象。这种方式有其长处，但它不必要地污染了开发者自己代码的对象空间，还要求开发者去了解内存里那些抽象对象。尽管如此我们还是接受了这种方式，因为网络最初的设计无法提供 我们今天所需的交互性，于是我们需要框架，来帮我们填补JavaScript和HTML之间的鸿沟。而且有了它，你不用再“直接”操控DOM，只要给你的DOM注上metadata（即AngularJS里的directive们），然后让AngularJS来帮你操纵DOM。同时，AngularJS不依赖（也不妨碍）任何其他的框架。你甚至可以基于其它的框架来开发AngularJS应用。<br>API地址：<a href="http://docs.angularjs.org/api/；" target="_blank" rel="external">http://docs.angularjs.org/api/；</a><br>AngularJS在github上的中文粗译版地址：<a href="https://github.com/basestyle/angularjs-cn。" target="_blank" rel="external">https://github.com/basestyle/angularjs-cn。</a></p>
-<h2 id="2-3-什么时候该用AngularJS"><a href="#2-3-什么时候该用AngularJS" class="headerlink" title="2.3 什么时候该用AngularJS"></a>2.3 什么时候该用AngularJS</h2><p>&#160; &#160; &#160; &#160;AngularJS是一个 MV* 框架，最适于开发客户端的单页面应用。它不是个功能库，而是用来开发动态网页的框架。它专注于扩展HTML的功能，提供动态数据绑定（data binding），而且它能跟其它框架（如jQuery）合作融洽。</p>
-<p>&#160; &#160; &#160; &#160;如果你要开发的是单页应用，AngularJS就是你的上上之选。Gmail、Google Docs、Twitter和Facebook这样的应用，都很能发挥AngularJS的长处。但是像游戏开发之类对DOM进行大量操纵、又或者单纯需要 极高运行速度的应用，就不是AngularJS的用武之地了。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要介绍了AngularJS是什么？什么时候该用AngularJS？
-    
-    </summary>
-    
-      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
-    
-    
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
-      <category term="angular介绍" scheme="http://yoursite.com/tags/angular%E4%BB%8B%E7%BB%8D/"/>
-    
-  </entry>
-  
-  <entry>
     <title>angularjs(三)</title>
     <link href="http://yoursite.com/2017/04/25/angular-3/"/>
     <id>http://yoursite.com/2017/04/25/angular-3/</id>
     <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:26.117Z</updated>
+    <updated>2017-05-14T14:15:28.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>功能介绍</code></center></p>
 <hr>
@@ -1656,7 +1730,7 @@
     <link href="http://yoursite.com/2017/04/25/angular-4/"/>
     <id>http://yoursite.com/2017/04/25/angular-4/</id>
     <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:22.852Z</updated>
+    <updated>2017-05-14T14:15:24.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>过滤器</code></center></p>
 <hr>
@@ -1724,11 +1798,72 @@
   </entry>
   
   <entry>
+    <title>angular(六)</title>
+    <link href="http://yoursite.com/2017/04/25/angular_6/"/>
+    <id>http://yoursite.com/2017/04/25/angular_6/</id>
+    <published>2017-04-25T05:17:02.000Z</published>
+    <updated>2017-05-14T14:15:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>服务</code></center></p>
+<hr>
+<h2 id="服务（service）"><a href="#服务（service）" class="headerlink" title="服务（service）"></a>服务（service）</h2><h3 id="服务介绍"><a href="#服务介绍" class="headerlink" title="服务介绍"></a>服务介绍</h3><p>&#160; &#160; &#160; &#160;服务这个概念其实并不陌生，在其他语言中如Java便有这样的概念，其作用就是对外提供某个特定的功能，如消息服务，文件压缩服务等，是一个独立的模块。ng的服务是这样定义的：</p>
+<ul>
+<li>Angular services are singletons objects or functions that carry out specific tasks common to web apps.</li>
+</ul>
+<p>它是一个单例对象或函数，对外提供特定的功能。<br>首先是一个单例，即无论这个服务被注入到任何地方，对象始终只有一个实例。<br>其次这与我们自己定义一个function然后在其他地方调用不同，因为服务被定义在一个模块中，所以其使用范围是可以被我们管理的。ng的避免全局变量污染意识非常强。</p>
+<p>&#160; &#160; &#160; &#160;ng提供了很多内置的服务，可以到API中查看[<a href="http://docs.angularjs.org/api/。" target="_blank" rel="external">http://docs.angularjs.org/api/。</a>]<br>知道了概念，我们来拉一个service出来溜溜，看看到底是个什么用法。　<br>　<br>&#160; &#160; &#160; &#160;我们在controller中直接声明$location服务，这依靠ng的依赖注入机制。$location提供地址栏相关的服务，我们在此只是简单的获取当前的地址。</p>
+<p>&#160; &#160; &#160; &#160;服务的使用是如此简单，我们可以把服务注入到controller、指令或者是其他服务中。</p>
+<h3 id="自定义服务"><a href="#自定义服务" class="headerlink" title="自定义服务"></a>自定义服务</h3><p>&#160; &#160; &#160; &#160;如同指令一样，系统内置的服务以$开头，我们也可以自己定义一个服务。定义服务的方式有如下几种：</p>
+<ul>
+<li>使用系统内置的$provide服务；</li>
+<li>使用Module的factory方法；</li>
+<li>使用Module的service方法。</li>
+</ul>
+<p>&#160; &#160; &#160; &#160;下面通过一个小例子来分别试验一下。我们定义一个名为remoteData服务，它可以从远程获取数据，这也是我们在程序中经常使用的功能。不过我这里没有远程服务器，就写死一点数据模拟一下。<br>//使用$provide来定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用$provide来定义</span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.factory(<span class="string">'remoteData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用factory方法</span></div><div class="line">app.factory(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">    <span class="keyword">return</span> data;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用service方法</span></div><div class="line">app.service(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'n'</span>;</div><div class="line">    <span class="keyword">this</span>.value = <span class="string">'v'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;Module的factory和$provide的factory方法是一模一样的，从官网文档看它们其实就是一回事。至于Module内部是如何调用的，我此处并不打算深究，我只要知道怎么用就好了。</p>
+<p>&#160; &#160; &#160; &#160;再看Module的service方法，它没有return任何东西，是因为service方法本身返回一个构造器，系统会自动使用new关键字来创建出一个对象。所以我们看到在构造器函数内可以使用this，这样调用该服务的地方便可以直接通过remoteData.name来访问数据了。</p>
+<h3 id="管理服务的依赖关系"><a href="#管理服务的依赖关系" class="headerlink" title="管理服务的依赖关系"></a>管理服务的依赖关系</h3><p>&#160; &#160; &#160; &#160;服务与服务中间可以有依赖关系，例如我们这里定义一个名为validate的服务，它的作用是验证数据是否合法，它需要依赖我们从远程获取数据的服务remoteData。代码如下：</p>
+<p> &#160; &#160; &#160; &#160;在factory的参数中，我们可以直接传入服务remoteData，ng的依赖注入机制便帮我们做好了其他工作。不过一定要保证这个参数的名称与服务名称一致，ng是根据名称来识别的。若参数的名次与服务名称不一致，你就必须显示的声明一下，方式如下：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> app.factory(<span class="string">'validate'</span>,[<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">remoteDataService</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(remoteDataService.name==<span class="string">'n'</span>)&#123;</div><div class="line">            alert(<span class="string">'验证通过'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>  &#160; &#160; &#160; &#160;我们在controller中注入服务也是同样的道理，使用的名称需要与服务名称一致才可以正确注入。否则，你必须使用$inject来手动指定注入的服务。比如：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">testC</span>(<span class="params">scope,rd</span>)</span>&#123;</div><div class="line">    scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">testC.$inject = [<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>];</div></pre></td></tr></table></figure>
+<p>   &#160; &#160; &#160; &#160;在controller中注入服务，也可以在定义controller时使用数组作为第二个参数，在此处<br>把服务注入进去，这样在函数体中使用不一致的服务名称也是可以的，不过要确保注入的顺序是一致的，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'testC'</span>,[<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,rd</span>)</span>&#123;</div><div class="line">    $scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<h3 id="自定义服务示例"><a href="#自定义服务示例" class="headerlink" title="自定义服务示例"></a>自定义服务示例</h3><p>&#160; &#160; &#160; &#160;接下来让我们看下例子（例08 自定义服务）代码，自定义userService服务：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.factory(<span class="string">'userService'</span>, [<span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> doGetUser = <span class="function"><span class="keyword">function</span>(<span class="params">userId, path</span>) </span>&#123;</div><div class="line"><span class="comment">//return $http(&#123;</span></div><div class="line"><span class="comment">//method: 'JSONP',</span></div><div class="line"><span class="comment">//url: path</span></div><div class="line"><span class="comment">//&#125;);</span></div><div class="line"><span class="comment">/*手动指定数据*/</span></div><div class="line"><span class="keyword">var</span> data = &#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！"</span>&#125;;;</div><div class="line"><span class="keyword">if</span>(userId==<span class="string">'zhangsan'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己"</span>&#125;;</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(userId==<span class="string">'lisi'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> &#123;</div><div class="line"><span class="comment">/*userService对外暴露的函数，可有多个*/</span></div><div class="line">getUser: <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>) </span>&#123; </div><div class="line"><span class="keyword">return</span> doGetUser(userId, <span class="string">'../xxx/xxx.action'</span>); </div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;我们创建了一个只有一个方法的userService，getUser为这个服务从后台获取用户信息的函数，并且对外暴露。当然，由于这是一个静态的例子，无法访问后台，那么我们便制定其返回的数据。</p>
+<p>&#160; &#160; &#160; &#160;然后我们把这个服务添加到我们的controller中。我们建立一个controller并加载（或者注入）userService作为运行时依赖，我们把service的名字作为参数传递给controller 函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"test8Controller"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope,userService</span>)</span>&#123;</div><div class="line"><span class="comment">/*文章信息*/</span></div><div class="line">$scope.articles = [&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"爱飞像风"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"zhangsan"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"张三"</span></div><div class="line">&#125;,&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"无法停止的雨"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"lisi"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"李四"</span></div><div class="line">&#125;];</div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;<span class="comment">//显示作者详细信息开关</span></div><div class="line">$scope.currentUser = &#123;&#125;; <span class="comment">//当前选中的作者</span></div><div class="line">$scope.getUserInfo = <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>)</span>&#123;</div><div class="line">$scope.currentUser = userService.getUser(userId);</div><div class="line"><span class="comment">//调用 userService的getUser函数</span></div><div class="line">$scope.showUserInfo = <span class="literal">true</span>;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//定时器：隐藏作者详细信息</span></div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;我们的userService注入到我们的test8Controller后，我们就可以像使用其他服务（我们前面提到的$http服务）一样的使用userService了。</p>
+<p>相关的HTML代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/* View HTML*/</div><div class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"article_ in articles"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">&#123;&#123;article_.title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-show</span>=<span class="string">"showUserInfo"</span>&gt;</span></div><div class="line">用户ID：&#123;&#123;currentUser.userId&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户名：&#123;&#123;currentUser.userName&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户简介：&#123;&#123;currentUser.userInfo&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      本文主要介绍了angular中的服务
+    
+    </summary>
+    
+      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
+    
+    
+      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
+    
+      <category term="angular服务" scheme="http://yoursite.com/tags/angular%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
     <title>angularjs(五)</title>
     <link href="http://yoursite.com/2017/04/25/angular-5/"/>
     <id>http://yoursite.com/2017/04/25/angular-5/</id>
     <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:19.600Z</updated>
+    <updated>2017-05-14T14:15:20.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>过滤器</code></center></p>
 <hr>
@@ -1825,67 +1960,6 @@
       <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
     
       <category term="前端框架，angular指令" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%EF%BC%8Cangular%E6%8C%87%E4%BB%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>angular(六)</title>
-    <link href="http://yoursite.com/2017/04/25/angular_6/"/>
-    <id>http://yoursite.com/2017/04/25/angular_6/</id>
-    <published>2017-04-25T05:17:02.000Z</published>
-    <updated>2017-05-14T14:15:45.899Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>服务</code></center></p>
-<hr>
-<h2 id="服务（service）"><a href="#服务（service）" class="headerlink" title="服务（service）"></a>服务（service）</h2><h3 id="服务介绍"><a href="#服务介绍" class="headerlink" title="服务介绍"></a>服务介绍</h3><p>&#160; &#160; &#160; &#160;服务这个概念其实并不陌生，在其他语言中如Java便有这样的概念，其作用就是对外提供某个特定的功能，如消息服务，文件压缩服务等，是一个独立的模块。ng的服务是这样定义的：</p>
-<ul>
-<li>Angular services are singletons objects or functions that carry out specific tasks common to web apps.</li>
-</ul>
-<p>它是一个单例对象或函数，对外提供特定的功能。<br>首先是一个单例，即无论这个服务被注入到任何地方，对象始终只有一个实例。<br>其次这与我们自己定义一个function然后在其他地方调用不同，因为服务被定义在一个模块中，所以其使用范围是可以被我们管理的。ng的避免全局变量污染意识非常强。</p>
-<p>&#160; &#160; &#160; &#160;ng提供了很多内置的服务，可以到API中查看[<a href="http://docs.angularjs.org/api/。" target="_blank" rel="external">http://docs.angularjs.org/api/。</a>]<br>知道了概念，我们来拉一个service出来溜溜，看看到底是个什么用法。　<br>　<br>&#160; &#160; &#160; &#160;我们在controller中直接声明$location服务，这依靠ng的依赖注入机制。$location提供地址栏相关的服务，我们在此只是简单的获取当前的地址。</p>
-<p>&#160; &#160; &#160; &#160;服务的使用是如此简单，我们可以把服务注入到controller、指令或者是其他服务中。</p>
-<h3 id="自定义服务"><a href="#自定义服务" class="headerlink" title="自定义服务"></a>自定义服务</h3><p>&#160; &#160; &#160; &#160;如同指令一样，系统内置的服务以$开头，我们也可以自己定义一个服务。定义服务的方式有如下几种：</p>
-<ul>
-<li>使用系统内置的$provide服务；</li>
-<li>使用Module的factory方法；</li>
-<li>使用Module的service方法。</li>
-</ul>
-<p>&#160; &#160; &#160; &#160;下面通过一个小例子来分别试验一下。我们定义一个名为remoteData服务，它可以从远程获取数据，这也是我们在程序中经常使用的功能。不过我这里没有远程服务器，就写死一点数据模拟一下。<br>//使用$provide来定义</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用$provide来定义</span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.factory(<span class="string">'remoteData'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用factory方法</span></div><div class="line">app.factory(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> data = &#123;<span class="attr">name</span>:<span class="string">'n'</span>,<span class="attr">value</span>:<span class="string">'v'</span>&#125;;</div><div class="line">    <span class="keyword">return</span> data;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//使用service方法</span></div><div class="line">app.service(<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'n'</span>;</div><div class="line">    <span class="keyword">this</span>.value = <span class="string">'v'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;Module的factory和$provide的factory方法是一模一样的，从官网文档看它们其实就是一回事。至于Module内部是如何调用的，我此处并不打算深究，我只要知道怎么用就好了。</p>
-<p>&#160; &#160; &#160; &#160;再看Module的service方法，它没有return任何东西，是因为service方法本身返回一个构造器，系统会自动使用new关键字来创建出一个对象。所以我们看到在构造器函数内可以使用this，这样调用该服务的地方便可以直接通过remoteData.name来访问数据了。</p>
-<h3 id="管理服务的依赖关系"><a href="#管理服务的依赖关系" class="headerlink" title="管理服务的依赖关系"></a>管理服务的依赖关系</h3><p>&#160; &#160; &#160; &#160;服务与服务中间可以有依赖关系，例如我们这里定义一个名为validate的服务，它的作用是验证数据是否合法，它需要依赖我们从远程获取数据的服务remoteData。代码如下：</p>
-<p> &#160; &#160; &#160; &#160;在factory的参数中，我们可以直接传入服务remoteData，ng的依赖注入机制便帮我们做好了其他工作。不过一定要保证这个参数的名称与服务名称一致，ng是根据名称来识别的。若参数的名次与服务名称不一致，你就必须显示的声明一下，方式如下：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> app.factory(<span class="string">'validate'</span>,[<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">remoteDataService</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(remoteDataService.name==<span class="string">'n'</span>)&#123;</div><div class="line">            alert(<span class="string">'验证通过'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<p>  &#160; &#160; &#160; &#160;我们在controller中注入服务也是同样的道理，使用的名称需要与服务名称一致才可以正确注入。否则，你必须使用$inject来手动指定注入的服务。比如：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">testC</span>(<span class="params">scope,rd</span>)</span>&#123;</div><div class="line">    scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">testC.$inject = [<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>];</div></pre></td></tr></table></figure>
-<p>   &#160; &#160; &#160; &#160;在controller中注入服务，也可以在定义controller时使用数组作为第二个参数，在此处<br>把服务注入进去，这样在函数体中使用不一致的服务名称也是可以的，不过要确保注入的顺序是一致的，如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">'testC'</span>,[<span class="string">'$scope'</span>,<span class="string">'remoteData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,rd</span>)</span>&#123;</div><div class="line">    $scope.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="string">'name：'</span>+rd.name+<span class="string">'   value：'</span>+rd.value);</div><div class="line">    &#125;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<h3 id="自定义服务示例"><a href="#自定义服务示例" class="headerlink" title="自定义服务示例"></a>自定义服务示例</h3><p>&#160; &#160; &#160; &#160;接下来让我们看下例子（例08 自定义服务）代码，自定义userService服务：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.factory(<span class="string">'userService'</span>, [<span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$http</span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> doGetUser = <span class="function"><span class="keyword">function</span>(<span class="params">userId, path</span>) </span>&#123;</div><div class="line"><span class="comment">//return $http(&#123;</span></div><div class="line"><span class="comment">//method: 'JSONP',</span></div><div class="line"><span class="comment">//url: path</span></div><div class="line"><span class="comment">//&#125;);</span></div><div class="line"><span class="comment">/*手动指定数据*/</span></div><div class="line"><span class="keyword">var</span> data = &#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！"</span>&#125;;;</div><div class="line"><span class="keyword">if</span>(userId==<span class="string">'zhangsan'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己"</span>&#125;;</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(userId==<span class="string">'lisi'</span>)&#123;</div><div class="line">data = &#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> &#123;</div><div class="line"><span class="comment">/*userService对外暴露的函数，可有多个*/</span></div><div class="line">getUser: <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>) </span>&#123; </div><div class="line"><span class="keyword">return</span> doGetUser(userId, <span class="string">'../xxx/xxx.action'</span>); </div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;我们创建了一个只有一个方法的userService，getUser为这个服务从后台获取用户信息的函数，并且对外暴露。当然，由于这是一个静态的例子，无法访问后台，那么我们便制定其返回的数据。</p>
-<p>&#160; &#160; &#160; &#160;然后我们把这个服务添加到我们的controller中。我们建立一个controller并加载（或者注入）userService作为运行时依赖，我们把service的名字作为参数传递给controller 函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">"test8Controller"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope,userService</span>)</span>&#123;</div><div class="line"><span class="comment">/*文章信息*/</span></div><div class="line">$scope.articles = [&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"爱飞像风"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"zhangsan"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"张三"</span></div><div class="line">&#125;,&#123;</div><div class="line"><span class="attr">title</span> : <span class="string">"无法停止的雨"</span>,</div><div class="line"><span class="attr">userId</span> : <span class="string">"lisi"</span>,</div><div class="line"><span class="attr">userName</span> : <span class="string">"李四"</span></div><div class="line">&#125;];</div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;<span class="comment">//显示作者详细信息开关</span></div><div class="line">$scope.currentUser = &#123;&#125;; <span class="comment">//当前选中的作者</span></div><div class="line">$scope.getUserInfo = <span class="function"><span class="keyword">function</span>(<span class="params">userId</span>)</span>&#123;</div><div class="line">$scope.currentUser = userService.getUser(userId);</div><div class="line"><span class="comment">//调用 userService的getUser函数</span></div><div class="line">$scope.showUserInfo = <span class="literal">true</span>;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//定时器：隐藏作者详细信息</span></div><div class="line">$scope.showUserInfo = <span class="literal">false</span>;</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;我们的userService注入到我们的test8Controller后，我们就可以像使用其他服务（我们前面提到的$http服务）一样的使用userService了。</p>
-<p>相关的HTML代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/* View HTML*/</div><div class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"article_ in articles"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">&#123;&#123;article_.title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-show</span>=<span class="string">"showUserInfo"</span>&gt;</span></div><div class="line">用户ID：&#123;&#123;currentUser.userId&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户名：&#123;&#123;currentUser.userName&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">用户简介：&#123;&#123;currentUser.userInfo&#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要介绍了angular中的服务
-    
-    </summary>
-    
-      <category term="AngularJS" scheme="http://yoursite.com/categories/AngularJS/"/>
-    
-    
-      <category term="前端框架" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
-    
-      <category term="angular服务" scheme="http://yoursite.com/tags/angular%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
