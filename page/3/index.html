@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Seite 3 › 机会是留给有准备的人的~</title>
-  <meta name="author" content="wyx">
+  <title>Seite 3 › Opportunities are reserved for those who are prepared</title>
+  <meta name="author" content="蒙长圆">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  <meta property="og:site_name" content="机会是留给有准备的人的~"/>
+  <meta property="og:site_name" content="Opportunities are reserved for those who are prepared"/>
 
   
     <meta property="og:image" content="undefined"/>
   
 
   <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="机会是留给有准备的人的~" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="Opportunities are reserved for those who are prepared" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
@@ -27,7 +27,7 @@
 
 <body>
   <header id="header"><div class="meta inner">
-  <h1><a href="/">机会是留给有准备的人的~</a></h1>
+  <h1><a href="/">Opportunities are reserved for those who are prepared</a></h1>
   <h2><a href="/"></a></h2>
   <nav id="main-nav">
     <ul>
@@ -46,84 +46,6 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  <div class="post-content">
-    <header>
-      
-  
-    <h1 class="title"><a href="/2017/04/25/angular_8/">angular(八)</a></h1>
-  
-
-      
-        <time datetime="2017-04-25T05:17:02.000Z">2017-04-25</time>
-      
-    </header>
-    <div class="entry">
-      
-        <a id="more"></a>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>路由DI</code></center></p>
-<hr>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="路由介绍"><a href="#路由介绍" class="headerlink" title="路由介绍"></a>路由介绍</h3><p>&#160; &#160; &#160; &#160;在谈路由机制前有必要先提一下现在比较流行的单页面应用，就是所谓的single page APP。为了实现无刷新的视图切换，我们通常会用ajax请求从后台取数据，然后套上HTML模板渲染在页面上，然而ajax的一个致命缺点就是导致浏览器后退按钮失效，尽管我们可以在页面上放一个大大的返回按钮，让用户点击返回来导航，但总是无法避免用户习惯性的点后退。解决此问题的一个方法是使用hash，监听hashchange事件来进行视图切换，另一个方法是用HTML5的history API，通过pushState()记录操作历史，监听popstate事件来进行视图切换，也有人把这叫pjax技术。基本流程如下：</p>
-<p>&#160; &#160; &#160; &#160;如此一来，便形成了通过地址栏进行导航的深度链接（deeplinking ），也就是我们所需要的路由机制。通过路由机制，一个单页应用的各个视图就可以很好的组织起来了。</p>
-<h3 id="ngRoute内容"><a href="#ngRoute内容" class="headerlink" title="ngRoute内容"></a>ngRoute内容</h3><p>&#160; &#160; &#160; &#160;ng的路由机制是靠ngRoute提供的，通过hash和history两种方式实现了路由，可以检测浏览器是否支持history来灵活调用相应的方式。ng的路由(ngRoute)是一个单独的模块，包含以下内容：</p>
-<ul>
-<li><p>服务$routeProvider用来定义一个路由表，即地址栏与视图模板的映射</p>
-</li>
-<li><p>服务$routeParams保存了地址栏中的参数，例如</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">id</span> : <span class="number">1</span>, <span class="attr">name</span> : <span class="string">'tom'</span>&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>服务$route完成路由匹配，并且提供路由相关的属性访问及事件，如访问当前路由对应的controller</p>
-</li>
-<li><p>指令ngView用来在主视图中指定加载子视图的区域<br>　以上内容再加上$location服务，我们就可以实现一个单页面应用了。下面来看一下具体如何使用这些内容。</p>
-</li>
-</ul>
-<h3 id="ng的路由机制"><a href="#ng的路由机制" class="headerlink" title="ng的路由机制"></a>ng的路由机制</h3><h4 id="第一步：引入文件和依赖"><a href="#第一步：引入文件和依赖" class="headerlink" title="第一步：引入文件和依赖"></a>第一步：引入文件和依赖</h4><p>&#160; &#160; &#160; &#160;ngRoute模块包含在一个单独的文件中，所以第一步需要在页面上引入这个文件，如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://code.angularjs.org/1.2.8/angular.min.js"</span> rel=<span class="string">"nofollow"</span>/&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://code.angularjs.org/1.2.8/angular-route.min.js"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>/&gt;</span><span class="undefined"></span></span></div></pre></td></tr></table></figure>
-<p>　<br>&#160; &#160; &#160; &#160;光引入还不够，我们还需在模块声明中注入对ngRoute的依赖，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [<span class="string">'ngRoute'</span>]);</div></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;完成了这些，我们就可以在模板或是controller中使用上面的服务和指令了。下面我们需要定义一个路由表。</p>
-<h4 id="第二步：定义路由表"><a href="#第二步：定义路由表" class="headerlink" title="第二步：定义路由表"></a>第二步：定义路由表</h4><p>&#160; &#160; &#160; &#160;$routeProvider提供了定义路由表的服务，它有两个核心方法，when(path,route)和otherwise(params)，先看一下核心中的核心when(path,route)方法。<br>&#160; &#160; &#160; &#160;when(path,route)方法接收两个参数，path是一个string类型，表示该条路由规则所匹配的路径，它将与地址栏的内容($location.path)值进行匹配。如果需要匹配参数，可以在path中使用冒号加名称的方式，如：path为/show/:name，如果地址栏是/show/tom，那么参数name和所对应的值tom便会被保存在$routeParams中，像这样：{name : tom}。我们也可以用<code>*</code>进行模糊匹配，如：/show*/:name将匹配/showInfo/tom。</p>
-<p>&#160; &#160; &#160; &#160;route参数是一个object，用来指定当path匹配后所需的一系列配置项，包括以下内容：</p>
-<ul>
-<li>controller //function或string类型。在当前模板上执行的controller函数，生成新的scope；</li>
-<li>controllerAs //string类型，为controller指定别名；</li>
-<li>template //string或function类型，视图z所用的模板，这部分内容将被ngView引用；</li>
-<li>templateUrl //string或function类型，当视图模板为单独的html文件或是使用了<br><code>&lt;script type=&quot;text/ng-template&quot;&gt;</code><br>定义模板时使用；</li>
-<li>resolve //指定当前controller所依赖的其他模块；</li>
-<li>redirectTo //重定向的地址。</li>
-</ul>
-<p>最简单情况，我们定义一个html文件为模板，并初始化一个指定的controller：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailRouteConfig</span>(<span class="params">$routeProvider</span>)</span>&#123;</div><div class="line">    $routeProvider.when(<span class="string">'/show'</span>, &#123;</div><div class="line">        <span class="attr">controller</span>: ShowController,</div><div class="line">        <span class="attr">templateUrl</span>: <span class="string">'show.html'</span></div><div class="line">    &#125;).</div><div class="line">    when(<span class="string">'/put/:name'</span>,&#123;</div><div class="line">       <span class="attr">controller</span>: PutController,</div><div class="line">       <span class="attr">templateUrl</span>: <span class="string">'put.html'</span></div><div class="line">    &#125;)</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>&#160; &#160; &#160; &#160;otherwise(params)方法对应路径匹配不到时的情况，这时候我们可以配置一个redirectTo参数，让它重定向到404页面或者是首页。</p>
-<h4 id="第三步：在主视图模板中指定加载子视图的位置"><a href="#第三步：在主视图模板中指定加载子视图的位置" class="headerlink" title="第三步：在主视图模板中指定加载子视图的位置"></a>第三步：在主视图模板中指定加载子视图的位置</h4><p>&#160; &#160; &#160; &#160;我们的单页面程序都是局部刷新的，那这个“局部”是哪里呢，这就轮到ngView出马了，只需在模板中简单的使用此指令，在哪里用，哪里就是“局部”。例如：<br><code>&lt;div ng-view&gt;&lt;/div&gt;</code>　　或：<code>&lt;ng-view&gt;&lt;/ng-view&gt;</code>　</p>
-<p>&#160; &#160; &#160; &#160;我们的子视图将会在此处被引入进来。完成这三步后，你的程序的路由就配置好了。</p>
-<h3 id="路由示例"><a href="#路由示例" class="headerlink" title="路由示例"></a>路由示例</h3><p>&#160; &#160; &#160; &#160;下面我们将用一个例子（例09）来说明路由的使用方式及步骤：</p>
-<p>1.为demoApp添加一个路由，代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">demoApp.config([<span class="string">'$routeProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>) </span>&#123;  </div><div class="line">$routeProvider.when(<span class="string">'/list'</span>, &#123;  </div><div class="line"><span class="attr">templateUrl</span>: <span class="string">'route/list.html'</span>,  </div><div class="line">  <span class="attr">controller</span>: <span class="string">'routeListController'</span></div><div class="line">&#125;).when(<span class="string">'/list/:id'</span>, &#123;  </div><div class="line">  <span class="attr">templateUrl</span>: <span class="string">'route/detail.html'</span>,</div><div class="line">   <span class="attr">controller</span>: <span class="string">'routeDetailController'</span></div><div class="line">  &#125;).otherwise(&#123;  </div><div class="line">        <span class="attr">redirectTo</span>: <span class="string">'/list'</span>  </div><div class="line">     &#125;);  </div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<p>/list 对应为：route/list.html页面，显示用户列表；/list/:id对应于route/detail.html页面，显示用户详细信息。</p>
-<p>2.为list.html和detail.html分别声明Controller：routeListController和routeDetailController。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">'routeListController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;  </div><div class="line">$scope.users = [&#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己带盐！"</span>&#125;,</div><div class="line">&#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;,</div><div class="line">&#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！我是谁！"</span>&#125;];</div><div class="line"> </div><div class="line">&#125;);  </div><div class="line">demoApp.controller(<span class="string">'routeDetailController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope, $routeParams, userService</span>) </span>&#123;  </div><div class="line">    $scope.userDetail = userService.getUser($routeParams.id);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>routeDetailController中如上面提到的一样，注入了userService服务，在这里直接拿来用。</p>
-<p>3.创建list.html和detail.html页面，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Route : List.html（用户列表页面）<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"user in users"</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://m.cnblogs.com/142260/3817063.html?full=1#/list/&#123;&#123; user.userId &#125;&#125;"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Route : detail.html（用户详细信息页面）<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color: red;"</span>&gt;</span>&#123;&#123;userDetail.userName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>用户ID：&#123;&#123;userDetail.userId&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>用户名：&#123;&#123;userDetail.userName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">用户简介：<span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;userDetail.userInfo&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://m.cnblogs.com/142260/3817063.html?full=1#/list"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span>返回<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<ol>
-<li>路由局部刷新位置：</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>AngularJS路由（Route） 示例<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-      
-    </div>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-      </footer>
-  </div>
-</article>
-
-
-
-
-
   <article class="post">
   <div class="post-content">
     <header>
@@ -214,6 +136,84 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">onclick</span>=<span class="string">"XmlSendRequest();"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">onclick</span>=<span class="string">"JqSendRequest();"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery-1.12.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">XmlSendRequest</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">            xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">                    <span class="keyword">var</span> result = xhr.responseText;</div><div class="line">                    <span class="built_in">console</span>.log(result);</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line"></div><div class="line">            xhr.withCredentials = <span class="literal">true</span>;</div><div class="line"></div><div class="line">            xhr.open(<span class="string">'PUT'</span>, <span class="string">"http://aylin.com:8000/test/"</span>, <span class="literal">true</span>);</div><div class="line">            xhr.setRequestHeader(<span class="string">'k1'</span>, <span class="string">'v1'</span>);</div><div class="line">            xhr.send();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">JqSendRequest</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            $.ajax(&#123;</div><div class="line">                <span class="attr">url</span>: <span class="string">"http://aylin.com:8000/test/"</span>,</div><div class="line">                <span class="attr">type</span>: <span class="string">'PUT'</span>,</div><div class="line">                <span class="attr">dataType</span>: <span class="string">'text'</span>,</div><div class="line">                <span class="attr">headers</span>: &#123;<span class="string">'k1'</span>: <span class="string">'v1'</span>&#125;,</div><div class="line">                <span class="attr">xhrFields</span>:&#123;<span class="attr">withCredentials</span>: <span class="literal">true</span>&#125;,</div><div class="line">                <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data, statusText, xmlHttpRequest</span>)</span>&#123;</div><div class="line">                    <span class="built_in">console</span>.log(data);</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><code>view code</code>代码</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">复制代码</div><div class="line">class MainHandler(tornado.web.RequestHandler):</div><div class="line">    </div><div class="line">    def put(self):</div><div class="line">        self.set_header('Access-Control-Allow-Origin', "http://www.xxx.com")</div><div class="line">        self.set_header('Access-Control-Allow-Credentials', "true")</div><div class="line">        </div><div class="line">        self.set_header('xxoo', "seven")</div><div class="line">        self.set_header('zhangyanlinhenshuai', "feichangshuai")</div><div class="line">        self.set_header('Access-Control-Expose-Headers', "shuai,shuaishuai")</div><div class="line"></div><div class="line">        self.set_cookie('kkkkk', 'vvvvv');</div><div class="line"></div><div class="line">        self.write('&#123;"status": true, "data": "seven"&#125;')</div><div class="line"></div><div class="line">    def options(self, *args, **kwargs):</div><div class="line">        self.set_header('Access-Control-Allow-Origin', "http://www.xxx.com")</div><div class="line">        self.set_header('Access-Control-Allow-Headers', "k1,k2")</div><div class="line">        self.set_header('Access-Control-Allow-Methods', "PUT,DELETE")</div><div class="line">        self.set_header('Access-Control-Max-Age', 10)</div><div class="line">复制代码</div></pre></td></tr></table></figure>
+      
+    </div>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2017/04/25/angular_8/">angular(八)</a></h1>
+  
+
+      
+        <time datetime="2017-04-25T05:17:02.000Z">2017-04-25</time>
+      
+    </header>
+    <div class="entry">
+      
+        <a id="more"></a>
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>路由DI</code></center></p>
+<hr>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="路由介绍"><a href="#路由介绍" class="headerlink" title="路由介绍"></a>路由介绍</h3><p>&#160; &#160; &#160; &#160;在谈路由机制前有必要先提一下现在比较流行的单页面应用，就是所谓的single page APP。为了实现无刷新的视图切换，我们通常会用ajax请求从后台取数据，然后套上HTML模板渲染在页面上，然而ajax的一个致命缺点就是导致浏览器后退按钮失效，尽管我们可以在页面上放一个大大的返回按钮，让用户点击返回来导航，但总是无法避免用户习惯性的点后退。解决此问题的一个方法是使用hash，监听hashchange事件来进行视图切换，另一个方法是用HTML5的history API，通过pushState()记录操作历史，监听popstate事件来进行视图切换，也有人把这叫pjax技术。基本流程如下：</p>
+<p>&#160; &#160; &#160; &#160;如此一来，便形成了通过地址栏进行导航的深度链接（deeplinking ），也就是我们所需要的路由机制。通过路由机制，一个单页应用的各个视图就可以很好的组织起来了。</p>
+<h3 id="ngRoute内容"><a href="#ngRoute内容" class="headerlink" title="ngRoute内容"></a>ngRoute内容</h3><p>&#160; &#160; &#160; &#160;ng的路由机制是靠ngRoute提供的，通过hash和history两种方式实现了路由，可以检测浏览器是否支持history来灵活调用相应的方式。ng的路由(ngRoute)是一个单独的模块，包含以下内容：</p>
+<ul>
+<li><p>服务$routeProvider用来定义一个路由表，即地址栏与视图模板的映射</p>
+</li>
+<li><p>服务$routeParams保存了地址栏中的参数，例如</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">id</span> : <span class="number">1</span>, <span class="attr">name</span> : <span class="string">'tom'</span>&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>服务$route完成路由匹配，并且提供路由相关的属性访问及事件，如访问当前路由对应的controller</p>
+</li>
+<li><p>指令ngView用来在主视图中指定加载子视图的区域<br>　以上内容再加上$location服务，我们就可以实现一个单页面应用了。下面来看一下具体如何使用这些内容。</p>
+</li>
+</ul>
+<h3 id="ng的路由机制"><a href="#ng的路由机制" class="headerlink" title="ng的路由机制"></a>ng的路由机制</h3><h4 id="第一步：引入文件和依赖"><a href="#第一步：引入文件和依赖" class="headerlink" title="第一步：引入文件和依赖"></a>第一步：引入文件和依赖</h4><p>&#160; &#160; &#160; &#160;ngRoute模块包含在一个单独的文件中，所以第一步需要在页面上引入这个文件，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://code.angularjs.org/1.2.8/angular.min.js"</span> rel=<span class="string">"nofollow"</span>/&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://code.angularjs.org/1.2.8/angular-route.min.js"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>/&gt;</span><span class="undefined"></span></span></div></pre></td></tr></table></figure>
+<p>　<br>&#160; &#160; &#160; &#160;光引入还不够，我们还需在模块声明中注入对ngRoute的依赖，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'MyApp'</span>, [<span class="string">'ngRoute'</span>]);</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;完成了这些，我们就可以在模板或是controller中使用上面的服务和指令了。下面我们需要定义一个路由表。</p>
+<h4 id="第二步：定义路由表"><a href="#第二步：定义路由表" class="headerlink" title="第二步：定义路由表"></a>第二步：定义路由表</h4><p>&#160; &#160; &#160; &#160;$routeProvider提供了定义路由表的服务，它有两个核心方法，when(path,route)和otherwise(params)，先看一下核心中的核心when(path,route)方法。<br>&#160; &#160; &#160; &#160;when(path,route)方法接收两个参数，path是一个string类型，表示该条路由规则所匹配的路径，它将与地址栏的内容($location.path)值进行匹配。如果需要匹配参数，可以在path中使用冒号加名称的方式，如：path为/show/:name，如果地址栏是/show/tom，那么参数name和所对应的值tom便会被保存在$routeParams中，像这样：{name : tom}。我们也可以用<code>*</code>进行模糊匹配，如：/show*/:name将匹配/showInfo/tom。</p>
+<p>&#160; &#160; &#160; &#160;route参数是一个object，用来指定当path匹配后所需的一系列配置项，包括以下内容：</p>
+<ul>
+<li>controller //function或string类型。在当前模板上执行的controller函数，生成新的scope；</li>
+<li>controllerAs //string类型，为controller指定别名；</li>
+<li>template //string或function类型，视图z所用的模板，这部分内容将被ngView引用；</li>
+<li>templateUrl //string或function类型，当视图模板为单独的html文件或是使用了<br><code>&lt;script type=&quot;text/ng-template&quot;&gt;</code><br>定义模板时使用；</li>
+<li>resolve //指定当前controller所依赖的其他模块；</li>
+<li>redirectTo //重定向的地址。</li>
+</ul>
+<p>最简单情况，我们定义一个html文件为模板，并初始化一个指定的controller：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">emailRouteConfig</span>(<span class="params">$routeProvider</span>)</span>&#123;</div><div class="line">    $routeProvider.when(<span class="string">'/show'</span>, &#123;</div><div class="line">        <span class="attr">controller</span>: ShowController,</div><div class="line">        <span class="attr">templateUrl</span>: <span class="string">'show.html'</span></div><div class="line">    &#125;).</div><div class="line">    when(<span class="string">'/put/:name'</span>,&#123;</div><div class="line">       <span class="attr">controller</span>: PutController,</div><div class="line">       <span class="attr">templateUrl</span>: <span class="string">'put.html'</span></div><div class="line">    &#125;)</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;otherwise(params)方法对应路径匹配不到时的情况，这时候我们可以配置一个redirectTo参数，让它重定向到404页面或者是首页。</p>
+<h4 id="第三步：在主视图模板中指定加载子视图的位置"><a href="#第三步：在主视图模板中指定加载子视图的位置" class="headerlink" title="第三步：在主视图模板中指定加载子视图的位置"></a>第三步：在主视图模板中指定加载子视图的位置</h4><p>&#160; &#160; &#160; &#160;我们的单页面程序都是局部刷新的，那这个“局部”是哪里呢，这就轮到ngView出马了，只需在模板中简单的使用此指令，在哪里用，哪里就是“局部”。例如：<br><code>&lt;div ng-view&gt;&lt;/div&gt;</code>　　或：<code>&lt;ng-view&gt;&lt;/ng-view&gt;</code>　</p>
+<p>&#160; &#160; &#160; &#160;我们的子视图将会在此处被引入进来。完成这三步后，你的程序的路由就配置好了。</p>
+<h3 id="路由示例"><a href="#路由示例" class="headerlink" title="路由示例"></a>路由示例</h3><p>&#160; &#160; &#160; &#160;下面我们将用一个例子（例09）来说明路由的使用方式及步骤：</p>
+<p>1.为demoApp添加一个路由，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">demoApp.config([<span class="string">'$routeProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>) </span>&#123;  </div><div class="line">$routeProvider.when(<span class="string">'/list'</span>, &#123;  </div><div class="line"><span class="attr">templateUrl</span>: <span class="string">'route/list.html'</span>,  </div><div class="line">  <span class="attr">controller</span>: <span class="string">'routeListController'</span></div><div class="line">&#125;).when(<span class="string">'/list/:id'</span>, &#123;  </div><div class="line">  <span class="attr">templateUrl</span>: <span class="string">'route/detail.html'</span>,</div><div class="line">   <span class="attr">controller</span>: <span class="string">'routeDetailController'</span></div><div class="line">  &#125;).otherwise(&#123;  </div><div class="line">        <span class="attr">redirectTo</span>: <span class="string">'/list'</span>  </div><div class="line">     &#125;);  </div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>/list 对应为：route/list.html页面，显示用户列表；/list/:id对应于route/detail.html页面，显示用户详细信息。</p>
+<p>2.为list.html和detail.html分别声明Controller：routeListController和routeDetailController。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">demoApp.controller(<span class="string">'routeListController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;  </div><div class="line">$scope.users = [&#123;<span class="attr">userId</span>:<span class="string">"zhangsan"</span>,<span class="attr">userName</span>:<span class="string">"张三"</span>,<span class="attr">userInfo</span>:<span class="string">"我是张三，我为自己带盐！"</span>&#125;,</div><div class="line">&#123;<span class="attr">userId</span>:<span class="string">"lisi"</span>,<span class="attr">userName</span>:<span class="string">"李四"</span>,<span class="attr">userInfo</span>:<span class="string">"我是李四，我为卿狂！"</span>&#125;,</div><div class="line">&#123;<span class="attr">userId</span>:<span class="string">"woshishui"</span>,<span class="attr">userName</span>:<span class="string">"我是谁"</span>,<span class="attr">userInfo</span>:<span class="string">"我是谁！我是谁！我是谁！"</span>&#125;];</div><div class="line"> </div><div class="line">&#125;);  </div><div class="line">demoApp.controller(<span class="string">'routeDetailController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope, $routeParams, userService</span>) </span>&#123;  </div><div class="line">    $scope.userDetail = userService.getUser($routeParams.id);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>routeDetailController中如上面提到的一样，注入了userService服务，在这里直接拿来用。</p>
+<p>3.创建list.html和detail.html页面，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Route : List.html（用户列表页面）<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"user in users"</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://m.cnblogs.com/142260/3817063.html?full=1#/list/&#123;&#123; user.userId &#125;&#125;"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Route : detail.html（用户详细信息页面）<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color: red;"</span>&gt;</span>&#123;&#123;userDetail.userName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>用户ID：&#123;&#123;userDetail.userId&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>用户名：&#123;&#123;userDetail.userName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">用户简介：<span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;userDetail.userInfo&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://m.cnblogs.com/142260/3817063.html?full=1#/list"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span>返回<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>路由局部刷新位置：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>AngularJS路由（Route） 示例<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
       
     </div>
       
@@ -760,7 +760,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2017 wyx
+  &copy; 2017 蒙长圆
   
 </div>
 <div class="clearfix"></div></footer>
