@@ -1,26 +1,87 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    
-
-    
-
-    
-
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
-    <meta charset="utf-8">
-    
-    
-    
-    <title>Vue(数据绑定) | 要么庸俗要么孤独</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Vuejs,前端框架,Vue的数据绑定">
-    <meta name="description" content="本文主要介绍了Vue中的数据绑定机制">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vuejs,前端框架,Vue的数据绑定," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="要么庸俗要么孤独" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍了Vue中的数据绑定机制">
 <meta name="keywords" content="Vuejs,前端框架,Vue的数据绑定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue(数据绑定)">
@@ -34,172 +95,246 @@
 <meta name="twitter:title" content="Vue(数据绑定)">
 <meta name="twitter:description" content="本文主要介绍了Vue中的数据绑定机制">
 <meta name="twitter:image" content="http://orzuutv5f.bkt.clouddn.com/02vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A.jpg">
-    
-        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/me.png">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/23/vue数据绑定/"/>
+
+
+
+
+
+  <title>Vue(数据绑定) | 要么庸俗要么孤独</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/me.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">wyx</h5>
-          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">要么庸俗要么孤独</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Modify01" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                Weibo
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Vue(数据绑定)</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">Vue(数据绑定)</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2017-06-23T05:17:02.000Z" itemprop="datePublished" class="page-time">
-  2017-06-23
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VueJS/">VueJS</a></li></ul>
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-        </h5>
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/23/vue数据绑定/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="要么庸俗要么孤独">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Vue入门之数据绑定"><span class="post-toc-number">2.</span> <span class="post-toc-text">Vue入门之数据绑定</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是双向绑定？"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">什么是双向绑定？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue绑定文本"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Vue绑定文本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#绑定数据中使用JavaScript表达式"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">绑定数据中使用JavaScript表达式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vue属性绑定"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Vue属性绑定</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出纯HTML"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">输出纯HTML</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#样式绑定"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">样式绑定</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#绑定样式对象"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">绑定样式对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#混合普通的HTML标签样式类及绑定样式对象"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text">混合普通的HTML标签样式类及绑定样式对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#绑定data中的样式对象"><span class="post-toc-number">2.6.3.</span> <span class="post-toc-text">绑定data中的样式对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#绑定样式数组"><span class="post-toc-number">2.6.4.</span> <span class="post-toc-text">绑定样式数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内联样式绑定"><span class="post-toc-number">2.6.5.</span> <span class="post-toc-text">内联样式绑定</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算属性"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">计算属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#绑定的数据过滤器"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">绑定的数据过滤器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#核心：自动响应对象的变化到HTML标签"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">核心：自动响应对象的变化到HTML标签</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#双向数据绑定"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">双向数据绑定</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据绑定总结"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">数据绑定总结</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-vue数据绑定"
-  class="post-article article-type-post fade" itemprop="blogPost">
+      <header class="post-header">
 
-    <div class="post-card">
-        <h1 class="post-card-title">Vue(数据绑定)</h1>
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue(数据绑定)</h1>
+        
+
         <div class="post-meta">
-            <time class="post-time" title="2017-06-23 13:17:02" datetime="2017-06-23T05:17:02.000Z"  itemprop="datePublished">2017-06-23</time>
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T13:17:02+08:00">
+                2017-06-23
+              </time>
+            
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VueJS/">VueJS</a></li></ul>
-
-
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueJS/" itemprop="url" rel="index">
+                    <span itemprop="name">VueJS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  本文主要介绍了Vue中的数据绑定机制
+              </div>
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <a id="more"></a>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><p><center style="font-size: 30px"><code>Vue数据绑定</code></center></p>
 <hr>
 <h1 id="Vue入门之数据绑定"><a href="#Vue入门之数据绑定" class="headerlink" title="Vue入门之数据绑定"></a>Vue入门之数据绑定</h1><h2 id="什么是双向绑定？"><a href="#什么是双向绑定？" class="headerlink" title="什么是双向绑定？"></a>什么是双向绑定？</h2><p>Vue框架很核心的功能就是双向的数据绑定。<br>双向是指：HTML标签数据 绑定到 Vue对象，另外反方向数据也是绑定的。通俗点说就是，Vue对象的改变会直接影响到HTML的标签的变化，而且标签的变化也会反过来影响Vue对象的属性的变化。<br>这样以来，就彻底变革了之前Dom的开发方式，之前Dom驱动的开发方式尤其是以jQuery为主的开发时代，都是dom变化后，触发js事件，然后在事件中通过js代码取得标签的变化，再跟后台进行交互，然后根据后台返回的结果再更新HTML标签，异常的繁琐。有了Vue这种双向绑定，让开发人员只需要关心json数据的变化即可，Vue自动映射到HTML上，而且HTML的变化也会映射回js对象上，开发方式直接变革成了前端由数据驱动的<br>开发时代，远远抛弃了Dom开发主导的时代了。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/02vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A.jpg" alt="vue 双向绑定" title="">
-                </div>
-                <div class="image-caption">vue 双向绑定</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/02vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A.jpg" alt="vue 双向绑定"></p>
 <h2 id="Vue绑定文本"><a href="#Vue绑定文本" class="headerlink" title="Vue绑定文本"></a>Vue绑定文本</h2><p>数据绑定最常见的形式就是使用 “Mustache” 语法（双大括号）的文本插值，比如模板引擎：handlebars中就是用的&#123;&#123;  &#125;&#125;.<br>创建的Vue对象中的data属性就是用来绑定数据到HTML的。参考如下代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;         <span class="comment">// 创建Vue对象。Vue的核心对象。</span></div><div class="line">    el: <span class="string">'#app'</span>,               <span class="comment">// el属性：把当前Vue对象挂载到 div标签上，#app是id选择器</span></div><div class="line">    data: &#123;                   <span class="comment">// data: 是Vue对象中绑定的数据</span></div><div class="line">      msg: <span class="string">'Hello Vue!'</span>   <span class="comment">// message 自定义的数据</span></div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <h2 id="绑定数据中使用JavaScript表达式"><a href="#绑定数据中使用JavaScript表达式" class="headerlink" title="绑定数据中使用JavaScript表达式"></a>绑定数据中使用JavaScript表达式</h2><p>对于所有的数据绑定， Vue.js 都提供了完全的 JavaScript 表达式支持。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Message: &#123;&#123; msg + ' - ' + name &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;         <span class="comment">// 创建Vue对象。Vue的核心对象。</span></div><div class="line">    el: <span class="string">'#app'</span>,               <span class="comment">// el属性：把当前Vue对象挂载到 div标签上，#app是id选择器</span></div><div class="line">    data: &#123;                   <span class="comment">// data: 是Vue对象中绑定的数据</span></div><div class="line">      msg: <span class="string">'Hi'</span>,              <span class="comment">// message 自定义的数据</span></div><div class="line">      name: <span class="string">'flydragon'</span>       <span class="comment">// name自定义的属性，vue可以多个自定义属性，属性类型也可是复杂类型</span></div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -231,13 +366,7 @@
 <p>Vue.js 允许你自定义过滤器，被用作一些常见的文本格式化。过滤器应该被添加在 mustache 插值的尾部，由“管道符”指示：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; message | capitalize &#125;&#125;</div><div class="line"><span class="comment">&lt;!-- in mustaches --&gt;</span></div><div class="line">&#123;&#123; message | capitalize &#125;&#125;</div><div class="line"><span class="comment">&lt;!-- in v-bind --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"rawId | formatId"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">Vue 2.x 中，过滤器只能在 mustache 绑定和 v-bind 表达式（从 2.1.0 开始支持）中使用，因为过滤器设计目的就是用于文本转换。为了在其他指令中实现更复杂的数据变换，你应该使用计算属性。</div><div class="line"></div><div class="line">过滤器函数总接受表达式的值作为第一个参数。</div><div class="line">new Vue(&#123;</div><div class="line">  // ...</div><div class="line">  filters: &#123;</div><div class="line">    capitalize: function (value) &#123;</div><div class="line">      if (!value) return ''</div><div class="line">      value = value.toString()</div><div class="line">      return value.charAt(0).toUpperCase() + value.slice(1)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">过滤器可以串联：</div><div class="line">&#123;&#123; message | filterA | filterB &#125;&#125;</div><div class="line">过滤器是 JavaScript 函数，因此可以接受参数：</div><div class="line">&#123;&#123; message | filterA('arg1', arg2) &#125;&#125;</div><div class="line">这里，字符串 'arg1' 将传给过滤器作为第二个参数， arg2 表达式的值将被求值然后传给过滤器作为第三个参数。</div></pre></td></tr></table></figure></p>
 <h2 id="核心：自动响应对象的变化到HTML标签"><a href="#核心：自动响应对象的变化到HTML标签" class="headerlink" title="核心：自动响应对象的变化到HTML标签"></a>核心：自动响应对象的变化到HTML标签</h2><p>上面的例子都是 数据对象是写死在创建的Vue对像上，那如果数据（data）发生改变时会怎样呢？<br>让我们用chrome把上面例子的页面打开，并打开发者工具控制台,输入：<code>app.age = 20</code> 会有什么情况发生呢？</p>
 <hr>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/03vue%E5%93%8D%E5%BA%94.png" alt="响应" title="">
-                </div>
-                <div class="image-caption">响应</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/03vue%E5%93%8D%E5%BA%94.png" alt="响应"></p>
 <p>在页面中添加一个按钮，动态的增加年龄：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue入门之htmlraw<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- computed里面的函数可以直接当成data里面的属性用，非常方便，注意没有括号！！！--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>生日<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; getBirthday &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>年龄<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; age &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>地址<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; address &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- 添加下面这行代码，动态增加 年龄，页面会有怎样的变化呢？？ --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"app.age+=1;"</span> &gt;</span>加加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">      <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">birthday</span>: <span class="number">914228510514</span>,     <span class="comment">// 这是一个日期对象的值：1998年11月1日</span></div><div class="line">        age: <span class="number">19</span>,</div><div class="line">        <span class="attr">address</span>: <span class="string">'北京昌平区龙泽飞龙'</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">computed</span>: &#123;</div><div class="line">        <span class="comment">// 把日期换成 常见规格格式的字符串。</span></div><div class="line">        getBirthday: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="keyword">this</span>.birthday);</div><div class="line">          <span class="keyword">return</span> m.getFullYear() + <span class="string">'年'</span> + m.getMonth() +<span class="string">'月'</span>+ m.getDay()+<span class="string">'日'</span>;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h2><p>上面的例子我们大多讲的是单向的 js对象向 HTML数据进行绑定，那HTML怎样向js进行反馈数据呢？<br>HTML中只有表达能接受用户的输入，最简单的演示双向绑定的就是文本框了。</p>
@@ -247,305 +376,396 @@
 <p>关于其他表单的绑定的语法我就不赘述了，还是参考官网吧，我这里大部分例子也是来自<a href="https://cn.vuejs.org/v2/guide/forms.html#基础用法" target="_blank" rel="external">官网</a>。</p>
 <h2 id="数据绑定总结"><a href="#数据绑定总结" class="headerlink" title="数据绑定总结"></a>数据绑定总结</h2><p>vue提供了大量的绑定的语法和方法，非常方便我们进行数据的绑定，尤其它是双向的数据绑定，极大的减少了我们dom操作的麻烦程度。可能你越来越喜欢它了吧…</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2017-06-23T11:44:30.000Z" itemprop="dateUpdated">2017-06-23 19:44:30</time>
-</span><br>
-
-
-        
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/06/23/vue数据绑定/" target="_blank" rel="external">http://yoursite.com/2017/06/23/vue数据绑定/</a>
-        
+      
     </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/me.png" alt="wyx">
-            wyx
-        </a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vuejs/" rel="tag"># Vuejs</a>
+          
+            <a href="/tags/前端框架/" rel="tag"># 前端框架</a>
+          
+            <a href="/tags/Vue的数据绑定/" rel="tag"># Vue的数据绑定</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/23/vue入门之Vue实例与生命周期/" rel="next" title="Vue(Vue实例详解与生命周期)">
+                <i class="fa fa-chevron-left"></i> Vue(Vue实例详解与生命周期)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/23/vue入门简介/" rel="prev" title="Vue(入门及简介)">
+                Vue(入门及简介) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue的数据绑定/">Vue的数据绑定</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端框架/">前端框架</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/23/vue数据绑定/&title=《Vue(数据绑定)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/23/vue数据绑定/&title=《Vue(数据绑定)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/23/vue数据绑定/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue(数据绑定)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/06/23/vue数据绑定/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/23/vue数据绑定/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
 
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/06/23/vue入门简介/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Vue(入门及简介)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/06/23/Vue入门之组件化/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Vue(Vue入门之组件化开发)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-<section class="comments" id="comments">
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
-    <!-- UY END -->
-</section>
-
-
-
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        大爷过来玩呀~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.png" data-alipay="/img/zfb.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">wyx</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
             </div>
-        </label>
-        
-    </div>
-</div>
+          
 
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
+          <div class="links-of-author motion-element">
             
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>wyx &copy; 2015 - 2017</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+          </div>
 
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正文开始"><span class="nav-number">1.</span> <span class="nav-text">正文开始</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue入门之数据绑定"><span class="nav-number">2.</span> <span class="nav-text">Vue入门之数据绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是双向绑定？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是双向绑定？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue绑定文本"><span class="nav-number">2.2.</span> <span class="nav-text">Vue绑定文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定数据中使用JavaScript表达式"><span class="nav-number">2.3.</span> <span class="nav-text">绑定数据中使用JavaScript表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue属性绑定"><span class="nav-number">2.4.</span> <span class="nav-text">Vue属性绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出纯HTML"><span class="nav-number">2.5.</span> <span class="nav-text">输出纯HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样式绑定"><span class="nav-number">2.6.</span> <span class="nav-text">样式绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定样式对象"><span class="nav-number">2.6.1.</span> <span class="nav-text">绑定样式对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合普通的HTML标签样式类及绑定样式对象"><span class="nav-number">2.6.2.</span> <span class="nav-text">混合普通的HTML标签样式类及绑定样式对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定data中的样式对象"><span class="nav-number">2.6.3.</span> <span class="nav-text">绑定data中的样式对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定样式数组"><span class="nav-number">2.6.4.</span> <span class="nav-text">绑定样式数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联样式绑定"><span class="nav-number">2.6.5.</span> <span class="nav-text">内联样式绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算属性"><span class="nav-number">2.7.</span> <span class="nav-text">计算属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定的数据过滤器"><span class="nav-number">2.8.</span> <span class="nav-text">绑定的数据过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心：自动响应对象的变化到HTML标签"><span class="nav-number">2.9.</span> <span class="nav-text">核心：自动响应对象的变化到HTML标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向数据绑定"><span class="nav-number">2.10.</span> <span class="nav-text">双向数据绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据绑定总结"><span class="nav-number">2.11.</span> <span class="nav-text">数据绑定总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
     </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wyx</span>
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/23/vue数据绑定/&title=《Vue(数据绑定)》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/23/vue数据绑定/&title=《Vue(数据绑定)》 — 要么庸俗要么孤独&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/23/vue数据绑定/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue(数据绑定)》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/06/23/vue数据绑定/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/23/vue数据绑定/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3a0U7DMAwF0P3/Tw+J10F3bXeIuidPUxlJTpFMYvvxiMfze7x+Pv7O63j96esMv81/wsDAwLgs43k4kq0nG823mLyOH+bBwMC4AaM63SRYH4faanDHwMDA6G2l+mRyDMXAwMBILqV5UE6OkhgYGBiTS+zxMjkveR0fvItjYGBckDEpDHz68x/VNzAwMP4x41kcx4ez5FCYHCLLu8LAwFjNSBJeZ11Bq5vO03MYGBh3YCRJ/Dz1ViUlRYL8RWNgYGxl5GmveYgcpf6rfwcMDIxFjLOSa3PAJFhjYGBsZVQvnPkBrnd9rTaKYWBg3IExaSE9t5m1+hwDA+M+jGpgnVxxqyXPAh4DA2M1Iz/YVbfYI03KpRgYGFsZvTT9pIWiUFON2z4wMDB2M/JgNz/e5d9vtsliYGAsZUwmTajVQ2ce6AvpNgwMjIszqs1h5xYSkpeS/BvAwMDYzai2bfVaK/LQ3LskY2Bg7GYky/TGpFJRPTJiYGDsZuTNFr0l80tyji/0pmFgYCxi5GG31zo2YUe/i4GBsZrRS3X1So+T2R75khgYGOsY86tpdf5eeu5NEQIDA2M1oxrTqm1kk8av/PCKgYFxB0avxNisQsTtHfkqGBgY92H0CgNJ0DzrEvtmFQwMDIxTqXmoLYRdDAwMjNa2kvLkvBUDAwPjPowkzB2D85DaC+hvnmNgYKxmTAoDeXNGL3l3VvMHBgbGZRlf51jwLhdLHqEAAAAASUVORK5CYII=" alt="微信分享二维码">
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+  <span class="post-meta-divider">|</span>
 
 
-</script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
 
 
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+        
 
 
 
 
 
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+        
+      </div>
+    </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '死鬼去哪里了！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

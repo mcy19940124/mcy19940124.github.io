@@ -1,26 +1,87 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    
-
-    
-
-    
-
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
-    <meta charset="utf-8">
-    
-    
-    
-    <title>webpack：从入门到真实项目配置 | 要么庸俗要么孤独</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="前端构建工具,webpack">
-    <meta name="description" content="该文使用的 Webpack 版本为 3.6.0，本文分两部分。第一步是简单的使用 webpack，第二部分通过一个真实项目来配置 webpack，没有使用任何的 CLI，都是一步步配置直到完成生产代码的打包">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端构建工具,webpack," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="要么庸俗要么孤独" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="该文使用的 Webpack 版本为 3.6.0，本文分两部分。第一步是简单的使用 webpack，第二部分通过一个真实项目来配置 webpack，没有使用任何的 CLI，都是一步步配置直到完成生产代码的打包">
 <meta name="keywords" content="前端构建工具,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack：从入门到真实项目配置">
@@ -51,162 +112,242 @@
 <meta name="twitter:title" content="webpack：从入门到真实项目配置">
 <meta name="twitter:description" content="该文使用的 Webpack 版本为 3.6.0，本文分两部分。第一步是简单的使用 webpack，第二部分通过一个真实项目来配置 webpack，没有使用任何的 CLI，都是一步步配置直到完成生产代码的打包">
 <meta name="twitter:image" content="http://orzuutv5f.bkt.clouddn.com/webpack%E4%BB%8B%E7%BB%8D.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/me.png">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/"/>
+
+
+
+
+
+  <title>webpack：从入门到真实项目配置 | 要么庸俗要么孤独</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/me.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">wyx</h5>
-          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">要么庸俗要么孤独</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Modify01" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                Weibo
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">webpack：从入门到真实项目配置</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">webpack：从入门到真实项目配置</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2017-09-20T15:42:26.000Z" itemprop="datePublished" class="page-time">
-  2017-09-20
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/webpack/">webpack</a></li></ul>
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-        </h5>
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="要么庸俗要么孤独">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文部分"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Webpack-到底是什么"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Webpack 到底是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单使用"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">简单使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Loader"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Loader</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Babel"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">Babel</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理图片"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">处理图片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理-CSS-文件"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">处理 CSS 文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何在项目中使用-webpack"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">如何在项目中使用 webpack</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分离代码"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">分离代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#抽取共同代码"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">抽取共同代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#按需加载代码"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">按需加载代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自动刷新"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">自动刷新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成生产环境代码"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">生成生产环境代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">补充</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">后记</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-webpack从入门到真实项目配置"
-  class="post-article article-type-post fade" itemprop="blogPost">
+      <header class="post-header">
 
-    <div class="post-card">
-        <h1 class="post-card-title">webpack：从入门到真实项目配置</h1>
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack：从入门到真实项目配置</h1>
+        
+
         <div class="post-meta">
-            <time class="post-time" title="2017-09-20 23:42:26" datetime="2017-09-20T15:42:26.000Z"  itemprop="datePublished">2017-09-20</time>
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T23:42:26+08:00">
+                2017-09-20
+              </time>
+            
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/webpack/">webpack</a></li></ul>
-
-
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  该文使用的 Webpack 版本为 3.6.0，本文分两部分。第一步是简单的使用 webpack，第二部分通过一个真实项目来配置 webpack，没有使用任何的 CLI，都是一步步配置直到完成生产代码的打包
+              </div>
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <a id="more"></a>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
 <h1 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a><code>正文部分</code></h1><left style="font-size: 30px; font-weight:700"><code>webpack：从入门到真实项目配置</code></left>
 
 <hr>
@@ -214,32 +355,14 @@
 <p>该文使用的 Webpack 版本为 3.6.0，本文分两部分。第一步是简单的使用 webpack，第二部分通过一个真实项目来配置 webpack，没有使用任何的 CLI，都是一步步配置直到完成生产代码的打包。<a href="https://github.com/Modify01/webpack" target="_blank" rel="external">这是本项目对应的仓库</a>，每个小节基本都对应了一次 commit。</p>
 </blockquote>
 <p>这是本文的大纲，如果觉得有兴趣你就可以往下看了</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E4%BB%8B%E7%BB%8D.png" alt="webpack介绍" title="">
-                </div>
-                <div class="image-caption">webpack介绍</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E4%BB%8B%E7%BB%8D.png" alt="webpack介绍"></p>
 <h2 id="Webpack-到底是什么"><a href="#Webpack-到底是什么" class="headerlink" title="Webpack 到底是什么"></a>Webpack 到底是什么</h2><p>自从出现模块化以后，大家可以将原本一坨代码分离到个个模块中，但是由此引发了一个问题。每个 JS 文件都需要从服务器去拿，由此会导致加载速度变慢。Webpack 最主要的目的就是为了解决这个问题，将所有小文件打包成一个或多个大文件，官网的图片很好的诠释了这个事情，除此之外，Webpack 也是一个能让你使用各种前端新技术的工具。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88.png" alt="webpack到底是什么" title="">
-                </div>
-                <div class="image-caption">webpack到底是什么</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88.png" alt="webpack到底是什么"></p>
 <h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>安装</p>
 <p>在命令行中依次输入</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir  webpack-demo</div><div class="line">cd webpack-demo</div><div class="line"><span class="comment">// 创建 package.json，这里会问一些问题，直接回车跳过就行</span></div><div class="line">npm init </div><div class="line"><span class="comment">//  推荐这个安装方式，当然你也安装在全局环境下</span></div><div class="line"><span class="comment">// 这种安装方式会将 webpack 放入 devDependencies 依赖中</span></div><div class="line">npm install --save-dev webpack</div></pre></td></tr></table></figure>
 <p>然后按照下图创建文件</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84.png" alt="webpack文件夹结构" title="">
-                </div>
-                <div class="image-caption">webpack文件夹结构</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84.png" alt="webpack文件夹结构"></p>
 <p>在以下文件写入代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// sum.js</span></div><div class="line"><span class="comment">// 这个模块化写法是 node 环境独有的，浏览器原生不支持使用</span></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b</div><div class="line">&#125;</div><div class="line"><span class="comment">// index.js</span></div><div class="line"><span class="keyword">var</span> sum = <span class="built_in">require</span>(<span class="string">'./sum'</span>)</div><div class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>, <span class="number">2</span>))</div></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./build/bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -248,13 +371,7 @@
 <p>现在我们可以开始使用 webpack 了，在命令行中输入</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node_modules/.bin/webpack</div></pre></td></tr></table></figure>
 <p>没问题的话你应该可以看到类似的样子</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="webpack运行结果" title="">
-                </div>
-                <div class="image-caption">webpack运行结果</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="webpack运行结果"></p>
 <p>可以发现原本两个 JS 文件只有 100B，但是打包后却增长到 2.66KB，这之中 webpack 肯定做了什么事情，我们去 bundle.js 文件中看看。</p>
 <p>把代码简化以后，核心思路是这样的</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> array = [(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> sum = array[<span class="number">1</span>]</div><div class="line">        <span class="built_in">console</span>.log(sum(<span class="number">1</span>, <span class="number">2</span>))</div><div class="line">    &#125;),</div><div class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params">a,b</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> a + b</div><div class="line">    &#125;)</div><div class="line">]</div><div class="line">array[<span class="number">0</span>]() <span class="comment">// -&gt; 3</span></div></pre></td></tr></table></figure>
@@ -283,24 +400,12 @@
 <p>先安装库</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev url-loader file-loader</div></pre></td></tr></table></figure>
 <p>创建一个 <code>images</code> 文件夹，放入两张图片，并且在 <code>app</code> 文件夹下创建一个 js 文件处理图片<br>，目前的文件夹结构如图</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84.png" alt="webpack图片文件夹结构" title="">
-                </div>
-                <div class="image-caption">webpack图片文件夹结构</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84.png" alt="webpack图片文件夹结构"></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// addImage.js</span></div><div class="line"><span class="keyword">let</span> smallImg = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>)</div><div class="line"><span class="comment">// 必须 require 进来</span></div><div class="line">smallImg.src = <span class="built_in">require</span>(<span class="string">'../images/small.jpeg'</span>)</div><div class="line"><span class="built_in">document</span>.body.appendChild(smallImg)</div><div class="line"></div><div class="line"><span class="keyword">let</span> bigImg = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>)</div><div class="line">bigImg.src = <span class="built_in">require</span>(<span class="string">'../images/big.jpeg'</span>)</div><div class="line"><span class="built_in">document</span>.body.appendChild(bigImg)</div></pre></td></tr></table></figure>
 <p>接下来修改 <code>webpack.config.js</code> 代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"><span class="comment">// ...</span></div><div class="line">    <span class="built_in">module</span>: &#123;</div><div class="line">        <span class="attr">rules</span>: [</div><div class="line">            <span class="comment">// ...</span></div><div class="line">            &#123;</div><div class="line">            <span class="comment">// 图片格式正则</span></div><div class="line">                test: <span class="regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,</div><div class="line">                <span class="attr">use</span>: [</div><div class="line">                  &#123;</div><div class="line">                    <span class="attr">loader</span>: <span class="string">'url-loader'</span>,</div><div class="line">                    <span class="comment">// 配置 url-loader 的可选项</span></div><div class="line">                    options: &#123;</div><div class="line">                    <span class="comment">// 限制 图片大小 10000B，小于限制会将图片转换为 base64格式</span></div><div class="line">                      limit: <span class="number">10000</span>,</div><div class="line">                    <span class="comment">// 超出限制，创建的文件格式</span></div><div class="line">                    <span class="comment">// build/images/[图片名].[hash].[图片格式]</span></div><div class="line">                      name: <span class="string">'images/[name].[hash].[ext]'</span></div><div class="line">                   &#125;</div><div class="line">                  &#125;</div><div class="line">                ]</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>运行 <code>npm run start</code>，打包成功如下图</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%AF%B9%E4%BA%8E%E5%9B%BE%E7%89%87%E7%9A%84%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%9C.png" alt="webpack对于图片处理结果" title="">
-                </div>
-                <div class="image-caption">webpack对于图片处理结果</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%AF%B9%E4%BA%8E%E5%9B%BE%E7%89%87%E7%9A%84%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%9C.png" alt="webpack对于图片处理结果"></p>
 <p>可以发现大的图片被单独提取了出来，小的图片打包进了 <code>bundle.js</code> 中。</p>
 <p>在浏览器中打开 HTML 文件，发现小图确实显示出来了，但是却没有看到大图，打开开发者工具栏，可以发现我们大图的图片路径是有问题的，所以我们又要修改 <code>webpack.config.js</code> 代码了。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="attr">entry</span>:  <span class="string">'./app/index.js'</span>, <span class="comment">// 入口文件</span></div><div class="line">    output: &#123;</div><div class="line">      <span class="attr">path</span>: path.resolve(__dirname, <span class="string">'build'</span>), <span class="comment">// 必须使用绝对地址，输出文件夹</span></div><div class="line">      filename: <span class="string">"bundle.js"</span>, <span class="comment">// 打包后输出文件的文件名</span></div><div class="line">      publicPath: <span class="string">'build/'</span> <span class="comment">// 知道如何寻找资源</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
@@ -314,67 +419,31 @@
 <p>然后修改 <code>webpack.config.js</code> 代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"><span class="comment">// ...</span></div><div class="line">    <span class="built_in">module</span>: &#123;</div><div class="line">      <span class="attr">rules</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</div><div class="line">            <span class="attr">use</span>: [<span class="string">'style-loader'</span>,</div><div class="line">                &#123;</div><div class="line">                    <span class="attr">loader</span>: <span class="string">'css-loader'</span>,</div><div class="line">                    <span class="attr">options</span>: &#123;</div><div class="line">                        <span class="attr">modules</span>: <span class="literal">true</span></div><div class="line">                       &#125;</div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;,</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>运行下 <code>npm run start</code>，然后刷新页面，可以发现图片被正确的加上了边框，现在我们来看一下 HTML 的文件结构</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%A4%84%E7%90%86css%E8%BF%87%E7%A8%8B.png" alt="webpack处理css过程" title="">
-                </div>
-                <div class="image-caption">webpack处理css过程</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%A4%84%E7%90%86css%E8%BF%87%E7%A8%8B.png" alt="webpack处理css过程"></p>
 <p>从上图可以看到，我们在 <code>addImage.css</code> 文件中写的代码被加入到了 <code>style</code> 标签中，并且因为我们开启了 CSS 模块化的选项，所以 <code>.test</code> 被转成了唯一的哈希值，这样就解决了 CSS 的变量名重复问题。</p>
 <p>但是将 CSS 代码整合进 JS 文件也是有弊端的，大量的 CSS 代码会造成 JS 文件的大小变大，操作 DOM 也会造成性能上的问题，所以接下来我们将使用 <code>extract-text-webpack-plugin</code> 插件将 CSS 文件打包为一个单独文件</p>
 <p>首先安装 <code>npm i --save-dev extract-text-webpack-plugin</code></p>
 <p>然后修改 <code>webpack.config.js</code> 代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">"extract-text-webpack-plugin"</span>)</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"><span class="comment">// ....</span></div><div class="line">    <span class="built_in">module</span>: &#123;</div><div class="line">      <span class="attr">rules</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</div><div class="line">          <span class="comment">// 写法和之前基本一致</span></div><div class="line">          loader: ExtractTextPlugin.extract(&#123;</div><div class="line">          <span class="comment">// 必须这样写，否则会报错</span></div><div class="line">                fallback: <span class="string">'style-loader'</span>,</div><div class="line">                <span class="attr">use</span>: [&#123;</div><div class="line">                    <span class="attr">loader</span>: <span class="string">'css-loader'</span>,</div><div class="line">                    <span class="attr">options</span>: &#123; </div><div class="line">                        <span class="attr">modules</span>: <span class="literal">true</span></div><div class="line">                    &#125;</div><div class="line">                &#125;]</div><div class="line">            &#125;)</div><div class="line">        ]</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 插件列表</span></div><div class="line">    plugins: [</div><div class="line">    <span class="comment">// 输出的文件路径</span></div><div class="line">      <span class="keyword">new</span> ExtractTextPlugin(<span class="string">"css/[name].[hash].css"</span>)</div><div class="line">    ]</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>运行下 <code>npm run start</code>，可以发现 CSS 文件被单独打包出来了</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E7%9A%84css%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85.png" alt="webpack的css文件打包" title="">
-                </div>
-                <div class="image-caption">webpack的css文件打包</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E7%9A%84css%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85.png" alt="webpack的css文件打包"></p>
 <p>但是这时候刷新页面会发现图片的边框消失了，那是因为我们的 HTML 文件没有引用新的 CSS 文件，所以这里需要我们手动引入下，在下面的章节我们会通过插件的方式自动引入新的文件。</p>
 <p>接下来，会用一个项目来继续我们的 webpack 学习，在这之前，先 clone 一下项目。该项目原地址是 <a href="https://github.com/StephenGrider/WebpackProject" target="_blank" rel="external">这里</a>，因为使用的 webpack 版本太低，并且依赖的库也有点问题，故我将项目拷贝了过来并修改了几个库的版本号。</p>
 <p>请依次按照以下代码操作</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git clone https:<span class="comment">//github.com/KieSun/webpack-demo.git</span></div><div class="line">cd webpack-demo</div><div class="line"><span class="comment">// 切换到 0.1 标签上并创建一个新分支</span></div><div class="line">git checkout -b demo <span class="number">0.1</span></div><div class="line">cd project</div><div class="line">npm i </div><div class="line"><span class="comment">// 查看分支是否为 demo，没问题的话就可以进行下一步</span></div></pre></td></tr></table></figure>
 <h2 id="如何在项目中使用-webpack"><a href="#如何在项目中使用-webpack" class="headerlink" title="如何在项目中使用 webpack"></a>如何在项目中使用 webpack</h2><p>项目中已经配置了很简单的 babel 和 webpack，直接运行 <code>npm run start</code> 即可</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8webpack.png" alt="如何在项目中使用webpack" title="">
-                </div>
-                <div class="image-caption">如何在项目中使用webpack</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8webpack.png" alt="如何在项目中使用webpack"></p>
 <p>这时候你会发现这个 bundle.js 居然有这么大，这肯定是不能接受的，所以接下来章节的主要目的就是将单个文件拆分为多个文件，优化项目。</p>
 <h2 id="分离代码"><a href="#分离代码" class="headerlink" title="分离代码"></a>分离代码</h2><p>先让我们考虑下缓存机制。对于代码中依赖的库很少会去主动升级版本，但是我们自己的代码却每时每刻都在变更，所以我们可以考虑将依赖的库和自己的代码分割开来，这样用户在下一次使用应用时就可以尽量避免重复下载没有变更的代码，那么既然要将依赖代码提取出来，我们需要变更下入口和出口的部分代码。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这是 packet.json 中 dependencies 下的</span></div><div class="line"><span class="keyword">const</span> VENOR = [<span class="string">"faker"</span>,</div><div class="line">  <span class="string">"lodash"</span>,</div><div class="line">  <span class="string">"react"</span>,</div><div class="line">  <span class="string">"react-dom"</span>,</div><div class="line">  <span class="string">"react-input-range"</span>,</div><div class="line">  <span class="string">"react-redux"</span>,</div><div class="line">  <span class="string">"redux"</span>,</div><div class="line">  <span class="string">"redux-form"</span>,</div><div class="line">  <span class="string">"redux-thunk"</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"><span class="comment">// 之前我们都是使用了单文件入口</span></div><div class="line"><span class="comment">// entry 同时也支持多文件入口，现在我们有两个入口</span></div><div class="line"><span class="comment">// 一个是我们自己的代码，一个是依赖库的代码</span></div><div class="line">  entry: &#123;</div><div class="line">  <span class="comment">// bundle 和 vendor 都是自己随便取名的，会映射到 [name] 中</span></div><div class="line">    bundle: <span class="string">'./src/index.js'</span>,</div><div class="line">    <span class="attr">vendor</span>: VENOR</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">output</span>: &#123;</div><div class="line">    <span class="attr">path</span>: path.join(__dirname, <span class="string">'dist'</span>),</div><div class="line">    <span class="attr">filename</span>: <span class="string">'[name].js'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>现在我们 build 一下，看看是否有惊喜出现</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E9%A1%B9%E7%9B%AE%E5%88%86%E7%A6%BB.png" alt="webpack项目分离" title="">
-                </div>
-                <div class="image-caption">webpack项目分离</div>
-            </figure>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E9%A1%B9%E7%9B%AE%E5%88%86%E7%A6%BB%EF%BC%882%EF%BC%89.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E9%A1%B9%E7%9B%AE%E5%88%86%E7%A6%BB.png" alt="webpack项目分离"></p>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E9%A1%B9%E7%9B%AE%E5%88%86%E7%A6%BB%EF%BC%882%EF%BC%89.png" alt=""></p>
 <p>真的有惊喜。。为什么 bundle 文件大小压根没变。这是因为 bundle 中也引入了依赖库的代码,刚才的步骤并没有抽取 bundle 中引入的代码，接下来让我们学习如何将共同的代码抽取出来。</p>
 <h3 id="抽取共同代码"><a href="#抽取共同代码" class="headerlink" title="抽取共同代码"></a>抽取共同代码</h3><p>在这小节我们使用 webpack 自带的插件 <code>CommonsChunkPlugin</code>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"><span class="comment">//...</span></div><div class="line">  output: &#123;</div><div class="line">    <span class="attr">path</span>: path.join(__dirname, <span class="string">'dist'</span>),</div><div class="line">    <span class="comment">// 既然我们希望缓存生效，就应该每次在更改代码以后修改文件名</span></div><div class="line">    <span class="comment">// [chunkhash]会自动根据文件是否更改而更换哈希</span></div><div class="line">    filename: <span class="string">'[name].[chunkhash].js'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [</div><div class="line">    <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">    <span class="comment">// vendor 的意义和之前相同</span></div><div class="line">    <span class="comment">// manifest文件是将每次打包都会更改的东西单独提取出来，保证没有更改的代码无需重新打包，这样可以加快打包速度</span></div><div class="line">      names: [<span class="string">'vendor'</span>, <span class="string">'manifest'</span>],</div><div class="line">      <span class="comment">// 配合 manifest 文件使用</span></div><div class="line">      minChunks: <span class="literal">Infinity</span></div><div class="line">    &#125;)</div><div class="line">  ]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>当我们重新 build 以后，会发现 bundle 文件很明显的减小了体积</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E6%8A%BD%E5%8F%96%E5%85%B1%E5%90%8C%E4%BB%A3%E7%A0%81.png" alt="webpack抽取公共代码" title="">
-                </div>
-                <div class="image-caption">webpack抽取公共代码</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E6%8A%BD%E5%8F%96%E5%85%B1%E5%90%8C%E4%BB%A3%E7%A0%81.png" alt="webpack抽取公共代码"></p>
 <p>但是我们使用哈希来保证缓存的同时会发现每次 build 都会生成不一样的文件，这时候我们引入另一个插件来帮助我们删除不需要的文件。</p>
 <blockquote>
 <p>npm install –save-dev clean-webpack-plugin</p>
@@ -389,42 +458,18 @@
 <p>然后修改配置文件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"><span class="comment">//...</span></div><div class="line">  plugins: [</div><div class="line">  <span class="comment">// 我们这里将之前的 HTML 文件当做模板</span></div><div class="line">  <span class="comment">// 注意在之前 HTML 文件中请务必删除之前引入的 JS 文件</span></div><div class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</div><div class="line">      <span class="attr">template</span>: <span class="string">'index.html'</span></div><div class="line">    &#125;)</div><div class="line">  ]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>执行 build 操作会发现同时生成了 HTML 文件，并且已经自动引入了 JS 文件</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%88%A0%E9%99%A4%E5%A4%9A%E4%BD%99%E7%9A%84%E4%BB%A3%E7%A0%81.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E5%88%A0%E9%99%A4%E5%A4%9A%E4%BD%99%E7%9A%84%E4%BB%A3%E7%A0%81.png" alt=""></p>
 <h3 id="按需加载代码"><a href="#按需加载代码" class="headerlink" title="按需加载代码"></a>按需加载代码</h3><p>在这一小节我们将学习如何按需加载代码，在这之前的 vendor 入口我发现忘记加入 router 这个库了，大家可以加入这个库并且重新 build 下，会发现 bundle 只有不到 300KB 了。</p>
 <p>现在我们的 bundle 文件包含了我们全部的自己代码。但是当用户访问我们的首页时，其实我们根本无需让用户加载除了首页以外的代码，这个优化我们可以通过路由的异步加载来完成。</p>
 <p>现在修改 <code>src/router.js</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注意在最新版的 V4路由版本中，更改了按需加载的方式，如果安装了 V4版，可以自行前往官网学习</span></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Router, Route, IndexRoute, hashHistory &#125; <span class="keyword">from</span> <span class="string">'react-router'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./components/Home'</span>;</div><div class="line"><span class="keyword">import</span> ArtistMain <span class="keyword">from</span> <span class="string">'./components/artists/ArtistMain'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> rootRoute = &#123;</div><div class="line">  <span class="attr">component</span>: Home,</div><div class="line">  <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">  <span class="attr">indexRoute</span>: &#123; <span class="attr">component</span>: ArtistMain &#125;,</div><div class="line">  <span class="attr">childRoutes</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'artists/new'</span>,</div><div class="line">      getComponent(location, cb) &#123;</div><div class="line">        System.import(<span class="string">'./components/artists/ArtistCreate'</span>)</div><div class="line">          .then(<span class="function"><span class="params">module</span> =&gt;</span> cb(<span class="literal">null</span>, <span class="built_in">module</span>.default))</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'artists/:id/edit'</span>,</div><div class="line">      getComponent(location, cb) &#123;</div><div class="line">        System.import(<span class="string">'./components/artists/ArtistEdit'</span>)</div><div class="line">          .then(<span class="function"><span class="params">module</span> =&gt;</span> cb(<span class="literal">null</span>, <span class="built_in">module</span>.default))</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'artists/:id'</span>,</div><div class="line">      getComponent(location, cb) &#123;</div><div class="line">        System.import(<span class="string">'./components/artists/ArtistDetail'</span>)</div><div class="line">          .then(<span class="function"><span class="params">module</span> =&gt;</span> cb(<span class="literal">null</span>, <span class="built_in">module</span>.default))</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Routes = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">history</span>=<span class="string">&#123;hashHistory&#125;</span> <span class="attr">routes</span>=<span class="string">&#123;rootRoute&#125;</span> /&gt;</span></span></div><div class="line">  );</div><div class="line">&#125;;</div><div class="line"></div><div class="line">export default Routes;</div></pre></td></tr></table></figure>
 <p>然后执行 build 命令，可以发现我们的 bundle 文件又瘦身了，并且新增了几个文件</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/webpack%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD.png" alt="webpack按需加载代码" title="">
-                </div>
-                <div class="image-caption">webpack按需加载代码</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/webpack%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD.png" alt="webpack按需加载代码"></p>
 <p>将 HTML 文件在浏览器中打开，当点击路由跳转时，可以在开发者工具中的 Network 一栏中看到加载了一个 JS 文件。</p>
 <p>首页</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://user-gold-cdn.xitu.io/2017/9/17/a5a9c677fc770d8a99bbed9e79fdd730?imageView2/0/w/1280/h/960" alt="webpack首页加载" title="">
-                </div>
-                <div class="image-caption">webpack首页加载</div>
-            </figure>
+<p><img src="https://user-gold-cdn.xitu.io/2017/9/17/a5a9c677fc770d8a99bbed9e79fdd730?imageView2/0/w/1280/h/960" alt="webpack首页加载"></p>
 <p>点击右上角 Random Artist 以后</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://user-gold-cdn.xitu.io/2017/9/17/93e7c9d86eeb7076b6f5e7434b0012e9?imageView2/0/w/1280/h/960" alt="点击右上角 Random Artist 以后" title="">
-                </div>
-                <div class="image-caption">点击右上角 Random Artist 以后</div>
-            </figure>
+<p><img src="https://user-gold-cdn.xitu.io/2017/9/17/93e7c9d86eeb7076b6f5e7434b0012e9?imageView2/0/w/1280/h/960" alt="点击右上角 Random Artist 以后"></p>
 <h2 id="自动刷新"><a href="#自动刷新" class="headerlink" title="自动刷新"></a>自动刷新</h2><p>每次更新代码都需要执行依次 build，并且还要等上一会很麻烦，这一小节介绍如何使用自动刷新的功能。</p>
 <p>首先安装插件</p>
 <blockquote>
@@ -433,21 +478,9 @@
 <p>然后修改 packet.json 文件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">    <span class="string">"build"</span>: <span class="string">"webpack"</span>,</div><div class="line">    <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --open"</span></div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
 <p>现在直接执行 <code>npm run dev</code> 可以发现浏览器自动打开了一个空的页面，并且在命令行中也多了新的输出</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://user-gold-cdn.xitu.io/2017/9/17/43f5b70bd82152ce21379120dfab8d71?imageView2/0/w/1280/h/960" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://user-gold-cdn.xitu.io/2017/9/17/43f5b70bd82152ce21379120dfab8d71?imageView2/0/w/1280/h/960" alt=""></p>
 <p>等待编译完成以后，修改 JS 或者 CSS 文件，可以发现 webpack 自动帮我们完成了编译，并且只更新了需要更新的代码</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://user-gold-cdn.xitu.io/2017/9/17/7a5769363d0782abc59902d370c52472?imageView2/0/w/1280/h/960" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://user-gold-cdn.xitu.io/2017/9/17/7a5769363d0782abc59902d370c52472?imageView2/0/w/1280/h/960" alt=""></p>
 <p>但是每次重新刷新页面对于 debug 来说很不友好，这时候就需要用到模块热替换了。但是因为项目中使用了 React，并且 Vue 或者其他框架都有自己的一套 hot-loader，所以这里就略过了，有兴趣的可以自己学习下。</p>
 <h2 id="生成生产环境代码"><a href="#生成生产环境代码" class="headerlink" title="生成生产环境代码"></a>生成生产环境代码</h2><p>现在我们可以将之前所学和一些新加的插件整合在一起，build 生产环境代码。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev url-loader optimize-css-assets-webpack-plugin file-loader extract-text-webpack-plugin</div></pre></td></tr></table></figure>
@@ -456,318 +489,401 @@
 <p>修改 packet.json 文件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">    <span class="string">"build"</span>: <span class="string">"NODE_ENV=production webpack -p"</span>,</div><div class="line">    <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --open"</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>执行 <code>npm run build</code></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://user-gold-cdn.xitu.io/2017/9/17/ff8acf374946ee6db118117f22ec48f5?imageView2/0/w/1280/h/960" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://user-gold-cdn.xitu.io/2017/9/17/ff8acf374946ee6db118117f22ec48f5?imageView2/0/w/1280/h/960" alt=""></p>
 <p>可以看到我们在经历了这么多步以后，将 bundle 缩小到了只有 27.1KB，像 vendor 这种常用的库我们一般可以使用 CDN 的方式外链进来。</p>
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>webpack 配置上有些实用的小点在上文没有提到，统一在这里提一下。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">resolve</span>: &#123;</div><div class="line">  <span class="comment">// 文件扩展名，写明以后就不需要每个文件写后缀</span></div><div class="line">    extensions: [<span class="string">'.js'</span>, <span class="string">'.css'</span>, <span class="string">'.json'</span>],</div><div class="line"> <span class="comment">// 路径别名，比如这里可以使用 css 指向 static/css 路径</span></div><div class="line">    alias: &#123;</div><div class="line">      <span class="string">'@'</span>: resolve(<span class="string">'src'</span>),</div><div class="line">      <span class="string">'css'</span>: resolve(<span class="string">'static/css'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// 生成 source-map，用于打断点，这里有好几个选项</span></div><div class="line">  devtool: <span class="string">'#cheap-module-eval-source-map'</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>如果你是跟着本文一个个步骤敲下来的，那么大部分的 webpack 配置你应该都是可以看懂了，并且自己应该也知道如何去配置。谢谢大家看到这里，<a href="https://github.com/Modify01/webpack" target="_blank" rel="external">这是本项目对应的仓库</a>，每个小节基本都对应了一次 commit。</p>
 <p>文章较长，有错误也难免，如果你发现了任何问题或者我有任何表述的不明白的地方，都可以留言给我。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2017-09-20T02:57:00.000Z" itemprop="dateUpdated">2017-09-20 10:57:00</time>
-</span><br>
-
-
-        
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/09/20/webpack从入门到真实项目配置/" target="_blank" rel="external">http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/</a>
-        
+      
     </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/me.png" alt="wyx">
-            wyx
-        </a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端构建工具/" rel="tag"># 前端构建工具</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/11/js 的正则表达式/" rel="next" title="js 的正则表达式">
+                <i class="fa fa-chevron-left"></i> js 的正则表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/06/javascript风格指南/" rel="prev" title="Airbnb JavaScript风格指南（）">
+                Airbnb JavaScript风格指南（） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/&title=《webpack：从入门到真实项目配置》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/&title=《webpack：从入门到真实项目配置》 — 要么庸俗要么孤独&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack：从入门到真实项目配置》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
 
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/11/06/javascript风格指南/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Airbnb JavaScript风格指南（）</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/09/11/js 的正则表达式/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">js 的正则表达式</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-<section class="comments" id="comments">
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
-    <!-- UY END -->
-</section>
-
-
-
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        大爷过来玩呀~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.png" data-alipay="/img/zfb.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">wyx</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
             </div>
-        </label>
-        
-    </div>
-</div>
+          
 
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
+          <div class="links-of-author motion-element">
             
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>wyx &copy; 2015 - 2017</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+          </div>
 
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正文部分"><span class="nav-number">1.</span> <span class="nav-text">正文部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack-到底是什么"><span class="nav-number">1.1.</span> <span class="nav-text">Webpack 到底是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单使用"><span class="nav-number">1.2.</span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loader"><span class="nav-number">1.3.</span> <span class="nav-text">Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Babel"><span class="nav-number">1.3.1.</span> <span class="nav-text">Babel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理图片"><span class="nav-number">1.3.2.</span> <span class="nav-text">处理图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理-CSS-文件"><span class="nav-number">1.3.3.</span> <span class="nav-text">处理 CSS 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在项目中使用-webpack"><span class="nav-number">1.4.</span> <span class="nav-text">如何在项目中使用 webpack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分离代码"><span class="nav-number">1.5.</span> <span class="nav-text">分离代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抽取共同代码"><span class="nav-number">1.5.1.</span> <span class="nav-text">抽取共同代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按需加载代码"><span class="nav-number">1.5.2.</span> <span class="nav-text">按需加载代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动刷新"><span class="nav-number">1.6.</span> <span class="nav-text">自动刷新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成生产环境代码"><span class="nav-number">1.7.</span> <span class="nav-text">生成生产环境代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">1.8.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">1.9.</span> <span class="nav-text">后记</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
     </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wyx</span>
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/&title=《webpack：从入门到真实项目配置》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/&title=《webpack：从入门到真实项目配置》 — 要么庸俗要么孤独&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack：从入门到真实项目配置》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/20/webpack从入门到真实项目配置/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aMZLjMAwEQP//0950q2yxBgApK2hFLp9XYisgeAO8XvH1/nd9fj//zdUT199su/Dw8PAGS/+8kmW942v9++TO+Zrx8PDwTvPWW3Oy6Seb+7rYJC8lXzMeHh7eM3nr36/vk2/uayoeHh7e83nrxzQPvkEMgYeHh/c0Xn6crZaEJNqoBrtHshY8PDy8zp786gHu/3ykv4eHh4c37qrnMcG8/Z8HvoV14uHh4R3g5Qfc3uN7jPwbPDw8vPt5vTbVJFDoBRbNCBgPDw/vMK+3QSfg9d/2BhSil4uHh4d3jJccpnNGddH54EL+V1+yFjw8PLwDvGQRk9giv381/ig3wPDw8PDGvOrnhJo3z+btt0skHh4e3gHeetOfvIj8/nmZacYfeHh4eId58yAgb3H1Dsp5gcHDw8M7x6ueP/Mhql4bLF96PqyAh4eHt4vXO7D2wtm8VEwiDDw8PLw7eZNjaxWQRw/VgzUeHh7ePbz8RqNGVGuheUvsy2c8PDy8W3g9cO+lTEay1v+Kh4eHdyevGiVEj4mP3b2hruaRGg8PD6/Fm0S6vSJRjSGqMe62xBoPDw/vgjcJZPPve8Wg2nhr/o8BDw8Pr8grNJOCgLVaBpImWV42Lu+Ah4eHt5VXHbTqjU9VB6oOjg7g4eHhjXnzIKBXTiZFolqW8PDw8PbyJgNP5beYbOKtX16WLjw8PLwDvHzT7+HzslEtDOWXhYeHh7eJN2lHJcfraMseD4Fd3gEPDw/vAK+6+eZH8OQOvbZZXqLw8PDwzvF6Y0+TB1eHt0aFAQ8PD+8YrxqPVltZk0bXKEbBw8PD+ylv76hBNdKtBh94eHh4T+DN49pdwwrlNhgeHh7eAV4vMsjLSTVi6LXBRlkLHh4eXsyrDjZVt/KEnb+ODRg8PDy8Pu8P4eySl/mFOzkAAAAASUVORK5CYII=" alt="微信分享二维码">
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+  <span class="post-meta-divider">|</span>
 
 
-</script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
 
 
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+        
 
 
 
 
 
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+        
+      </div>
+    </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '死鬼去哪里了！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

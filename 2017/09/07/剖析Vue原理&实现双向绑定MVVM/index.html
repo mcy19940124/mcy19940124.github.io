@@ -1,26 +1,87 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    
-
-    
-
-    
-
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
-    <meta charset="utf-8">
-    
-    
-    
-    <title>剖析Vue原理&amp;实现双向绑定MVVM | 要么庸俗要么孤独</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Vuejs,JavaScript,双向数据绑定">
-    <meta name="description" content="剖析Vue原理&amp;实现双向绑定MVVM">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vuejs,JavaScript,双向数据绑定," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="要么庸俗要么孤独" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="剖析Vue原理&amp;实现双向绑定MVVM">
 <meta name="keywords" content="Vuejs,JavaScript,双向数据绑定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剖析Vue原理&amp;实现双向绑定MVVM">
@@ -35,162 +96,242 @@
 <meta name="twitter:title" content="剖析Vue原理&amp;实现双向绑定MVVM">
 <meta name="twitter:description" content="剖析Vue原理&amp;实现双向绑定MVVM">
 <meta name="twitter:image" content="http://orzuutv5f.bkt.clouddn.com/%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%95%88%E6%9E%9C.gif">
-    
-        <link rel="alternate" type="application/atom+xml" title="要么庸俗要么孤独" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/img/me.png">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/"/>
+
+
+
+
+
+  <title>剖析Vue原理&实现双向绑定MVVM | 要么庸俗要么孤独</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/me.png">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">wyx</h5>
-          <a href="mailto:Modifywyx@gmail.com" title="Modifywyx@gmail.com" class="mail">Modifywyx@gmail.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">要么庸俗要么孤独</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Modify01" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="http://weibo.com/5670644167/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
-                <i class="icon icon-lg icon-weibo"></i>
-                Weibo
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">剖析Vue原理&amp;实现双向绑定MVVM</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">剖析Vue原理&amp;实现双向绑定MVVM</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2017-09-07T06:36:02.000Z" itemprop="datePublished" class="page-time">
-  2017-09-07
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/双向数据绑定/">双向数据绑定</a></li></ul>
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-        </h5>
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="要么庸俗要么孤独">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正文开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">正文开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#几种实现双向绑定的做法"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">几种实现双向绑定的做法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现Observer"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">实现Observer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现Compile"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">实现Compile</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现Watcher"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">实现Watcher</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现MVVM"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">实现MVVM</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-剖析Vue原理&amp;实现双向绑定MVVM"
-  class="post-article article-type-post fade" itemprop="blogPost">
+      <header class="post-header">
 
-    <div class="post-card">
-        <h1 class="post-card-title">剖析Vue原理&实现双向绑定MVVM</h1>
+        
+        
+          <h1 class="post-title" itemprop="name headline">剖析Vue原理&实现双向绑定MVVM</h1>
+        
+
         <div class="post-meta">
-            <time class="post-time" title="2017-09-07 14:36:02" datetime="2017-09-07T06:36:02.000Z"  itemprop="datePublished">2017-09-07</time>
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T14:36:02+08:00">
+                2017-09-07
+              </time>
+            
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/双向数据绑定/">双向数据绑定</a></li></ul>
-
-
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/双向数据绑定/" itemprop="url" rel="index">
+                    <span itemprop="name">双向数据绑定</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  剖析Vue原理&实现双向绑定MVVM
+              </div>
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <a id="more"></a>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
 <h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><center style="font-size: 30px"><code>剖析Vue原理&amp;实现双向绑定MVVM</code></center>
 
 <blockquote>
@@ -198,13 +339,7 @@
 </blockquote>
 <p>相信大家对mvvm双向绑定应该都不陌生了，一言不合上代码，下面先看一个本文最终实现的效果吧，和vue一样的语法，如果还不了解双向绑定，猛戳<a href="https://www.google.com.hk/search?q=%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A" target="_blank" rel="external">Google</a></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mvvm-app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"word"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;word&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"sayHi"</span>&gt;</span>change model<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/observer.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/watcher.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/compile.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/mvvm.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> MVVM(&#123;</div><div class="line">        <span class="attr">el</span>: <span class="string">'#mvvm-app'</span>,</div><div class="line">        <span class="attr">data</span>: &#123;</div><div class="line">            <span class="attr">word</span>: <span class="string">'Hello World!'</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">methods</span>: &#123;</div><div class="line">            <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">this</span>.word = <span class="string">'Hi, everybody!'</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>效果:<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%95%88%E6%9E%9C.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
+<p>效果:<br><img src="http://orzuutv5f.bkt.clouddn.com/%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%95%88%E6%9E%9C.gif" alt=""></p>
 <h2 id="几种实现双向绑定的做法"><a href="#几种实现双向绑定的做法" class="headerlink" title="几种实现双向绑定的做法"></a>几种实现双向绑定的做法</h2><p>目前几种主流的mvc(vm)框架都实现了单向数据绑定，而我所理解的双向数据绑定无非就是在单向绑定的基础上给可输入元素（input、textare等）添加了change(input)事件，来动态修改model和 view，并没有多高深。所以无需太过介怀是实现的单向或双向绑定。</p>
 <p>实现数据绑定的做法有大致如下几种：</p>
 <blockquote>
@@ -215,13 +350,7 @@
  <left style="font-size: 14px;font-weight: bold;">发布者-订阅者模式:</left>一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做法是<code>vm.set(&#39;property&#39;, value)</code>，这里有篇文章讲的比较详细，有兴趣可点<a href="http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day" target="_blank" rel="external">这里</a><br><br>这种方式现在毕竟太low了，我们更希望通过 <code>vm.property = value</code> 这种方式更新数据，同时自动更新视图，于是有了下面两种方式<br><br><left style="font-size: 14px;font-weight: bold;">脏值检查:</left> angular.js 是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，最简单的方式就是通过 <code>setInterval()</code> 定时轮询检测数据变动，当然Google不会这么low，angular只有在指定的事件触发时进入脏值检测，大致如下：<br><br>- DOM事件，譬如用户输入文本，点击按钮等。( ng-click )<br>- XHR响应事件 ( $http )<br>- 浏览器Location变更事件 ( $location )<br>- Timer事件( $timeout , $interval )<br>- 执行 $digest() 或 $apply()<br>- 数据劫持: vue.js 则是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。<br><br><left style="font-size: 14px;font-weight: bold;">数据劫持:</left> vue.js 则是采用数据劫持结合发布者-订阅者模式的方式，通过<code>Object.defineProperty()</code>来劫持各个属性的<code>setter</code>，<code>getter</code>，在数据变动时发布消息给订阅者，触发相应的监听回调。<br><br>## 思路整理<br><br>已经了解到vue是通过数据劫持的方式来做数据绑定的，其中最核心的方法便是通过<code>Object.defineProperty()</code>来实现对属性的劫持，达到监听数据变动的目的，无疑这个方法是本文中最重要、最基础的内容之一，如果不熟悉defineProperty，猛戳<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">这里</a><br><left style="font-size: 16px;font-weight: bold;">整理了一下，要实现mvvm的双向绑定，就必须要实现以下几点：</left>
 
 <p>1, 实现一个数据监听器Observer，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者<br>2, 实现一个指令解析器Compile，对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数<br>3, 实现一个Watcher，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图<br>4, mvvm入口函数，整合以上三者</p>
-<p>上述流程如图所示：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/mvvm%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="数据绑定流程图" title="">
-                </div>
-                <div class="image-caption">数据绑定流程图</div>
-            </figure></p>
+<p>上述流程如图所示：<br><img src="http://orzuutv5f.bkt.clouddn.com/mvvm%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="数据绑定流程图"></p>
 <h2 id="实现Observer"><a href="#实现Observer" class="headerlink" title="实现Observer"></a>实现Observer</h2><p>ok, 思路已经整理完毕，也已经比较明确相关逻辑和模块功能了，let’s do it<br>我们知道可以利用<code>Obeject.defineProperty()</code>来监听属性变动<br>那么将需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上<code>setter</code>和<code>getter</code><br>这样的话，给这个对象的某个值赋值，就会触发<code>setter</code>，那么就能监听到了数据变化。。相关代码可以是这样：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="attr">name</span>: <span class="string">'kindeng'</span>&#125;;</div><div class="line">observe(data);</div><div class="line">data.name = <span class="string">'dmq'</span>; <span class="comment">// 哈哈哈，监听到值变化了 kindeng --&gt; dmq</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!data || <span class="keyword">typeof</span> data !== <span class="string">'object'</span>) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 取出所有属性遍历</span></div><div class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</div><div class="line">        defineReactive(data, key, data[key]);</div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data, key, val</span>) </span>&#123;</div><div class="line">    observe(val); <span class="comment">// 监听子属性</span></div><div class="line">    <span class="built_in">Object</span>.defineProperty(data, key, &#123;</div><div class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>, <span class="comment">// 可枚举</span></div><div class="line">        configurable: <span class="literal">false</span>, <span class="comment">// 不能再define</span></div><div class="line">        get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> val;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newVal</span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'哈哈哈，监听到值变化了 '</span>, val, <span class="string">' --&gt; '</span>, newVal);</div><div class="line">            val = newVal;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样我们已经可以监听每个数据的变化了，那么监听到变化之后就是怎么通知订阅者了，所以接下来我们需要实现一个消息订阅器，很简单，维护一个数组，用来收集订阅者，数据变动触发notify，再调用订阅者的update方法，代码改善之后是这样：</p>
@@ -230,13 +359,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Observer.js</span></div><div class="line"><span class="comment">// ...省略</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(data, key, &#123;</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// 由于需要在闭包内添加watcher，所以通过Dep定义一个全局target属性，暂存watcher, 添加完移除</span></div><div class="line">        Dep.target &amp;&amp; dep.addDep(Dep.target);</div><div class="line">        <span class="keyword">return</span> val;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ... 省略</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Watcher.js</span></div><div class="line">Watcher.prototype = &#123;</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</div><div class="line">        Dep.target = <span class="keyword">this</span>;</div><div class="line">        <span class="keyword">this</span>.value = data[key];    <span class="comment">// 这里会触发属性的getter，从而添加订阅者</span></div><div class="line">        Dep.target = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这里已经实现了一个Observer了，已经具备了监听数据和数据变化通知订阅者的功能，完整代码。那么接下来就是实现Compile了</p>
 <h2 id="实现Compile"><a href="#实现Compile" class="headerlink" title="实现Compile"></a>实现Compile</h2><p>compile主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图，如图所示：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://orzuutv5f.bkt.clouddn.com/Compile%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A.png" alt="实现Compile" title="">
-                </div>
-                <div class="image-caption">实现Compile</div>
-            </figure>
+<p><img src="http://orzuutv5f.bkt.clouddn.com/Compile%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A.png" alt="实现Compile"></p>
 <p>因为遍历解析的过程有多次操作dom节点，为提高性能和效率，会先将跟节点<code>el</code>转换成文档碎片<code>fragment</code>进行解析编译操作，解析完成，再将<code>fragment</code>添加回原来的真实dom节点中</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Compile</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.$el = <span class="keyword">this</span>.isElementNode(el) ? el : <span class="built_in">document</span>.querySelector(el);</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.$el) &#123;</div><div class="line">        <span class="keyword">this</span>.$fragment = <span class="keyword">this</span>.node2Fragment(<span class="keyword">this</span>.$el);</div><div class="line">        <span class="keyword">this</span>.init();</div><div class="line">        <span class="keyword">this</span>.$el.appendChild(<span class="keyword">this</span>.$fragment);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Compile.prototype = &#123;</div><div class="line">    <span class="attr">init</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.compileElement(<span class="keyword">this</span>.$fragment); &#125;,</div><div class="line">    <span class="attr">node2Fragment</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment(), child;</div><div class="line">        <span class="comment">// 将原生节点拷贝到fragment</span></div><div class="line">        <span class="keyword">while</span> (child = el.firstChild) &#123;</div><div class="line">            fragment.appendChild(child);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> fragment;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>compileElement方法将遍历所有节点及其子节点，进行扫描解析编译，调用对应的指令渲染函数进行数据渲染，并调用对应的指令更新函数进行绑定，详看代码及注释说明：</p>
@@ -259,305 +382,396 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要围绕“几种实现双向绑定的做法”、“实现Observer”、“实现Compile”、“实现Watcher”、“实现MVVM”这几个模块来阐述了双向绑定的原理和实现。并根据思路流程渐进梳理讲解了一些细节思路和比较关键的内容点，以及通过展示部分关键代码讲述了怎样一步步实现一个双向绑定MVVM。文中肯定会有一些不够严谨的思考和错误，欢迎大家指正，有兴趣欢迎一起探讨和改进~</p>
 <p>最后，感谢您的阅读！</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2017-09-07T08:55:08.000Z" itemprop="dateUpdated">2017-09-07 16:55:08</time>
-</span><br>
-
-
-        
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/09/07/剖析Vue原理&amp;实现双向绑定MVVM/" target="_blank" rel="external">http://yoursite.com/2017/09/07/剖析Vue原理&amp;实现双向绑定MVVM/</a>
-        
+      
     </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/me.png" alt="wyx">
-            wyx
-        </a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vuejs/" rel="tag"># Vuejs</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/双向数据绑定/" rel="tag"># 双向数据绑定</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/07/关于eslint使用规则，和各种报错对应规则/" rel="next" title="关于eslint使用规则，和各种报错对应规则">
+                <i class="fa fa-chevron-left"></i> 关于eslint使用规则，和各种报错对应规则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/11/js 的正则表达式/" rel="prev" title="js 的正则表达式">
+                js 的正则表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vuejs/">Vuejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/双向数据绑定/">双向数据绑定</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
 
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/09/11/js 的正则表达式/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">js 的正则表达式</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/09/07/关于eslint使用规则，和各种报错对应规则/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">关于eslint使用规则，和各种报错对应规则</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-<section class="comments" id="comments">
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
-    <!-- UY END -->
-</section>
-
-
-
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        大爷过来玩呀~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.png" data-alipay="/img/zfb.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">wyx</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
             </div>
-        </label>
-        
-    </div>
-</div>
+          
 
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
+          <div class="links-of-author motion-element">
             
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>wyx &copy; 2015 - 2017</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+          </div>
 
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正文开始"><span class="nav-number">1.</span> <span class="nav-text">正文开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几种实现双向绑定的做法"><span class="nav-number">1.1.</span> <span class="nav-text">几种实现双向绑定的做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现Observer"><span class="nav-number">1.2.</span> <span class="nav-text">实现Observer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现Compile"><span class="nav-number">1.3.</span> <span class="nav-text">实现Compile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现Watcher"><span class="nav-number">1.4.</span> <span class="nav-text">实现Watcher</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现MVVM"><span class="nav-number">1.5.</span> <span class="nav-text">实现MVVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
     </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wyx</span>
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&pic=http://yoursite.com/img/me.png" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&title=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《剖析Vue原理&实现双向绑定MVVM》 — 要么庸俗要么孤独&url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/07/剖析Vue原理&实现双向绑定MVVM/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwUlEQVR42u3a0U7EMAwEQP7/p0HiCQkadp2mHNL06dSDNNOTYsv221t8vX9e3z9/vfP1Wq/w/b+Sda5WvuHCw8PDG2396rrayvr+mrTeQ/Jtsmc8PDy807w2GCSPWW86DyrtfvDw8PBeh7d1QI/S8fVz8fDw8P4vb5ZGt0k5Hh4e3qvxkmLETrLblonXezhSa8HDw8ObVAbqBthffX6ov4eHh4e3UYTNj+n8uJ+Vbot94uHh4R3g5els/m3S7N8vFq+fUmfreHh4eCWvXSK/nw9yzQJAUgjGw8PDO8fLixH7aXTeDCtS5516DB4eHl7Max+ZB4l8yCApc8xeBx4eHt45Xl5KaAsNbSOtjWlRYMDDw8O7lbcDu8LsFA7y5LsYMsDDw8M7wGuP/llKvf/6ZgMHeHh4ePfy2iLCfjs/T9Pbo//yF8PDw8O7lZcv3RZYk1R4nVjvDLDi4eHhPcMrsu/4YXXLauP6JTDg4eHh3cTLSwbtYEE7RtCOFERJOR4eHt7jvNnR376IvMi7vvPDynh4eHiP8HbKqfuN/+QqisV4eHh4j/DyBPeuUkIxONUGGzw8PLxHeLOH5Wlunljn61/ex8PDwzvGyxtU7WHdDiIUhYYkOOHh4eEd4J1LcHPA7BXUo1d4eHh4N/Hygmx7HLcJdPtttB88PDy8A7z1oXxv0tw2zJI4VgQePDw8vJt4bZLaHtxtuXZ2//Jv8PDw8A7wdg7xJM2dlSraIsgw7uHh4eGNeLMGfzti1YaEPNj8sj4eHh7eAd5si3mLK2fs9/p3fgA8PDy8lpcHgxaQp9ptUl6MheHh4eEd47XtpbY4m5OSgFEEGzw8PLyX4c1KsXmZI0nH8fDw8F6fN2tE5YXXfEyh2CceHh7eMV5ejNhJkdsGW9vuqgcI8PDw8Ea8nQZYEgzaQka7/hYMDw8Pr+N9AD/Zu2AqtDNxAAAAAElFTkSuQmCC" alt="微信分享二维码">
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+  <span class="post-meta-divider">|</span>
 
 
-</script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
 
 
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+        
 
 
 
 
 
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+        
+      </div>
+    </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '死鬼去哪里了！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
