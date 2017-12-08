@@ -205,20 +205,19 @@ Vue入门之组件化开发组件其实就是一个拥有样式、动画、js逻
 
 <div class="post-preview">
 
-    <a href="/2017/06/23/Vue入门之事件绑定处理/">
+    <a href="/2017/06/23/vue入门之Vue实例与生命周期/">
         <h2 class="post-title">
-            Vue(Vue事件处理)
+            Vue(Vue实例详解与生命周期)
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-正文开始Vue入门之事件处理
+正文开始Vue实例详解与生命周期
 
-Vue事件处理监听事件的Vue处理Vue提供了协助我们为标签绑定时间的方法，当然我们可以直接用dom原生的方式去绑定事件。Vue提供的指令进行绑定也是非常方便，而且能让ViewModel更简洁，逻辑更彻底。所以还是推荐大家使用的。
-Vue提供了v-on指令帮助我们进行事件的绑定。基本的内联事件处理方法[官方demo]：
-12345678910111213&l......
+Vue实例详解与生命周期Vue的实例是Vue框架的入口，其实也就是前端的ViewModel，它包含了页面中的业务逻辑处理、数据模型等，当然它也有自己的一系列的生命周期的事件钩子，辅助我们进行对整个Vue实例生成、编译、挂载、销毁等过程进行js控制。
+Vue实例初始化的选项配置对象详解前面我们已经用了很多次 new Vue({...})的代码，而且Vue初......
         </div>
     </a>
     <p class="post-meta">
@@ -279,19 +278,20 @@ Vue入门之数据绑定什么是双向绑定？Vue框架很核心的功能就�
 
 <div class="post-preview">
 
-    <a href="/2017/06/23/vue入门之Vue实例与生命周期/">
+    <a href="/2017/06/23/Vue入门之事件绑定处理/">
         <h2 class="post-title">
-            Vue(Vue实例详解与生命周期)
+            Vue(Vue事件处理)
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-正文开始Vue实例详解与生命周期
+正文开始Vue入门之事件处理
 
-Vue实例详解与生命周期Vue的实例是Vue框架的入口，其实也就是前端的ViewModel，它包含了页面中的业务逻辑处理、数据模型等，当然它也有自己的一系列的生命周期的事件钩子，辅助我们进行对整个Vue实例生成、编译、挂载、销毁等过程进行js控制。
-Vue实例初始化的选项配置对象详解前面我们已经用了很多次 new Vue({...})的代码，而且Vue初......
+Vue事件处理监听事件的Vue处理Vue提供了协助我们为标签绑定时间的方法，当然我们可以直接用dom原生的方式去绑定事件。Vue提供的指令进行绑定也是非常方便，而且能让ViewModel更简洁，逻辑更彻底。所以还是推荐大家使用的。
+Vue提供了v-on指令帮助我们进行事件的绑定。基本的内联事件处理方法[官方demo]：
+12345678910111213&l......
         </div>
     </a>
     <p class="post-meta">
@@ -351,44 +351,17 @@ Vue实例初始化的选项配置对象详解前面我们已经用了很多次 n
 
 <div class="post-preview">
 
-    <a href="/2017/04/25/angular-4/">
+    <a href="/2017/04/25/angular-3/">
         <h2 class="post-title">
-            angularjs(四)
+            angularjs(三)
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            正文开始过滤器
+            正文开始功能介绍
 
-1.过滤器&#160; &#160; &#160; &#160;过滤器（filter）正如其名，作用就是接收一个输入，通过某个规则进行处理，然后返回处理后的结果。主要用在数据的格式化上，例如获取一个数组中的子集，对数组中的元素进行排序等。过滤器通常是伴随标记来使用的，将你model中的数据格式化为需要的格式。表单的控制功能主要涉及到数据验证以及表单控件的增强。ng内置了一些......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by wyx on
-        2017-04-25
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/25/angular-5/">
-        <h2 class="post-title">
-            angularjs(五)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            正文开始过滤器
-
-指令(directive)&#160; &#160; &#160; &#160;通过使用模板，我们可以把model和controller中的数据组装起来呈现给浏览器，还可以通过数据绑定，实时更新视图，让我们的页面变成动态的。
-模板中可以使用的东西包括以下四种：
-
-指令(directive)：ng提供的或者自定义的标签和属性，用来增强HTML表现力；
-标记(markup)：即......
+1.数据绑定&#160; &#160; &#160; &#160;AngularJS的双向数据绑定，意味着你可以在Mode(JS)中改变数据，而这些变动立刻就会自动出现在View上，反之亦然。即：一方面可以做到model变化驱动了DOM中元素变化，另一方面也可以做到DOM元素的变化也会影响到Model。&#160; &#160; &#160; &#160;在我们使用jQu......
         </div>
     </a>
     <p class="post-meta">
@@ -415,6 +388,30 @@ Vue实例初始化的选项配置对象详解前面我们已经用了很多次 n
 服务（service）服务介绍&#160; &#160; &#160; &#160;服务这个概念其实并不陌生，在其他语言中如Java便有这样的概念，其作用就是对外提供某个特定的功能，如消息服务，文件压缩服务等，是一个独立的模块。ng的服务是这样定义的：
 
 Angular services are singletons objects or functions that ca......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by wyx on
+        2017-04-25
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/25/angular_8/">
+        <h2 class="post-title">
+            angular(八)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+正文开始路由DI
+
+路由路由介绍&#160; &#160; &#160; &#160;在谈路由机制前有必要先提一下现在比较流行的单页面应用，就是所谓的single page APP。为了实现无刷新的视图切换，我们通常会用ajax请求从后台取数据，然后套上HTML模板渲染在页面上，然而ajax的一个致命缺点就是导致浏览器后退按钮失效，尽管我们可以在页面上放一个大大的返回按钮，让用户点击返回来......
         </div>
     </a>
     <p class="post-meta">
